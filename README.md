@@ -4,7 +4,7 @@
 
 VibeDic은 바이브코딩으로 웹사이트와 애플리케이션을 만드는 사람이 UI 요소의 공식 명칭과 역할을 쉽게 찾아보고, 실제 유명 서비스에서 어떻게 사용되는지 확인하며, 관련 UX 패턴과 PC·태블릿·모바일 환경의 차이를 이해할 수 있도록 돕는 사례 기반 학습 웹앱입니다.
 
-- 배포 주소: https://chichiboo123.github.io/vibedic/
+- 배포 주소: https://vibedic.chichiboo.link/
 
 ## 핵심 콘셉트
 
@@ -87,7 +87,7 @@ npm run build    # tsc 타입 검사 + 프로덕션 빌드 (dist/)
 npm run preview  # 빌드 결과 미리보기
 ```
 
-`vite.config.ts`의 `base: '/vibedic/'` 설정으로 GitHub Pages 프로젝트 경로에서 에셋이 정상 로드됩니다.
+`vite.config.ts`의 `base: '/'` 설정은 **커스텀 도메인이 루트 경로에서 서빙되는 것**을 기준으로 합니다. `chichiboo123.github.io/vibedic/` 같은 GitHub Pages 프로젝트 하위 경로로 되돌린다면 `base`를 다시 `/vibedic/`로 바꿔야 에셋 경로가 맞습니다(그렇지 않으면 JS/CSS가 404가 되어 흰 화면만 나옵니다).
 
 ## GitHub Pages 배포 방법
 
@@ -103,6 +103,22 @@ npm run preview  # 빌드 결과 미리보기
 4. main 브랜치에 코드 push
 5. Actions에서 배포 성공 여부 확인
 ```
+
+### 커스텀 도메인(vibedic.chichiboo.link) 설정
+
+`public/CNAME` 파일(`vibedic.chichiboo.link`)이 빌드마다 `dist/`에 그대로 복사되어 배포 아티팩트에 포함됩니다. GitHub Pages는 이 파일을 읽어 저장소의 커스텀 도메인 설정을 자동으로 인식합니다. 다만 아래 두 가지는 저장소 관리자가 직접 해야 합니다.
+
+```text
+1. 도메인을 관리하는 DNS 제공자에서 CNAME 레코드 추가
+   호스트: vibedic (또는 vibedic.chichiboo.link)
+   값: chichiboo123.github.io
+2. GitHub 저장소 Settings → Pages → Custom domain에
+   vibedic.chichiboo.link가 자동 반영됐는지 확인
+   (반영 전이면 직접 입력 후 Save)
+3. DNS 전파와 인증서 발급이 끝나면 Enforce HTTPS 체크박스를 켬
+```
+
+DNS가 아직 전파되지 않았거나 `base`와 실제 서빙 경로가 어긋나면(예: 커스텀 도메인인데 `base`가 `/vibedic/`로 남아있는 경우) 자바스크립트·CSS가 404가 되어 화면이 흰색으로만 보입니다. 배포 후 흰 화면이 보이면 브라우저 개발자 도구의 Network 탭에서 자산 경로가 404인지부터 확인하세요.
 
 ## 데이터 구조
 
@@ -150,7 +166,7 @@ src/
 - **로컬 개발**: 프로젝트 루트에 `.env.local` 파일을 만들고 `VITE_GEMINI_API_KEY=발급받은키` 를 넣습니다. (`.env.local`은 `.gitignore`로 커밋되지 않습니다.)
 - **GitHub Pages 배포**: 저장소 **Settings → Secrets and variables → Actions → Secrets 탭 → New repository secret**에서 이름을 정확히 `VITE_GEMINI_API_KEY`로 등록합니다(워크플로가 같은 이름으로 그대로 읽어 빌드에 주입합니다). 반드시 **Repository secrets**여야 합니다 — **Environments → github-pages** 아래의 Environment secret으로 등록하면 `build` 잡에서 읽지 못합니다.
 
-> 참고: 정적 SPA 특성상 이렇게 주입된 키는 빌드된 JS 번들에 포함되어 브라우저에 노출됩니다. Google AI Studio에서 키에 **HTTP 리퍼러 제한**(예: `chichiboo123.github.io/*`)을 걸어 오남용을 막는 것을 권장합니다.
+> 참고: 정적 SPA 특성상 이렇게 주입된 키는 빌드된 JS 번들에 포함되어 브라우저에 노출됩니다. Google AI Studio에서 키에 **HTTP 리퍼러 제한**(예: `vibedic.chichiboo.link/*`)을 걸어 오남용을 막는 것을 권장합니다.
 
 > 주의: `github-pages` 환경은 GitHub가 자동으로 "default 브랜치(`main`)에서만 배포 허용" 규칙을 겁니다. Actions 탭에서 **Run workflow**를 수동 실행할 때는 반드시 브랜치를 `main`으로 선택하세요. 다른 브랜치를 선택해도 배포 잡은 오류 없이 건너뛰어지도록 워크플로에 안전장치가 있습니다.
 
