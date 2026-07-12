@@ -4,6 +4,7 @@ import { Bookmark, HelpCircle, Menu, Search, X } from 'lucide-react';
 import { useSavedItems } from '../../hooks/useSavedItems';
 import { NavigationDrawer } from './NavigationDrawer';
 import { UsageGuideModal } from './UsageGuideModal';
+import { ThemeToggle } from './ThemeToggle';
 
 const menuItems = [
   { to: '/ui', label: 'UI 요소' },
@@ -89,6 +90,8 @@ export function Header() {
               </span>
             )}
           </Link>
+
+          <ThemeToggle />
 
           {/* 넓은 화면: 가로 메뉴 옆에 사용법 버튼을 둡니다. */}
           <button

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
+  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -12,6 +13,7 @@ export default {
           DEFAULT: 'var(--color-primary)',
           soft: 'var(--color-primary-soft)',
           strong: 'var(--color-primary-strong)',
+          hover: 'var(--color-primary-hover)',
         },
         line: 'var(--color-border)',
         success: 'var(--color-success)',

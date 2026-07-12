@@ -10,6 +10,7 @@
   --color-primary: #6366f1;
   --color-primary-soft: #eef0fe;
   --color-primary-strong: #4649d8;
+  --color-primary-hover: #4649d8;
   --color-border: #e3e7ef;
   --color-success: #15803d;
   --color-warning: #b45309;
@@ -23,6 +24,46 @@
   --shadow-md: 0 6px 24px rgba(30, 36, 48, 0.12);
 }
 
+/* 시스템이 다크 모드를 선호하면 사용자가 명시적으로 라이트를 고르기 전까지 기본값으로 적용합니다. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-background: #12141c;
+    --color-surface: #1a1d29;
+    --color-text: #e7e9f2;
+    --color-text-muted: #9aa1b8;
+    --color-primary: #6366f1;
+    --color-primary-soft: #242a52;
+    --color-primary-strong: #818cf8;
+    --color-primary-hover: #4649d8;
+    --color-border: #2c3040;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+    --color-error: #f87171;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* 사용자가 헤더의 테마 버튼으로 명시적으로 고른 값. 시스템 설정보다 우선합니다. */
+:root[data-theme='dark'] {
+  --color-background: #12141c;
+  --color-surface: #1a1d29;
+  --color-text: #e7e9f2;
+  --color-text-muted: #9aa1b8;
+  --color-primary: #6366f1;
+  --color-primary-soft: #242a52;
+  --color-primary-strong: #818cf8;
+  --color-primary-hover: #4649d8;
+  --color-border: #2c3040;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -30,6 +71,9 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-text);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
   font-family:
     'PretendardGOV Variable',
     'Pretendard GOV Variable',
