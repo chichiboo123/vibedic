@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -51,11 +51,14 @@ jobs:
           enablement: true
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
   deploy:
+    # github-pages 환경은 GitHub가 자동으로 "default 브랜치(main)에서만 배포 허용" 규칙을 걸어둡니다.
+    # main이 아닌 브랜치에서 workflow_dispatch로 잘못 실행해도 오류 대신 조용히 건너뜁니다.
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
