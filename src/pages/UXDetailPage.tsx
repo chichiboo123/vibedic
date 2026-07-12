@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowDown, ArrowRight, CheckCircle2, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { findUXPatternBySlug } from '../data/uxPatterns';
-import { findServiceById } from '../data/services';
+import { findUIItemById } from '../data/uiItems';
 import { uxCategoryById } from '../data/categories';
 import { DeviceTabs } from '../components/device/DeviceTabs';
 import { RelatedUICards, RelatedUXCards } from '../components/dictionary/RelatedLinks';
 import { SaveButton } from '../components/common/SaveButton';
 import { CopyPromptButton } from '../components/common/CopyPromptButton';
-import { ServiceBadge } from '../components/dictionary/ServiceCard';
+import { ServiceExampleList } from '../components/dictionary/ServiceExampleList';
 import { addRecentItem } from '../hooks/useRecentItems';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { NotFoundPage } from './NotFoundPage';
@@ -26,6 +26,8 @@ export function UXDetailPage() {
   if (!pattern) return <NotFoundPage />;
 
   const category = uxCategoryById(pattern.category);
+  // 이 UX 패턴을 대표하는 UI 요소 — 사례 도식에서 강조해 보여줍니다.
+  const coreUiItem = findUIItemById(pattern.relatedUiIds[0]);
 
   return (
     <article className="mx-auto max-w-3xl">
@@ -88,28 +90,11 @@ export function UXDetailPage() {
       </Section>
 
       <Section title="유명 서비스 사례">
-        <ul className="space-y-3">
-          {pattern.serviceExamples.map((example) => {
-            const service = findServiceById(example.serviceId);
-            return (
-              <li key={example.title} className="flex gap-3 rounded-card border border-line bg-surface p-4">
-                {service && <ServiceBadge name={service.name} id={service.id} />}
-                <div>
-                  <p className="text-sm font-semibold">
-                    {service ? (
-                      <Link to={`/services/${service.slug}`} className="hover:text-primary-strong hover:underline">
-                        {example.title}
-                      </Link>
-                    ) : (
-                      example.title
-                    )}
-                  </p>
-                  <p className="mt-0.5 text-sm text-muted">{example.description}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <ServiceExampleList
+          examples={pattern.serviceExamples}
+          demoType={coreUiItem?.demoType ?? 'static'}
+          category={coreUiItem?.category ?? 'display'}
+        />
       </Section>
 
       {(pattern.badExperience || pattern.betterExperience) && (

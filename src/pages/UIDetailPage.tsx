@@ -2,14 +2,13 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AlertTriangle, CheckCircle2, HelpCircle, ThumbsUp } from 'lucide-react';
 import { findUIItemBySlug } from '../data/uiItems';
-import { findServiceById } from '../data/services';
 import { uiCategoryById } from '../data/categories';
 import { InteractiveDemo } from '../components/demos/InteractiveDemo';
 import { DeviceTabs } from '../components/device/DeviceTabs';
 import { RelatedUICards, RelatedUXCards } from '../components/dictionary/RelatedLinks';
 import { SaveButton } from '../components/common/SaveButton';
 import { CopyPromptButton } from '../components/common/CopyPromptButton';
-import { ServiceBadge } from '../components/dictionary/ServiceCard';
+import { ServiceExampleList } from '../components/dictionary/ServiceExampleList';
 import { addRecentItem } from '../hooks/useRecentItems';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { NotFoundPage } from './NotFoundPage';
@@ -71,28 +70,11 @@ export function UIDetailPage() {
       </Section>
 
       <Section title="어디에서 볼 수 있나요?">
-        <ul className="space-y-3">
-          {item.serviceExamples.map((example) => {
-            const service = findServiceById(example.serviceId);
-            return (
-              <li key={example.title} className="flex gap-3 rounded-card border border-line bg-surface p-4">
-                {service && <ServiceBadge name={service.name} id={service.id} />}
-                <div>
-                  <p className="text-sm font-semibold">
-                    {service ? (
-                      <Link to={`/services/${service.slug}`} className="hover:text-primary-strong hover:underline">
-                        {example.title}
-                      </Link>
-                    ) : (
-                      example.title
-                    )}
-                  </p>
-                  <p className="mt-0.5 text-sm text-muted">{example.description}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <ServiceExampleList
+          examples={item.serviceExamples}
+          demoType={item.demoType}
+          category={item.category}
+        />
       </Section>
 
       <Section title="기기에서는 어떻게 달라지나요?">

@@ -1,4 +1,4 @@
-import type { UIItem } from '../../types';
+import type { DemoType, UICategoryId, UIItem } from '../../types';
 
 // 카드 상단에 들어가는 CSS 기반의 간단한 시각 미리보기입니다.
 export function MiniPreview({ item }: { item: UIItem }) {
@@ -7,13 +7,20 @@ export function MiniPreview({ item }: { item: UIItem }) {
       aria-hidden="true"
       className="flex h-24 items-center justify-center overflow-hidden rounded-t-card border-b border-line bg-background"
     >
-      <PreviewShape item={item} />
+      <PreviewGlyph demoType={item.demoType} category={item.category} />
     </div>
   );
 }
 
-function PreviewShape({ item }: { item: UIItem }) {
-  switch (item.demoType) {
+// 요소 하나를 나타내는 작은 도식. 카드 미리보기와 서비스 사례 목업에서 함께 씁니다.
+export function PreviewGlyph({
+  demoType,
+  category,
+}: {
+  demoType: DemoType;
+  category: UICategoryId;
+}) {
+  switch (demoType) {
     case 'button':
       return <div className="rounded-lg bg-primary px-5 py-2 text-xs font-semibold text-white">버튼</div>;
     case 'icon-button':
@@ -287,11 +294,11 @@ function PreviewShape({ item }: { item: UIItem }) {
         </div>
       );
     default:
-      return <CategoryFallback category={item.category} />;
+      return <CategoryFallback category={category} />;
   }
 }
 
-function CategoryFallback({ category }: { category: UIItem['category'] }) {
+function CategoryFallback({ category }: { category: UICategoryId }) {
   switch (category) {
     case 'layout':
       return (
