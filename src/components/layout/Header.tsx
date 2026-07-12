@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Bookmark, Menu, Search, X } from 'lucide-react';
 import { useSavedItems } from '../../hooks/useSavedItems';
+import { NavigationDrawer } from './NavigationDrawer';
 
 const menuItems = [
   { to: '/ui', label: 'UI 요소' },
@@ -20,17 +21,10 @@ export function Header() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    if (!menuOpen) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setMenuOpen(false);
-        menuButtonRef.current?.focus();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [menuOpen]);
+  const closeMenu = () => {
+    setMenuOpen(false);
+    menuButtonRef.current?.focus();
+  };
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
@@ -87,7 +81,7 @@ export function Header() {
             type="button"
             className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong md:hidden"
             aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
+            aria-haspopup="dialog"
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
             onClick={() => setMenuOpen((open) => !open)}
           >
@@ -100,38 +94,7 @@ export function Header() {
         </div>
       </div>
 
-      {menuOpen && (
-        <nav id="mobile-menu" aria-label="모바일 메뉴" className="border-t border-line bg-surface md:hidden">
-          <ul className="mx-auto max-w-page px-4 py-2">
-            {menuItems.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `block rounded-md px-3 py-3 text-sm font-medium ${
-                      isActive ? 'bg-primary-soft text-primary-strong' : 'text-ink hover:bg-background'
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  `block rounded-md px-3 py-3 text-sm font-medium ${
-                    isActive ? 'bg-primary-soft text-primary-strong' : 'text-ink hover:bg-background'
-                  }`
-                }
-              >
-                소개
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      )}
+      <NavigationDrawer open={menuOpen} onClose={closeMenu} menuItems={menuItems} />
     </header>
   );
 }

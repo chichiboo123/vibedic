@@ -1,55 +1,7 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useId, useRef, useState, type ReactNode } from 'react';
 import { ChevronDown, X } from 'lucide-react';
 import { useToast } from '../common/ToastProvider';
-
-function useFocusTrap(active: boolean, onClose: () => void) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const restoreRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (!active) return;
-    restoreRef.current = document.activeElement as HTMLElement | null;
-    const container = containerRef.current;
-    if (!container) return;
-
-    const getFocusable = () =>
-      Array.from(
-        container.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        ),
-      );
-
-    getFocusable()[0]?.focus();
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.stopPropagation();
-        onClose();
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      const focusable = getFocusable();
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      restoreRef.current?.focus();
-    };
-  }, [active, onClose]);
-
-  return containerRef;
-}
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 function Overlay({ onClose, children, align }: { onClose: () => void; children: ReactNode; align: 'center' | 'bottom' }) {
   return (
@@ -69,7 +21,7 @@ function Overlay({ onClose, children, align }: { onClose: () => void; children: 
 export function ModalDemo() {
   const [open, setOpen] = useState(false);
   const titleId = useId();
-  const trapRef = useFocusTrap(open, () => setOpen(false));
+  const trapRef = useFocusTrap<HTMLDivElement>(open, () => setOpen(false));
   const { showToast } = useToast();
 
   return (
@@ -137,7 +89,7 @@ export function AlertDialogDemo() {
   const [items, setItems] = useState(['여행 계획.md', '가계부.xlsx']);
   const titleId = useId();
   const descId = useId();
-  const trapRef = useFocusTrap(open, () => setOpen(false));
+  const trapRef = useFocusTrap<HTMLDivElement>(open, () => setOpen(false));
   const { showToast } = useToast();
 
   const target = items[0];
@@ -207,7 +159,7 @@ export function AlertDialogDemo() {
 export function BottomSheetDemo() {
   const [open, setOpen] = useState(false);
   const titleId = useId();
-  const trapRef = useFocusTrap(open, () => setOpen(false));
+  const trapRef = useFocusTrap<HTMLDivElement>(open, () => setOpen(false));
   const { showToast } = useToast();
 
   const options = ['링크 복사', '메시지로 보내기', '저장함에 담기'];
