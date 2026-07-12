@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { Assistant } from '../assistant/Assistant';
 
 export function Layout() {
   const location = useLocation();
@@ -23,6 +24,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <Assistant />
     </div>
   );
 }
