@@ -148,7 +148,7 @@ src/
 빌드 시 `VITE_GEMINI_API_KEY` 환경변수로 키를 주입하면, 사용자는 키 입력 없이 바로 어시스턴트를 쓸 수 있습니다.
 
 - **로컬 개발**: 프로젝트 루트에 `.env.local` 파일을 만들고 `VITE_GEMINI_API_KEY=발급받은키` 를 넣습니다. (`.env.local`은 `.gitignore`로 커밋되지 않습니다.)
-- **GitHub Pages 배포**: 저장소 **Settings → Secrets and variables → Actions → Secrets 탭 → New repository secret**에서 이름 `GEMINI_API_KEY`로 등록합니다. 반드시 **Repository secrets**여야 합니다 — **Environments → github-pages** 아래의 Environment secret으로 등록하면 `build` 잡에서 읽지 못합니다. 배포 워크플로가 이를 `VITE_GEMINI_API_KEY`로 빌드에 주입합니다.
+- **GitHub Pages 배포**: 저장소 **Settings → Secrets and variables → Actions → Secrets 탭 → New repository secret**에서 이름을 정확히 `VITE_GEMINI_API_KEY`로 등록합니다(워크플로가 같은 이름으로 그대로 읽어 빌드에 주입합니다). 반드시 **Repository secrets**여야 합니다 — **Environments → github-pages** 아래의 Environment secret으로 등록하면 `build` 잡에서 읽지 못합니다.
 
 > 참고: 정적 SPA 특성상 이렇게 주입된 키는 빌드된 JS 번들에 포함되어 브라우저에 노출됩니다. Google AI Studio에서 키에 **HTTP 리퍼러 제한**(예: `chichiboo123.github.io/*`)을 걸어 오남용을 막는 것을 권장합니다.
 

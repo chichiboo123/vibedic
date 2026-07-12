@@ -41,9 +41,10 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # 저장소 Settings > Secrets에 GEMINI_API_KEY를 등록하면
-          # 어시스턴트가 별도 키 입력 없이 바로 동작합니다. 없으면 사용자가 직접 키를 입력합니다.
-          VITE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 저장소 Settings > Secrets and variables > Actions > Repository secrets에
+          # 이름 그대로 VITE_GEMINI_API_KEY를 등록하면 어시스턴트가 별도 키 입력 없이 바로 동작합니다.
+          # 등록하지 않으면 사용자가 직접 키를 입력하는 방식으로 자동 폴백합니다.
+          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
