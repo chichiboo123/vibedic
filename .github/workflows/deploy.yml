@@ -40,6 +40,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # 저장소 Settings > Secrets에 GEMINI_API_KEY를 등록하면
+          # 어시스턴트가 별도 키 입력 없이 바로 동작합니다. 없으면 사용자가 직접 키를 입력합니다.
+          VITE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

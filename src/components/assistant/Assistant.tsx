@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { Bot, ExternalLink, KeyRound, Send, Settings2, Sparkles, X } from 'lucide-react';
 import {
   GeminiError,
-  getStoredApiKey,
+  getApiKey,
+  hasEnvApiKey,
   sendToGemini,
   setStoredApiKey,
   type ChatMessage,
 } from '../../assistant/gemini';
 import { AssistantText } from './AssistantText';
+import { ModelBattery } from './ModelBattery';
 
 const starterQuestions = [
   '회원가입 화면에는 어떤 UI가 필요해?',
@@ -23,13 +25,16 @@ const WELCOME_MESSAGE: ChatMessage = {
 
 export function Assistant() {
   const [open, setOpen] = useState(false);
-  const [apiKey, setApiKey] = useState(() => getStoredApiKey());
+  const [apiKey, setApiKey] = useState(() => getApiKey());
+  const envKey = hasEnvApiKey();
   const [showSettings, setShowSettings] = useState(false);
   const [keyInput, setKeyInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState('');
+  // 현재(또는 마지막으로) 대화에 사용한 모델의 체인 인덱스. null이면 아직 호출 전.
+  const [modelIndex, setModelIndex] = useState<number | null>(null);
 
   const fabRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -56,7 +61,13 @@ export function Assistant() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
-  const needsKey = !apiKey || showSettings;
+  // 환경변수 키가 있으면 항상 설정된 상태, 없으면 사용자가 입력해야 합니다.
+  const needsKey = !apiKey || (!envKey && showSettings);
+
+  const closePanel = () => {
+    setOpen(false);
+    fabRef.current?.focus();
+  };
 
   const saveKey = () => {
     const trimmed = keyInput.trim();
@@ -78,12 +89,16 @@ export function Assistant() {
     setLoading(true);
     try {
       // 환영 인사는 API 히스토리에서 제외합니다.
-      const reply = await sendToGemini(apiKey, nextHistory.slice(1));
-      setMessages((current) => [...current, { role: 'assistant', text: reply }]);
+      // onAttempt로 시도 중인 모델을 실시간 반영해 배터리 표시가 폴백을 따라 내려갑니다.
+      const result = await sendToGemini(apiKey, nextHistory.slice(1), (index) =>
+        setModelIndex(index),
+      );
+      setModelIndex(result.modelIndex);
+      setMessages((current) => [...current, { role: 'assistant', text: result.text }]);
     } catch (error) {
       if (error instanceof GeminiError) {
         setErrorText(error.message);
-        if (error.kind === 'auth') setShowSettings(true);
+        if (error.kind === 'auth' && !envKey) setShowSettings(true);
       } else {
         setErrorText('알 수 없는 문제가 생겼어요. 다시 시도해 주세요.');
       }
@@ -112,24 +127,36 @@ export function Assistant() {
         <div
           role="dialog"
           aria-label="VibeDic 어시스턴트"
-          className="fixed bottom-20 right-4 z-50 flex h-[min(34rem,calc(100dvh-6.5rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-card border border-line bg-surface shadow-raised"
+          className="fixed inset-x-2 bottom-20 top-16 z-50 flex flex-col overflow-hidden rounded-card border border-line bg-surface shadow-raised sm:inset-auto sm:bottom-20 sm:right-4 sm:top-auto sm:h-[min(36rem,calc(100dvh-7rem))] sm:w-[24rem]"
         >
           <header className="flex items-center gap-2 border-b border-line bg-primary-soft/60 px-4 py-3">
-            <Sparkles className="h-4 w-4 text-primary-strong" aria-hidden="true" />
+            <Sparkles className="h-4 w-4 shrink-0 text-primary-strong" aria-hidden="true" />
             <h2 className="text-sm font-bold">VibeDic 어시스턴트</h2>
-            <span className="rounded-full bg-surface px-1.5 py-0.5 text-[10px] font-semibold text-muted">
-              Gemini
-            </span>
-            {apiKey && (
+            {!needsKey && modelIndex !== null ? (
+              <ModelBattery modelIndex={modelIndex} />
+            ) : (
+              <span className="ml-auto rounded-full bg-surface px-1.5 py-0.5 text-[10px] font-semibold text-muted">
+                Gemini
+              </span>
+            )}
+            {apiKey && !envKey && (
               <button
                 type="button"
                 aria-label="API 키 설정"
                 onClick={() => setShowSettings((current) => !current)}
-                className="ml-auto flex h-8 w-8 items-center justify-center rounded-md text-muted hover:bg-surface hover:text-ink"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-muted hover:bg-surface hover:text-ink"
               >
                 <Settings2 className="h-4 w-4" aria-hidden="true" />
               </button>
             )}
+            <button
+              type="button"
+              aria-label="어시스턴트 닫기"
+              onClick={closePanel}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-muted hover:bg-surface hover:text-ink"
+            >
+              <X className="h-4 w-4" aria-hidden="true" />
+            </button>
           </header>
 
           {needsKey ? (
@@ -142,6 +169,10 @@ export function Assistant() {
                 어시스턴트는 Google Gemini API로 동작해요. 키는{' '}
                 <strong className="text-ink">내 브라우저에만 저장</strong>되고, 질문은 브라우저에서
                 Google로 직접 전송돼요. VibeDic 서버는 없어요.
+              </p>
+              <p className="mt-2 rounded-md bg-primary-soft/60 px-3 py-2 text-xs leading-relaxed text-muted">
+                배포 환경에서는 관리자가 <code className="font-mono">VITE_GEMINI_API_KEY</code>{' '}
+                환경변수로 키를 넣을 수 있어요. 아래 입력은 그 값이 없을 때 쓰는 개인용 방법이에요.
               </p>
               <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-muted">
                 <li>
@@ -228,7 +259,9 @@ export function Assistant() {
                 {loading && (
                   <div className="flex items-center gap-2 text-sm text-muted" role="status">
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-line border-t-primary" aria-hidden="true" />
-                    답변을 만들고 있어요…
+                    {modelIndex !== null
+                      ? `${['Gemini 3.1 Flash Lite', 'Gemini 3.5 Flash', 'Gemini 3 Flash', 'Gemini 2.5 Flash', 'Gemini 2.5 Flash Lite'][modelIndex]}로 답변을 만들고 있어요…`
+                      : '답변을 만들고 있어요…'}
                   </div>
                 )}
                 {messages.length === 1 && !loading && (

@@ -22,3 +22,7 @@ coverage
 
 # TypeScript build info
 *.tsbuildinfo
+
+# local env (API keys)
+.env.local
+.env.*.local
