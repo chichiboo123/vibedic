@@ -59,7 +59,7 @@ export function UsageGuideModal({ open, onClose }: UsageGuideModalProps) {
   // header의 backdrop-blur가 fixed 자손의 containing block이 되는 것을 피하려고 body에 포털로 렌더링합니다.
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -120,7 +120,7 @@ export function UsageGuideModal({ open, onClose }: UsageGuideModalProps) {
           <Link
             to="/ui"
             onClick={onClose}
-            className="min-h-11 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-strong"
+            className="min-h-11 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover"
           >
             UI 사전 둘러보기
           </Link>

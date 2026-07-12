@@ -17,7 +17,7 @@ export function NotFoundPage() {
       <div className="mt-6 flex flex-wrap justify-center gap-2">
         <Link
           to="/"
-          className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-strong"
+          className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
         >
           홈으로 이동
         </Link>

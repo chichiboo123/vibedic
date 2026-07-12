@@ -118,7 +118,7 @@ export function Assistant() {
         aria-label={open ? 'VibeDic 어시스턴트 닫기' : 'VibeDic 어시스턴트 열기'}
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-raised transition-colors hover:bg-primary-strong"
+        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-raised transition-colors hover:bg-primary-hover"
       >
         {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Bot className="h-7 w-7" aria-hidden="true" />}
       </button>
@@ -213,7 +213,7 @@ export function Assistant() {
                   <button
                     type="submit"
                     disabled={!keyInput.trim()}
-                    className="min-h-11 flex-1 rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-strong disabled:opacity-50"
+                    className="min-h-11 flex-1 rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
                   >
                     연결하기
                   </button>
@@ -233,7 +233,7 @@ export function Assistant() {
                 </div>
               </form>
               {errorText && (
-                <p role="alert" className="mt-3 rounded-md bg-red-50 px-3 py-2 text-sm text-error">
+                <p role="alert" className="mt-3 rounded-md bg-red-50 px-3 py-2 text-sm text-error dark:bg-red-950/40">
                   {errorText}
                 </p>
               )}
@@ -280,7 +280,7 @@ export function Assistant() {
                   </div>
                 )}
                 {errorText && (
-                  <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-error">
+                  <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-error dark:bg-red-950/40">
                     {errorText}
                   </p>
                 )}
@@ -314,7 +314,7 @@ export function Assistant() {
                   type="submit"
                   aria-label="질문 보내기"
                   disabled={!input.trim() || loading}
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-white hover:bg-primary-strong disabled:opacity-50"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-white hover:bg-primary-hover disabled:opacity-50"
                 >
                   <Send className="h-4 w-4" aria-hidden="true" />
                 </button>

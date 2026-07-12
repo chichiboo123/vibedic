@@ -6,7 +6,7 @@ import { useFocusTrap } from '../../hooks/useFocusTrap';
 function Overlay({ onClose, children, align }: { onClose: () => void; children: ReactNode; align: 'center' | 'bottom' }) {
   return (
     <div
-      className={`fixed inset-0 z-50 flex justify-center bg-ink/50 p-4 ${
+      className={`fixed inset-0 z-50 flex justify-center bg-black/50 p-4 ${
         align === 'center' ? 'items-center' : 'items-end p-0'
       }`}
       onClick={(event) => {
@@ -29,7 +29,7 @@ export function ModalDemo() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="min-h-11 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-strong"
+        className="min-h-11 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
       >
         공유 설정 열기
       </button>
@@ -72,7 +72,7 @@ export function ModalDemo() {
                   setOpen(false);
                   showToast('링크를 복사했어요.');
                 }}
-                className="min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-strong"
+                className="min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
               >
                 링크 복사
               </button>
@@ -108,7 +108,7 @@ export function AlertDialogDemo() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="mt-3 min-h-11 rounded-lg border border-error px-4 text-sm font-semibold text-error hover:bg-red-50"
+          className="mt-3 min-h-11 rounded-lg border border-error px-4 text-sm font-semibold text-error hover:bg-red-50 dark:hover:bg-red-950/40"
         >
           첫 번째 파일 삭제
         </button>
@@ -169,7 +169,7 @@ export function BottomSheetDemo() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="min-h-11 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-strong"
+        className="min-h-11 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
       >
         공유 시트 열기
       </button>
@@ -240,7 +240,7 @@ export function TooltipDemo() {
           <span
             id={tooltipId}
             role="tooltip"
-            className="absolute bottom-full left-1/2 mb-2 w-max max-w-[200px] -translate-x-1/2 rounded-md bg-ink px-2.5 py-1.5 text-xs text-white"
+            className="absolute bottom-full left-1/2 mb-2 w-max max-w-[200px] -translate-x-1/2 rounded-md bg-zinc-800 px-2.5 py-1.5 text-xs text-white"
           >
             도움말 버튼이에요. 포커스해도 보여요.
           </span>
@@ -300,7 +300,7 @@ export function ToastDemo() {
       <button
         type="button"
         onClick={() => showToast('저장했어요.')}
-        className="min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-strong"
+        className="min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
       >
         저장 토스트 띄우기
       </button>

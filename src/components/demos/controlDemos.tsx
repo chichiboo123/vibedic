@@ -22,7 +22,7 @@ export function ButtonDemo() {
         type="button"
         onClick={handleSave}
         disabled={loading}
-        className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-strong disabled:opacity-60"
+        className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-60"
       >
         {loading && (
           <span
@@ -91,7 +91,7 @@ export function FabDemo() {
         type="button"
         aria-label="새 메모 작성"
         onClick={() => showToast('새 메모 작성을 시작해요.')}
-        className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-raised hover:bg-primary-strong"
+        className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-raised hover:bg-primary-hover"
       >
         <Plus className="h-6 w-6" aria-hidden="true" />
       </button>

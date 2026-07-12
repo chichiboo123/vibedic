@@ -83,7 +83,7 @@ export function HomePage() {
             />
             <button
               type="submit"
-              className="absolute right-1.5 top-1/2 min-h-9 -translate-y-1/2 rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-strong"
+              className="absolute right-1.5 top-1/2 min-h-9 -translate-y-1/2 rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
             >
               검색
             </button>

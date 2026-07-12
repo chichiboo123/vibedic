@@ -74,7 +74,7 @@ export function AboutPage() {
       <div className="mt-10 flex flex-wrap gap-2">
         <Link
           to="/ui"
-          className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-strong"
+          className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
         >
           UI 사전 시작하기
         </Link>

@@ -146,12 +146,12 @@ export function PreviewGlyph({
       );
     case 'toast':
       return (
-        <div className="rounded-full bg-ink px-4 py-1.5 text-[10px] text-white">저장했어요 ✓</div>
+        <div className="rounded-full bg-zinc-800 px-4 py-1.5 text-[10px] text-white">저장했어요 ✓</div>
       );
     case 'tooltip':
       return (
         <div className="flex flex-col items-center gap-1">
-          <span className="rounded bg-ink px-2 py-1 text-[10px] text-white">설명이에요</span>
+          <span className="rounded bg-zinc-800 px-2 py-1 text-[10px] text-white">설명이에요</span>
           <span className="flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-xs text-muted">?</span>
         </div>
       );

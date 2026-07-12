@@ -145,7 +145,7 @@ export function SearchPage() {
           )}
           <button
             type="submit"
-            className="absolute right-1.5 top-1/2 min-h-9 -translate-y-1/2 rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-strong"
+            className="absolute right-1.5 top-1/2 min-h-9 -translate-y-1/2 rounded-full bg-primary px-4 text-sm font-semibold text-white hover:bg-primary-hover"
           >
             검색
           </button>
@@ -271,7 +271,7 @@ export function SearchPage() {
               <div className="mt-5 flex flex-wrap justify-center gap-2">
                 <Link
                   to="/ui"
-                  className="min-h-11 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-strong"
+                  className="min-h-11 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover"
                 >
                   UI 전체 보기
                 </Link>

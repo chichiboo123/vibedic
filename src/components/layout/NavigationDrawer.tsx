@@ -25,7 +25,7 @@ export function NavigationDrawer({ open, onClose, menuItems, onOpenGuide }: Navi
   // body에 직접 포털로 렌더링합니다.
   return createPortal(
     <div
-      className="fixed inset-0 z-50 bg-ink/50 md:hidden"
+      className="fixed inset-0 z-50 bg-black/50 md:hidden"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}

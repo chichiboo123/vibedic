@@ -55,7 +55,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm text-white shadow-raised"
+            className="flex items-center gap-2 rounded-full bg-zinc-800 px-4 py-2.5 text-sm text-white shadow-raised"
           >
             {toast.message.includes('복사') || toast.message.includes('저장') ? (
               <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" aria-hidden="true" />

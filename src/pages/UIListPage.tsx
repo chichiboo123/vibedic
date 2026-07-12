@@ -123,7 +123,7 @@ export function UIListPage() {
               setPopularOnly(false);
               setCategory(null);
             }}
-            className="mt-4 min-h-11 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-strong"
+            className="mt-4 min-h-11 rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
           >
             필터 초기화
           </button>
