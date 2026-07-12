@@ -78,6 +78,14 @@ describe('페이지 렌더링과 이동', () => {
     ).toBeInTheDocument();
   });
 
+  it('푸터에 제작자 링크가 새 창으로 열리도록 표시된다', () => {
+    renderApp('/');
+    const credit = screen.getByRole('link', { name: /Created by\. 교육뮤지컬 꿈꾸는 치수쌤/ });
+    expect(credit).toHaveAttribute('href', 'https://litt.ly/chichiboo');
+    expect(credit).toHaveAttribute('target', '_blank');
+    expect(credit).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
   it('잘못된 경로에서는 404 화면이 보인다', () => {
     renderApp('/이상한-경로');
     expect(screen.getByRole('heading', { name: '찾으려는 페이지가 없어요.' })).toBeInTheDocument();

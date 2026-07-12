@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ExternalLink } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -36,6 +37,16 @@ export function Footer() {
           서비스 및 상표의 권리는 각 권리자에게 있습니다. VibeDic은 UI·UX 학습을 위해 공개적으로
           관찰 가능한 사례를 설명합니다.
         </p>
+        <a
+          href="https://litt.ly/chichiboo"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1 text-xs text-muted hover:text-ink hover:underline"
+        >
+          Created by. 교육뮤지컬 꿈꾸는 치수쌤
+          <ExternalLink className="h-3 w-3" aria-hidden="true" />
+          <span className="sr-only">(새 창에서 열림)</span>
+        </a>
       </div>
     </footer>
   );
