@@ -1,0 +1,711 @@
+import type { UXPattern } from '../../types';
+
+export const actPatterns: UXPattern[] = [
+  {
+    id: 'ux-save-action',
+    slug: 'save-action',
+    koreanName: '저장',
+    englishName: 'Save Action',
+    userGoal: '내 작업이 확실히 저장됐다고 믿고 싶어요.',
+    summary: '작업을 저장하고 저장됐음을 분명히 확인하는 경험입니다.',
+    category: 'act',
+    keywords: ['저장', '저장하기', '보관', '기록'],
+    flowSteps: ['저장 버튼 확인', '저장 실행', '저장 중 표시', '완료 피드백 확인'],
+    relatedUiIds: ['ui-button', 'ui-toast', 'ui-icon-button', 'ui-badge'],
+    relatedUxIds: ['ux-autosave', 'ux-completion-feedback'],
+    serviceExamples: [
+      {
+        serviceId: 'canva',
+        title: 'Canva 저장 상태',
+        description: '변경 사항이 자동 저장되고 상태가 상단에 표시됩니다.',
+      },
+      {
+        serviceId: 'youtube',
+        title: 'YouTube 나중에 볼 동영상',
+        description: '저장 버튼을 누르면 즉시 알림으로 결과를 알려줍니다.',
+      },
+    ],
+    badExperience: '저장을 눌렀는데 아무 반응이 없어 여러 번 다시 누르게 됩니다.',
+    betterExperience: '저장 중과 완료 상태가 즉시 표시되고, 실패하면 원인과 재시도를 안내합니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '저장 중 상태가 표시되는가?',
+      '완료가 시각과 보조기기 모두에 전달되는가?',
+      '실패 시 재시도 방법이 안내되는가?',
+    ],
+    vibePrompt:
+      '저장 버튼 흐름을 만들어줘.\n누르면 버튼이 저장 중 상태(스피너, 비활성)로 바뀌고\n완료되면 저장됨 토스트를 띄워줘.\n실패하면 오류 메시지와 다시 시도 버튼을 보여줘.',
+  },
+  {
+    id: 'ux-danger-confirm',
+    slug: 'danger-confirm',
+    koreanName: '위험 행동 확인',
+    englishName: 'Destructive Action Confirmation',
+    userGoal: '실수로 중요한 것을 지우고 싶지 않아요.',
+    summary: '삭제처럼 되돌리기 어려운 행동 전에 한 번 더 확인하는 경험입니다.',
+    category: 'act',
+    keywords: ['삭제 확인', '위험', '되돌릴 수 없음', '경고', '탈퇴'],
+    flowSteps: ['삭제 시도', '확인 다이얼로그 표시', '대상과 결과 확인', '확정 또는 취소', '결과 피드백'],
+    relatedUiIds: ['ui-alert-dialog', 'ui-button', 'ui-toast'],
+    relatedUxIds: ['ux-undo', 'ux-completion-feedback'],
+    serviceExamples: [
+      {
+        serviceId: 'google-drive',
+        title: 'Google Drive 영구 삭제',
+        description: '휴지통 비우기 전 되돌릴 수 없음을 명확히 알립니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 휴지통 구조',
+        description: '삭제해도 휴지통에 남아 복원할 기회를 줍니다.',
+      },
+    ],
+    badExperience: '삭제 버튼 옆에 확인 버튼이 붙어 있어 실수로 연달아 눌러버립니다.',
+    betterExperience: '무엇이 삭제되는지 이름을 보여주고, 기본 포커스는 취소에 두며, 가능하면 실행 취소를 제공합니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '무엇이 삭제되는지 대상이 표시되는가?',
+      '되돌릴 수 있는지 여부가 안내되는가?',
+      '확정 버튼과 취소 버튼이 명확히 구분되는가?',
+      '가능한 경우 실행 취소를 제공하는가?',
+    ],
+    vibePrompt:
+      '삭제 확인 흐름을 만들어줘.\n삭제 버튼을 누르면 항목 이름이 포함된 경고 다이얼로그를 띄우고\n기본 포커스는 취소 버튼에 둬줘.\n삭제 후에는 실행 취소 버튼이 있는 토스트를 5초간 보여줘.',
+    featured: true,
+  },
+  {
+    id: 'ux-undo',
+    slug: 'undo',
+    koreanName: '실행 취소',
+    englishName: 'Undo',
+    userGoal: '방금 한 실수를 바로 되돌리고 싶어요.',
+    summary: '직전 행동을 손쉽게 되돌릴 수 있게 하는 경험입니다.',
+    category: 'act',
+    keywords: ['실행 취소', '되돌리기', 'Undo', 'Ctrl+Z'],
+    flowSteps: ['동작 실행', '실행 취소 기회 표시', '실행 취소 선택', '원래 상태 복원 확인'],
+    relatedUiIds: ['ui-toast', 'ui-button', 'ui-icon-button'],
+    relatedUxIds: ['ux-danger-confirm', 'ux-completion-feedback'],
+    serviceExamples: [
+      {
+        serviceId: 'gmail',
+        title: 'Gmail 보내기 취소',
+        description: '전송 직후 몇 초 동안 실행 취소 버튼이 표시됩니다.',
+      },
+      {
+        serviceId: 'google-docs',
+        title: 'Google Docs 되돌리기',
+        description: 'Ctrl+Z와 툴바 버튼으로 편집을 되돌립니다.',
+      },
+    ],
+    badExperience: '사소한 동작마다 확인 창이 뜨는데 정작 실수는 되돌릴 수 없습니다.',
+    betterExperience: '동작은 바로 실행하되 잠깐의 실행 취소 기회를 제공해 확인 피로를 줄입니다.',
+    deviceNotes: {
+      desktop: 'Ctrl+Z 단축키를 함께 지원하면 강력합니다.',
+      tablet: '토스트의 실행 취소 버튼이 주된 수단입니다.',
+      mobile: '흔들어서 취소 같은 OS 관습도 있으나 버튼 제공이 기본입니다.',
+      hasMeaningfulDifference: true,
+    },
+    checklist: [
+      '실행 취소 기회가 충분히 오래 유지되는가?',
+      '무엇이 되돌려지는지 명확한가?',
+      '실행 취소 후 결과가 확인되는가?',
+    ],
+    vibePrompt:
+      '항목 삭제에 실행 취소를 붙여줘.\n삭제 즉시 목록에서 제거하되 실행 취소 버튼이 있는 토스트를 5초간 보여주고\n누르면 항목을 원래 위치에 복원해줘.',
+  },
+  {
+    id: 'ux-share-action',
+    slug: 'share-action',
+    koreanName: '공유',
+    englishName: 'Sharing',
+    userGoal: '이 콘텐츠를 다른 사람에게 쉽게 전하고 싶어요.',
+    summary: '링크 복사나 공유 시트로 콘텐츠를 다른 사람에게 전하는 경험입니다.',
+    category: 'act',
+    keywords: ['공유', '공유하기', '링크 복사', '보내기'],
+    flowSteps: ['공유 버튼 선택', '공유 방법 확인', '대상 또는 링크 복사 선택', '완료 피드백 확인'],
+    relatedUiIds: ['ui-bottom-sheet', 'ui-modal', 'ui-toast', 'ui-icon-button'],
+    relatedUxIds: ['ux-link-sharing', 'ux-completion-feedback'],
+    serviceExamples: [
+      {
+        serviceId: 'youtube',
+        title: 'YouTube 공유 시트',
+        description: '공유 버튼에서 링크 복사와 여러 서비스 공유를 고릅니다.',
+      },
+      {
+        serviceId: 'instagram',
+        title: 'Instagram 공유',
+        description: '게시물을 친구에게 보내거나 스토리로 공유합니다.',
+      },
+    ],
+    badExperience: '링크를 복사했는지 안 됐는지 아무 피드백이 없습니다.',
+    betterExperience: '복사 완료가 즉시 표시되고 자주 쓰는 공유 대상이 먼저 보입니다.',
+    deviceNotes: {
+      desktop: '링크 복사가 중심이고 복사 완료 피드백이 중요합니다.',
+      tablet: 'OS 공유 시트와 자체 공유 UI를 상황에 맞게 씁니다.',
+      mobile: 'OS 공유 시트로 다른 앱에 바로 보낼 수 있습니다.',
+      hasMeaningfulDifference: true,
+    },
+    checklist: [
+      '링크 복사 완료가 피드백되는가?',
+      '공유 전에 공개 범위를 알 수 있는가?',
+      '자주 쓰는 공유 방법이 먼저 보이는가?',
+    ],
+    vibePrompt:
+      '콘텐츠 공유 기능을 만들어줘.\n공유 버튼을 누르면 링크 복사 버튼이 있는 공유 창을 띄우고\n복사하면 복사 완료 토스트를 보여줘.\n모바일에서는 Web Share API를 우선 사용해줘.',
+  },
+  {
+    id: 'ux-completion-feedback',
+    slug: 'completion-feedback',
+    koreanName: '완료 안내',
+    englishName: 'Completion Feedback',
+    userGoal: '내 행동이 잘 처리됐는지 바로 알고 싶어요.',
+    summary: '행동의 결과를 즉시 알려 안심하고 다음으로 넘어가게 하는 경험입니다.',
+    category: 'act',
+    keywords: ['완료', '피드백', '성공', '처리 결과', '알림'],
+    flowSteps: ['동작 실행', '처리 중 표시', '완료 알림 확인', '다음 행동 안내 확인'],
+    relatedUiIds: ['ui-toast', 'ui-badge', 'ui-banner', 'ui-progress-bar'],
+    relatedUxIds: ['ux-save-action', 'ux-undo', 'ux-error-recovery'],
+    serviceExamples: [
+      {
+        serviceId: 'coupang',
+        title: '쿠팡 주문 완료 화면',
+        description: '주문 번호와 배송 예정일이 완료 화면에 정리됩니다.',
+      },
+      {
+        serviceId: 'canva',
+        title: 'Canva 다운로드 완료',
+        description: '내보내기가 끝나면 완료 알림과 파일이 제공됩니다.',
+      },
+    ],
+    badExperience: '버튼을 눌러도 화면이 그대로라 성공했는지 알 수 없습니다.',
+    betterExperience: '처리 중과 완료가 명확히 표시되고 다음 행동(확인하러 가기 등)이 안내됩니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '완료가 1초 안에 피드백되는가?',
+      '완료 후 다음 행동이 안내되는가?',
+      '보조기기에도 완료가 전달되는가?',
+    ],
+    vibePrompt:
+      '작업 완료 피드백을 강화해줘.\n버튼 클릭 즉시 처리 중 상태를 보여주고\n완료되면 체크 아이콘과 함께 완료 메시지를 표시해줘.\naria-live로 스크린 리더에도 알려줘.',
+  },
+];
+
+export const waitPatterns: UXPattern[] = [
+  {
+    id: 'ux-loading',
+    slug: 'loading',
+    koreanName: '로딩',
+    englishName: 'Loading',
+    userGoal: '기다리는 동안 무슨 일이 일어나는지 알고 싶어요.',
+    summary: '콘텐츠가 준비되는 동안 상황을 이해하게 돕는 경험입니다.',
+    category: 'wait',
+    keywords: ['로딩', '기다림', '불러오는 중', '대기'],
+    flowSteps: ['화면 진입', '로딩 표시 확인', '콘텐츠 표시', '실패 시 재시도'],
+    relatedUiIds: ['ui-skeleton', 'ui-spinner', 'ui-progress-bar'],
+    relatedUxIds: ['ux-error-recovery', 'ux-upload-progress'],
+    serviceExamples: [
+      {
+        serviceId: 'youtube',
+        title: 'YouTube 스켈레톤 로딩',
+        description: '카드 자리에 회색 틀을 먼저 보여줘 기다림을 줄입니다.',
+      },
+      {
+        serviceId: 'chatgpt',
+        title: 'ChatGPT 스트리밍 응답',
+        description: '답변이 생성되는 대로 조금씩 표시되어 진행이 보입니다.',
+      },
+    ],
+    badExperience: '하얀 화면만 몇 초씩 이어져 멈춘 것인지 알 수 없습니다.',
+    betterExperience: '콘텐츠 모양의 스켈레톤이 먼저 뜨고, 오래 걸리면 진행 상황이나 안내가 추가됩니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '로딩 중임이 즉시 표시되는가?',
+      '레이아웃이 로딩 후 크게 튀지 않는가?',
+      '오래 걸릴 때 추가 안내가 있는가?',
+      '실패 시 다시 시도가 제공되는가?',
+    ],
+    vibePrompt:
+      '목록 화면의 로딩 상태를 만들어줘.\n데이터를 불러오는 동안 실제 카드와 같은 모양의 스켈레톤을 보여주고\n3초 이상 걸리면 안내 문구를 추가해줘.\n실패하면 다시 시도 버튼을 표시해줘.',
+  },
+  {
+    id: 'ux-upload-progress',
+    slug: 'upload-progress',
+    koreanName: '업로드 진행',
+    englishName: 'Upload Progress',
+    userGoal: '파일이 얼마나 올라갔는지 확인하고 싶어요.',
+    summary: '업로드 진행률과 결과를 항목별로 보여주는 경험입니다.',
+    category: 'wait',
+    keywords: ['업로드', '진행률', '퍼센트', '파일 전송'],
+    flowSteps: ['파일 선택', '업로드 시작', '진행률 확인', '완료 또는 실패 확인', '실패 시 재시도'],
+    relatedUiIds: ['ui-progress-bar', 'ui-file-upload', 'ui-toast', 'ui-list'],
+    relatedUxIds: ['ux-loading', 'ux-error-recovery'],
+    serviceExamples: [
+      {
+        serviceId: 'google-drive',
+        title: 'Google Drive 업로드 패널',
+        description: '여러 파일의 진행률이 목록으로 표시되고 개별 취소가 됩니다.',
+      },
+      {
+        serviceId: 'canva',
+        title: 'Canva 업로드 표시',
+        description: '이미지 업로드 진행이 썸네일 위에 표시됩니다.',
+      },
+    ],
+    badExperience: '큰 파일을 올리는 동안 아무 표시가 없어 창을 닫아도 되는지 모릅니다.',
+    betterExperience: '파일별 진행률과 남은 시간이 보이고, 실패한 것만 다시 올릴 수 있습니다.',
+    deviceNotes: {
+      desktop: '업로드 패널을 구석에 띄워 다른 작업을 계속하게 합니다.',
+      tablet: '진행 중 화면 이탈 시에도 상태를 유지합니다.',
+      mobile: '네트워크가 불안정할 수 있어 재시도 설계가 특히 중요합니다.',
+      hasMeaningfulDifference: true,
+    },
+    checklist: [
+      '파일별 진행률이 표시되는가?',
+      '업로드 중 취소할 수 있는가?',
+      '실패한 파일만 다시 시도할 수 있는가?',
+    ],
+    vibePrompt:
+      '여러 파일 업로드 진행 UI를 만들어줘.\n파일마다 진행률 막대와 퍼센트를 표시하고 개별 취소 버튼을 둬줘.\n실패한 파일에는 다시 시도 버튼을 보여줘.',
+  },
+  {
+    id: 'ux-empty-state',
+    slug: 'empty-state',
+    koreanName: '빈 상태',
+    englishName: 'Empty State',
+    userGoal: '아무것도 없을 때 뭘 해야 할지 알고 싶어요.',
+    summary: '데이터가 없는 화면에서 이유와 시작 방법을 알려주는 경험입니다.',
+    category: 'wait',
+    keywords: ['빈 상태', '빈 화면', '없음', '첫 사용'],
+    flowSteps: ['빈 화면 진입', '이유 확인', '시작 행동 안내 확인', '첫 항목 만들기'],
+    relatedUiIds: ['ui-empty-state', 'ui-button', 'ui-card'],
+    relatedUxIds: ['ux-no-results', 'ux-first-run-guide'],
+    serviceExamples: [
+      {
+        serviceId: 'notion',
+        title: 'Notion 빈 워크스페이스',
+        description: '템플릿 추천과 새 페이지 만들기로 시작을 돕습니다.',
+      },
+      {
+        serviceId: 'google-drive',
+        title: 'Google Drive 빈 폴더',
+        description: '파일을 끌어다 놓거나 새로 만들라는 안내가 표시됩니다.',
+      },
+    ],
+    badExperience: '텅 빈 화면에 데이터 없음이라는 문장만 떠 있습니다.',
+    betterExperience: '왜 비어 있는지, 무엇을 하면 채워지는지, 시작 버튼까지 한 화면에 담습니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '비어 있는 이유가 설명되는가?',
+      '첫 행동 버튼이 제공되는가?',
+      '상황별(첫 사용/검색 없음/오류) 빈 상태가 구분되는가?',
+    ],
+    vibePrompt:
+      '할 일 목록의 빈 상태 화면을 만들어줘.\n아직 할 일이 없다는 설명과 함께 첫 할 일 추가하기 버튼을 크게 보여주고\n간단한 사용 팁 한 줄을 함께 표시해줘.',
+  },
+  {
+    id: 'ux-error-recovery',
+    slug: 'error-recovery',
+    koreanName: '오류 상태와 다시 시도',
+    englishName: 'Error Recovery',
+    userGoal: '문제가 생겨도 해결 방법을 알고 다시 시도하고 싶어요.',
+    summary: '오류의 원인을 알려주고 복구 방법을 제공하는 경험입니다.',
+    category: 'wait',
+    keywords: ['오류', '에러', '다시 시도', '실패', '복구'],
+    flowSteps: ['오류 발생', '원인 안내 확인', '해결 방법 확인', '다시 시도', '복구 확인'],
+    relatedUiIds: ['ui-banner', 'ui-empty-state', 'ui-button', 'ui-toast'],
+    relatedUxIds: ['ux-offline', 'ux-loading'],
+    serviceExamples: [
+      {
+        serviceId: 'youtube',
+        title: 'YouTube 재생 오류',
+        description: '문제 안내와 함께 다시 시도 버튼을 제공합니다.',
+      },
+      {
+        serviceId: 'chatgpt',
+        title: 'ChatGPT 응답 재생성',
+        description: '응답 실패 시 다시 생성 버튼으로 바로 재시도합니다.',
+      },
+    ],
+    badExperience: '오류가 발생했습니다라는 문장 외엔 아무 단서가 없습니다.',
+    betterExperience: '무엇이 잘못됐고 무엇을 하면 되는지 쉬운 말로 알려주고 재시도 버튼을 제공합니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '오류 원인이 쉬운 말로 설명되는가?',
+      '다시 시도 버튼이 제공되는가?',
+      '작성 중이던 내용이 보존되는가?',
+      '기술 용어나 오류 코드만 보여주지 않는가?',
+    ],
+    vibePrompt:
+      '데이터 로드 실패 화면을 만들어줘.\n일시적인 문제일 수 있다는 안내와 다시 시도 버튼을 함께 보여주고\n재시도 중에는 버튼을 로딩 상태로 바꿔줘.',
+  },
+  {
+    id: 'ux-offline',
+    slug: 'offline',
+    koreanName: '오프라인 상태',
+    englishName: 'Offline State',
+    userGoal: '인터넷이 끊겨도 상황을 알고 대처하고 싶어요.',
+    summary: '네트워크가 끊겼음을 알리고 가능한 작업을 안내하는 경험입니다.',
+    category: 'wait',
+    keywords: ['오프라인', '연결 끊김', '네트워크 오류', '인터넷 없음'],
+    flowSteps: ['연결 끊김 감지', '오프라인 표시', '가능한 작업 확인', '연결 복구', '자동 동기화 확인'],
+    relatedUiIds: ['ui-banner', 'ui-toast', 'ui-empty-state'],
+    relatedUxIds: ['ux-error-recovery', 'ux-autosave'],
+    serviceExamples: [
+      {
+        serviceId: 'google-docs',
+        title: 'Google Docs 오프라인 편집',
+        description: '오프라인에서도 편집이 이어지고 연결되면 동기화됩니다.',
+      },
+      {
+        serviceId: 'netflix',
+        title: 'Netflix 저장 콘텐츠',
+        description: '미리 저장한 콘텐츠는 오프라인에서도 볼 수 있습니다.',
+      },
+    ],
+    badExperience: '연결이 끊긴 줄 모르고 작성한 내용이 전송 실패로 사라집니다.',
+    betterExperience: '오프라인임을 배너로 알리고, 작성 내용은 보관했다가 연결되면 자동 전송합니다.',
+    deviceNotes: {
+      desktop: '유선 환경이라 드물지만 상태 표시는 동일하게 필요합니다.',
+      tablet: 'Wi-Fi 전환 시점의 끊김을 자연스럽게 처리합니다.',
+      mobile: '이동 중 끊김이 잦아 오프라인 안내와 재시도가 특히 중요합니다.',
+      hasMeaningfulDifference: true,
+    },
+    checklist: [
+      '오프라인 상태가 화면에 표시되는가?',
+      '작성 중이던 내용이 보존되는가?',
+      '연결 복구 시 자동으로 이어지는가?',
+    ],
+    vibePrompt:
+      '오프라인 감지 기능을 만들어줘.\nnavigator.onLine과 online/offline 이벤트로 연결 상태를 감지하고\n끊기면 상단에 오프라인 배너를 표시해줘.\n연결이 돌아오면 배너를 없애고 다시 연결됨 토스트를 잠깐 보여줘.',
+  },
+];
+
+export const sharePatterns: UXPattern[] = [
+  {
+    id: 'ux-link-sharing',
+    slug: 'link-sharing',
+    koreanName: '링크 공유',
+    englishName: 'Link Sharing',
+    userGoal: '링크 하나로 내 문서를 다른 사람에게 보여주고 싶어요.',
+    summary: '공개 범위를 정한 링크를 만들어 전달하는 경험입니다.',
+    category: 'share',
+    keywords: ['링크 공유', '링크 복사', 'URL 공유', '공유 링크'],
+    flowSteps: ['공유 열기', '공개 범위 설정', '링크 복사', '전달', '받은 사람 접근 확인'],
+    relatedUiIds: ['ui-modal', 'ui-select', 'ui-toast', 'ui-button'],
+    relatedUxIds: ['ux-permission-selection', 'ux-share-action'],
+    serviceExamples: [
+      {
+        serviceId: 'google-docs',
+        title: 'Google Docs 링크 공유',
+        description: '링크가 있는 모든 사용자 같은 범위를 정해 링크를 복사합니다.',
+      },
+      {
+        serviceId: 'canva',
+        title: 'Canva 디자인 공유 링크',
+        description: '보기 전용, 편집 가능 링크를 구분해 만듭니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 웹 게시',
+        description: '페이지를 웹에 게시해 링크로 공개합니다.',
+      },
+    ],
+    badExperience: '링크를 보냈더니 상대방은 권한 없음 화면만 보게 됩니다.',
+    betterExperience: '링크 복사 전에 누가 열 수 있는지 명확히 보여주고 복사 완료를 알려줍니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '링크의 공개 범위가 복사 전에 보이는가?',
+      '복사 완료 피드백이 있는가?',
+      '권한 없는 접근자에게 요청 방법이 안내되는가?',
+    ],
+    vibePrompt:
+      '문서 링크 공유 모달을 만들어줘.\n공개 범위(나만, 링크가 있는 모두)를 셀렉트로 고르고 링크 복사 버튼을 둬줘.\n복사하면 완료 토스트를 보여주고 현재 범위를 모달에 항상 표시해줘.',
+  },
+  {
+    id: 'ux-permission-selection',
+    slug: 'permission-selection',
+    koreanName: '사용자 초대와 권한 선택',
+    englishName: 'Invite & Permissions',
+    userGoal: '함께 할 사람을 초대하고 할 수 있는 일을 정하고 싶어요.',
+    summary: '사람을 초대하며 보기, 댓글, 편집 권한을 정하는 경험입니다.',
+    category: 'share',
+    keywords: ['초대', '권한', '편집 권한', '보기 전용', '멤버 추가'],
+    flowSteps: ['초대 열기', '이메일 입력', '권한 선택', '초대 보내기', '멤버 목록 확인'],
+    relatedUiIds: ['ui-modal', 'ui-combo-box', 'ui-select', 'ui-avatar', 'ui-chip'],
+    relatedUxIds: ['ux-link-sharing', 'ux-comments'],
+    serviceExamples: [
+      {
+        serviceId: 'google-docs',
+        title: 'Google Docs 권한 관리',
+        description: '뷰어, 댓글 작성자, 편집자 권한을 사람별로 정합니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 멤버 초대',
+        description: '이메일로 초대하며 전체 허용, 읽기 허용 등을 고릅니다.',
+      },
+    ],
+    badExperience: '초대는 됐지만 무엇을 할 수 있는 권한인지 아무도 모릅니다.',
+    betterExperience: '권한별로 할 수 있는 일이 설명되고, 나중에 사람별로 바꾸거나 제거할 수 있습니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '권한별 가능한 일이 설명되는가?',
+      '초대 후 권한을 변경·회수할 수 있는가?',
+      '현재 접근 가능한 사람 목록이 보이는가?',
+    ],
+    vibePrompt:
+      '멤버 초대 모달을 만들어줘.\n이메일 입력이 칩으로 쌓이고 권한(보기, 댓글, 편집)을 셀렉트로 고르게 해줘.\n아래에 현재 멤버 목록과 각자의 권한, 제거 버튼을 보여줘.',
+  },
+  {
+    id: 'ux-comments',
+    slug: 'comments',
+    koreanName: '댓글과 멘션',
+    englishName: 'Comments & Mentions',
+    userGoal: '문서나 게시물에 의견을 남기고 대화하고 싶어요.',
+    summary: '댓글을 달고 답글과 멘션으로 대화를 이어가는 경험입니다.',
+    category: 'share',
+    keywords: ['댓글', '답글', '멘션', '@', '피드백'],
+    flowSteps: ['댓글 입력 진입', '내용 작성', '멘션 추가', '등록', '답글과 알림 확인'],
+    relatedUiIds: ['ui-textarea', 'ui-avatar', 'ui-list', 'ui-drawer', 'ui-notification-badge'],
+    relatedUxIds: ['ux-permission-selection', 'ux-version-history'],
+    serviceExamples: [
+      {
+        serviceId: 'google-docs',
+        title: 'Google Docs 문서 댓글',
+        description: '텍스트를 선택해 그 위치에 댓글을 달고 해결 처리합니다.',
+      },
+      {
+        serviceId: 'instagram',
+        title: 'Instagram 댓글과 답글',
+        description: '게시물에 댓글을 달고 답글로 대화가 이어집니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 멘션',
+        description: '@로 사람을 멘션하면 알림이 전달됩니다.',
+      },
+    ],
+    badExperience: '어느 부분에 대한 댓글인지 알 수 없고, 답글이 달려도 모릅니다.',
+    betterExperience: '댓글이 대상 위치와 연결되고, 멘션과 답글이 알림으로 이어집니다.',
+    deviceNotes: {
+      desktop: '문서 옆 패널로 댓글 목록을 나란히 봅니다.',
+      tablet: '패널을 열고 닫으며 본문과 오갑니다.',
+      mobile: '댓글이 하단 시트나 별도 화면으로 열립니다.',
+      hasMeaningfulDifference: true,
+    },
+    checklist: [
+      '댓글이 무엇에 대한 것인지 연결되는가?',
+      '멘션 시 상대에게 알림이 가는가?',
+      '해결됨 처리로 정리할 수 있는가?',
+    ],
+    vibePrompt:
+      '댓글 기능을 만들어줘.\n댓글 목록, 답글, @멘션 자동 완성을 구현하고\n등록 시 목록 맨 아래로 스크롤하며 작성자 아바타와 시간을 표시해줘.',
+  },
+  {
+    id: 'ux-version-history',
+    slug: 'version-history',
+    koreanName: '버전 기록',
+    englishName: 'Version History',
+    userGoal: '누가 무엇을 바꿨는지 확인하고 되돌리고 싶어요.',
+    summary: '변경 이력을 시간순으로 보고 과거 버전으로 복원하는 경험입니다.',
+    category: 'share',
+    keywords: ['버전', '기록', '히스토리', '복원', '변경 내역'],
+    flowSteps: ['버전 기록 열기', '시점 선택', '변경 내용 비교', '복원 결정', '복원 결과 확인'],
+    relatedUiIds: ['ui-timeline', 'ui-drawer', 'ui-list', 'ui-alert-dialog'],
+    relatedUxIds: ['ux-autosave', 'ux-undo'],
+    serviceExamples: [
+      {
+        serviceId: 'google-docs',
+        title: 'Google Docs 버전 기록',
+        description: '시점별 변경 내용이 색으로 구분되고 복원할 수 있습니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 페이지 기록',
+        description: '과거 시점의 페이지를 미리 보고 되돌립니다.',
+      },
+    ],
+    badExperience: '복원했더니 지금 버전이 사라지고 누가 바꿨는지도 알 수 없습니다.',
+    betterExperience: '복원 전 미리보기가 가능하고, 복원해도 기존 버전이 기록으로 남습니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '변경 시각과 작성자가 표시되는가?',
+      '복원 전 내용을 미리 볼 수 있는가?',
+      '복원 후에도 이전 기록이 남는가?',
+    ],
+    vibePrompt:
+      '버전 기록 패널을 만들어줘.\n저장 시점 목록을 시간순으로 보여주고 시점을 누르면 미리보기를 표시해줘.\n복원 버튼에는 확인 다이얼로그를 붙여줘.',
+  },
+];
+
+export const startPatterns: UXPattern[] = [
+  {
+    id: 'ux-login',
+    slug: 'login',
+    koreanName: '로그인',
+    englishName: 'Login',
+    userGoal: '내 계정으로 빠르고 안전하게 들어가고 싶어요.',
+    summary: '계정 정보를 입력해 서비스에 들어가는 경험입니다.',
+    category: 'start',
+    keywords: ['로그인', '로그인 화면', '계정', '비밀번호 찾기'],
+    flowSteps: ['로그인 진입', '아이디 입력', '비밀번호 입력', '오류 시 안내 확인', '로그인 완료'],
+    relatedUiIds: ['ui-text-field', 'ui-password-field', 'ui-button', 'ui-checkbox'],
+    relatedUxIds: ['ux-social-login', 'ux-inline-validation'],
+    serviceExamples: [
+      {
+        serviceId: 'google',
+        title: 'Google 단계형 로그인',
+        description: '이메일과 비밀번호를 한 단계씩 나누어 입력받습니다.',
+      },
+      {
+        serviceId: 'naver',
+        title: '네이버 로그인',
+        description: '아이디 저장, 일회용 로그인 등 다양한 방법을 제공합니다.',
+      },
+    ],
+    badExperience: '틀렸다는 말만 반복되고 아이디가 틀렸는지 비밀번호가 틀렸는지도, 찾는 방법도 안내되지 않습니다.',
+    betterExperience: '오류 원인을 안전한 범위에서 안내하고 비밀번호 찾기가 바로 보입니다.',
+    deviceNotes: {
+      desktop: '비밀번호 관리자 자동 입력이 잘 동작하게 마크업합니다.',
+      tablet: '입력 칸이 키보드에 가리지 않게 화면을 조정합니다.',
+      mobile: '이메일 키보드가 뜨게 하고 보기 전환 버튼을 제공합니다.',
+      hasMeaningfulDifference: true,
+    },
+    checklist: [
+      '오류 시 무엇을 확인해야 하는지 안내되는가?',
+      '비밀번호 찾기가 눈에 잘 보이는가?',
+      '자동완성 속성이 지정되어 있는가?',
+    ],
+    vibePrompt:
+      '로그인 화면을 만들어줘.\n이메일과 비밀번호 입력, 로그인 유지 체크박스, 비밀번호 찾기 링크를 배치하고\nautocomplete 속성을 지정해줘.\n실패 시 입력값을 유지한 채 오류 메시지를 보여줘.',
+  },
+  {
+    id: 'ux-social-login',
+    slug: 'social-login',
+    koreanName: '소셜 로그인',
+    englishName: 'Social Login',
+    userGoal: '가입 절차 없이 쓰던 계정으로 바로 시작하고 싶어요.',
+    summary: 'Google, 카카오 같은 기존 계정으로 간편하게 시작하는 경험입니다.',
+    category: 'start',
+    keywords: ['소셜 로그인', '간편 로그인', '구글 로그인', '카카오 로그인'],
+    flowSteps: ['시작 화면 진입', '소셜 계정 선택', '계정 인증', '동의 확인', '시작 완료'],
+    relatedUiIds: ['ui-button', 'ui-divider', 'ui-modal'],
+    relatedUxIds: ['ux-login', 'ux-onboarding'],
+    serviceExamples: [
+      {
+        serviceId: 'duolingo',
+        title: 'Duolingo 간편 시작',
+        description: 'Google 계정으로 몇 번의 탭 만에 학습을 시작합니다.',
+      },
+      {
+        serviceId: 'canva',
+        title: 'Canva 소셜 로그인',
+        description: '여러 소셜 계정 버튼이 나란히 제공됩니다.',
+      },
+    ],
+    badExperience: '지난번에 어떤 계정으로 가입했는지 기억나지 않아 계정이 두 개가 됩니다.',
+    betterExperience: '마지막 사용 계정을 표시해 주고, 같은 이메일 계정의 중복 가입을 안내합니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '소셜 버튼이 각 브랜드 규칙을 따르는가?',
+      '마지막 로그인 방법이 표시되는가?',
+      '이메일 로그인 대안도 제공되는가?',
+    ],
+    vibePrompt:
+      '시작 화면에 소셜 로그인 버튼을 만들어줘.\nGoogle, 카카오 버튼을 세로로 배치하고 마지막 사용 표시를 붙여줘.\n아래에 이메일로 계속하기 링크도 함께 제공해줘.',
+  },
+  {
+    id: 'ux-onboarding',
+    slug: 'onboarding',
+    koreanName: '온보딩',
+    englishName: 'Onboarding',
+    userGoal: '처음 왔지만 헤매지 않고 시작하고 싶어요.',
+    summary: '첫 사용자가 핵심 가치를 빠르게 경험하도록 안내하는 경험입니다.',
+    category: 'start',
+    keywords: ['온보딩', '첫 사용', '시작 안내', '튜토리얼', '환영'],
+    flowSteps: ['환영 화면', '목적 선택', '핵심 기능 안내', '첫 작업 완료', '일상 사용 시작'],
+    relatedUiIds: ['ui-carousel', 'ui-progress-bar', 'ui-button', 'ui-hero-section'],
+    relatedUxIds: ['ux-first-run-guide', 'ux-social-login'],
+    serviceExamples: [
+      {
+        serviceId: 'duolingo',
+        title: 'Duolingo 시작 흐름',
+        description: '목표를 묻고 바로 첫 레슨을 하게 해 가치를 즉시 경험시킵니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 시작 템플릿',
+        description: '용도를 고르면 맞는 템플릿으로 시작을 돕습니다.',
+      },
+    ],
+    badExperience: '기능 설명 슬라이드 열 장을 넘겨야 시작할 수 있고 건너뛸 수도 없습니다.',
+    betterExperience: '설명은 최소로 줄이고 실제 첫 작업을 해 보게 하며 언제든 건너뛸 수 있습니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '건너뛰기가 항상 가능한가?',
+      '설명보다 직접 해 보기 중심인가?',
+      '단계가 3~5개 이내로 짧은가?',
+    ],
+    vibePrompt:
+      '3단계 온보딩을 만들어줘.\n각 단계는 그림과 한 문장 설명으로 구성하고 진행 점과 건너뛰기 버튼을 표시해줘.\n마지막 단계에서 첫 작업을 바로 시작하는 버튼으로 이어줘.',
+  },
+  {
+    id: 'ux-first-run-guide',
+    slug: 'first-run-guide',
+    koreanName: '빈 화면 안내와 도움말',
+    englishName: 'First-run Guidance',
+    userGoal: '처음 보는 화면에서 무엇부터 할지 알고 싶어요.',
+    summary: '처음 마주한 화면에서 시작 방법과 도움말을 제공하는 경험입니다.',
+    category: 'start',
+    keywords: ['도움말', '가이드', '코치마크', '첫 화면', '튜토리얼'],
+    flowSteps: ['새 화면 진입', '안내 확인', '따라하기', '도움말 닫기', '스스로 사용'],
+    relatedUiIds: ['ui-empty-state', 'ui-tooltip', 'ui-popover', 'ui-accordion'],
+    relatedUxIds: ['ux-onboarding', 'ux-empty-state'],
+    serviceExamples: [
+      {
+        serviceId: 'canva',
+        title: 'Canva 에디터 안내',
+        description: '처음 에디터에 들어오면 주요 도구 위치를 안내합니다.',
+      },
+      {
+        serviceId: 'chatgpt',
+        title: 'ChatGPT 예시 프롬프트',
+        description: '빈 대화 화면에 시도해 볼 예시 질문이 제시됩니다.',
+      },
+    ],
+    badExperience: '설명 팝업이 화면을 뒤덮는데 닫고 나면 다시 볼 방법이 없습니다.',
+    betterExperience: '꼭 필요한 안내만 짧게 보여주고, 도움말은 언제든 다시 찾을 수 있습니다.',
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    checklist: [
+      '안내를 닫아도 다시 볼 수 있는가?',
+      '안내가 실제 첫 행동으로 이어지는가?',
+      '안내 개수가 3개 이내로 절제되어 있는가?',
+    ],
+    vibePrompt:
+      '처음 방문한 사용자를 위한 빈 화면 안내를 만들어줘.\n예시 항목 만들기 버튼과 짧은 사용 팁을 표시하고\n닫은 뒤에도 도움말 버튼으로 다시 볼 수 있게 localStorage로 상태를 관리해줘.',
+  },
+];

@@ -1,0 +1,346 @@
+import type { UIItem } from '../../types';
+
+export const layoutItems: UIItem[] = [
+  {
+    id: 'ui-header',
+    slug: 'header',
+    easyName: '화면 맨 위의 머리 영역',
+    koreanName: '헤더',
+    englishName: 'Header',
+    summary: '로고와 주요 메뉴를 담아 화면 맨 위에 고정되는 영역입니다.',
+    category: 'layout',
+    keywords: ['헤더', '상단', '머리말', '로고', 'GNB', '상단바'],
+    aliases: ['상단 영역', '글로벌 내비게이션', '탑바'],
+    states: ['기본', '스크롤 시 축소', '모바일 축약'],
+    serviceExamples: [
+      {
+        serviceId: 'youtube',
+        title: 'YouTube 상단 헤더',
+        description: '로고, 검색창, 알림과 프로필 버튼이 한 줄에 정리되어 있습니다.',
+      },
+      {
+        serviceId: 'notion',
+        title: 'Notion 페이지 상단',
+        description: '현재 문서 경로와 공유, 댓글 버튼이 상단에 얇게 배치됩니다.',
+      },
+    ],
+    relatedUxIds: ['ux-main-menu', 'ux-current-location'],
+    relatedUiIds: ['ui-top-app-bar', 'ui-main-menu', 'ui-footer'],
+    deviceNotes: {
+      desktop: '가로 공간이 넓어 로고, 메뉴, 검색, 프로필을 한 줄에 모두 배치할 수 있습니다.',
+      tablet: '메뉴 일부를 아이콘으로 줄이거나 드로어로 옮겨 공간을 확보합니다.',
+      mobile: '로고와 햄버거 버튼 정도만 남기고 나머지는 드로어나 별도 화면으로 옮깁니다.',
+      hasMeaningfulDifference: true,
+    },
+    useWhen: [
+      '어느 페이지에서든 주요 메뉴로 이동할 수 있어야 할 때',
+      '서비스 이름과 현재 위치를 항상 보여주고 싶을 때',
+    ],
+    avoidWhen: [
+      '몰입이 중요한 전체 화면 콘텐츠(영상 재생, 프레젠테이션)에서 항상 노출할 때',
+      '헤더에 너무 많은 메뉴를 넣어 한 줄에 다 들어가지 않을 때',
+    ],
+    confusedWith: '상단 앱 바는 모바일 앱 문법에 가까운 이름이고, 헤더는 웹 문서의 머리 영역을 가리키는 더 넓은 말입니다.',
+    accessibilityChecks: [
+      'header 요소와 nav 요소로 구조를 표현했는가?',
+      '로고를 누르면 홈으로 이동하는 것을 알 수 있는가?',
+      '키보드 Tab 순서가 시각적 순서와 일치하는가?',
+      '본문 바로가기 링크를 제공하는가?',
+    ],
+    vibePrompt:
+      '웹앱 상단에 고정되는 헤더를 만들어줘.\n왼쪽에 로고, 가운데 또는 오른쪽에 주요 메뉴를 배치하고,\n모바일에서는 메뉴가 햄버거 버튼과 드로어로 바뀌게 해줘.\nheader와 nav 시맨틱 태그를 사용하고 키보드로 모든 메뉴에 접근할 수 있게 해줘.',
+    demoType: 'static',
+    featured: true,
+  },
+  {
+    id: 'ui-footer',
+    slug: 'footer',
+    easyName: '화면 맨 아래의 꼬리 영역',
+    koreanName: '푸터',
+    englishName: 'Footer',
+    summary: '저작권, 약관, 부가 링크를 모아 화면 맨 아래에 두는 영역입니다.',
+    category: 'layout',
+    keywords: ['푸터', '하단', '바닥글', '저작권', '약관'],
+    aliases: ['하단 영역', '바닥글'],
+    serviceExamples: [
+      {
+        serviceId: 'naver',
+        title: '네이버 페이지 하단',
+        description: '이용약관, 개인정보 처리방침, 고객센터 링크가 모여 있습니다.',
+      },
+      {
+        serviceId: 'airbnb',
+        title: 'Airbnb 푸터',
+        description: '지원, 호스팅, 회사 소개 링크를 여러 열로 나누어 보여줍니다.',
+      },
+    ],
+    relatedUxIds: ['ux-main-menu'],
+    relatedUiIds: ['ui-header', 'ui-divider'],
+    deviceNotes: {
+      desktop: '여러 열로 링크 묶음을 나란히 보여줄 수 있습니다.',
+      tablet: '열 수를 줄여 두 열 정도로 정리합니다.',
+      mobile: '한 열로 쌓거나 아코디언으로 접어 스크롤 길이를 줄입니다.',
+      hasMeaningfulDifference: true,
+    },
+    useWhen: [
+      '약관, 저작권처럼 항상 접근 가능해야 하지만 자주 쓰지 않는 링크를 모을 때',
+      '페이지의 끝을 명확하게 알려주고 싶을 때',
+    ],
+    avoidWhen: [
+      '핵심 기능 버튼을 푸터에만 두어 사용자가 찾기 어렵게 만들 때',
+      '무한 스크롤 목록 아래에 푸터를 두어 도달할 수 없게 만들 때',
+    ],
+    accessibilityChecks: [
+      'footer 요소를 사용했는가?',
+      '링크 텍스트만으로 목적지를 알 수 있는가?',
+      '글자 크기와 대비가 본문 기준을 지키는가?',
+    ],
+    vibePrompt:
+      '웹앱 맨 아래에 푸터를 만들어줘.\n서비스 소개, 이용약관, 저작권 문구를 넣고\n모바일에서는 한 열로 쌓이게 해줘.\nfooter 시맨틱 태그를 사용해줘.',
+    demoType: 'static',
+  },
+  {
+    id: 'ui-sidebar',
+    slug: 'sidebar',
+    easyName: '화면 옆의 세로 메뉴 영역',
+    koreanName: '사이드바',
+    englishName: 'Sidebar',
+    summary: '화면 왼쪽이나 오른쪽에 세로로 붙어 메뉴나 목차를 보여주는 영역입니다.',
+    category: 'layout',
+    keywords: ['사이드바', '옆', '세로 메뉴', 'LNB', '좌측 메뉴'],
+    aliases: ['사이드 내비게이션', '좌측 패널'],
+    states: ['펼침', '접힘', '숨김'],
+    serviceExamples: [
+      {
+        serviceId: 'notion',
+        title: 'Notion 왼쪽 사이드바',
+        description: '페이지 목록을 트리 구조로 보여주고 접었다 펼 수 있습니다.',
+      },
+      {
+        serviceId: 'gmail',
+        title: 'Gmail 왼쪽 메뉴',
+        description: '받은편지함, 보낸편지함 같은 편지함 목록이 세로로 정렬됩니다.',
+      },
+      {
+        serviceId: 'google-drive',
+        title: 'Google Drive 폴더 트리',
+        description: '내 드라이브와 공유 문서함을 사이드바에서 계층으로 탐색합니다.',
+      },
+    ],
+    relatedUxIds: ['ux-main-menu', 'ux-current-location'],
+    relatedUiIds: ['ui-navigation-drawer', 'ui-navigation-rail', 'ui-bottom-navigation'],
+    deviceNotes: {
+      desktop: '항상 펼쳐 두고 현재 위치를 강조해 보여줄 수 있습니다.',
+      tablet: '아이콘만 남긴 내비게이션 레일로 줄이거나 필요할 때만 펼칩니다.',
+      mobile: '화면이 좁아 드로어로 바뀌거나 하단 내비게이션으로 대체됩니다.',
+      hasMeaningfulDifference: true,
+    },
+    useWhen: [
+      '메뉴나 폴더가 많아 세로로 나열해야 할 때',
+      '문서나 관리 화면처럼 늘 메뉴를 켜 두고 쓰는 화면일 때',
+    ],
+    avoidWhen: [
+      '메뉴가 3~4개뿐이라 상단 메뉴로 충분할 때',
+      '모바일 중심 서비스에서 좁은 화면을 더 좁게 만들 때',
+    ],
+    confusedWith: '내비게이션 드로어는 평소 숨겨져 있다가 열리는 방식이고, 사이드바는 화면에 늘 붙어 있는 방식에 가깝습니다.',
+    accessibilityChecks: [
+      'nav 요소와 적절한 레이블을 사용했는가?',
+      '접기 버튼의 상태를 스크린 리더가 알 수 있는가?',
+      '현재 위치가 색상 외의 방법으로도 표시되는가?',
+    ],
+    vibePrompt:
+      '화면 왼쪽에 고정되는 사이드바 메뉴를 만들어줘.\n현재 선택된 항목을 배경색과 아이콘으로 표시하고,\n태블릿에서는 아이콘만 남게 접히고 모바일에서는 드로어로 바뀌게 해줘.',
+    demoType: 'static',
+    featured: true,
+  },
+  {
+    id: 'ui-top-app-bar',
+    slug: 'top-app-bar',
+    easyName: '모바일 앱 상단의 제목 줄',
+    koreanName: '상단 앱 바',
+    englishName: 'Top App Bar',
+    summary: '화면 제목과 뒤로가기, 주요 동작 버튼을 담는 모바일 상단 줄입니다.',
+    category: 'layout',
+    keywords: ['앱바', '상단바', '타이틀바', '뒤로가기', '모바일 상단'],
+    aliases: ['앱 바', '타이틀 바', '내비게이션 바'],
+    states: ['기본', '스크롤 시 그림자', '검색 모드'],
+    serviceExamples: [
+      {
+        serviceId: 'kakaotalk',
+        title: '카카오톡 채팅방 상단',
+        description: '뒤로가기, 대화 상대 이름, 검색과 메뉴 버튼이 한 줄에 있습니다.',
+      },
+      {
+        serviceId: 'instagram',
+        title: 'Instagram 상세 화면 상단',
+        description: '게시물 상세로 들어가면 뒤로가기와 화면 제목이 상단에 나타납니다.',
+      },
+    ],
+    relatedUxIds: ['ux-back-navigation', 'ux-current-location'],
+    relatedUiIds: ['ui-header', 'ui-icon-button', 'ui-bottom-navigation'],
+    deviceNotes: {
+      desktop: 'PC 웹에서는 보통 더 넓은 헤더가 같은 역할을 대신합니다.',
+      tablet: '화면이 넓어 제목 옆에 더 많은 동작 버튼을 둘 수 있습니다.',
+      mobile: '뒤로가기, 제목, 동작 버튼 1~2개로 최소한만 구성합니다.',
+      hasMeaningfulDifference: true,
+    },
+    useWhen: [
+      '모바일에서 현재 화면 이름과 뒤로가기를 항상 보여줘야 할 때',
+      '화면마다 다른 주요 동작 버튼을 상단에 두고 싶을 때',
+    ],
+    avoidWhen: [
+      '전체 화면 몰입 콘텐츠에서 항상 노출할 때',
+      '버튼을 4개 이상 몰아넣어 한 줄이 복잡해질 때',
+    ],
+    confusedWith: '헤더는 웹 전체 상단 영역을 가리키고, 상단 앱 바는 화면 단위 제목과 동작을 담는 모바일 문법에 가깝습니다.',
+    accessibilityChecks: [
+      '뒤로가기 아이콘 버튼에 aria-label이 있는가?',
+      '화면 제목이 heading으로 읽히는가?',
+      '터치 영역이 44px 이상인가?',
+    ],
+    vibePrompt:
+      '모바일 화면 상단에 앱 바를 만들어줘.\n왼쪽에 뒤로가기 버튼, 가운데에 화면 제목, 오른쪽에 동작 아이콘 버튼을 배치하고\n모든 아이콘 버튼에 aria-label을 붙여줘.',
+    demoType: 'static',
+  },
+  {
+    id: 'ui-card',
+    slug: 'card',
+    easyName: '내용을 담는 네모 상자',
+    koreanName: '카드',
+    englishName: 'Card',
+    summary: '이미지, 제목, 설명을 한 덩어리로 묶어 보여주는 네모 영역입니다.',
+    category: 'layout',
+    keywords: ['카드', '상자', '박스', '썸네일', '그리드'],
+    aliases: ['카드 컴포넌트', '타일'],
+    states: ['기본', '호버', '선택됨'],
+    serviceExamples: [
+      {
+        serviceId: 'youtube',
+        title: 'YouTube 영상 카드',
+        description: '썸네일, 제목, 채널명, 조회수가 하나의 카드로 묶여 있습니다.',
+      },
+      {
+        serviceId: 'airbnb',
+        title: 'Airbnb 숙소 카드',
+        description: '숙소 사진, 위치, 가격, 평점이 한 카드에 정리됩니다.',
+      },
+      {
+        serviceId: 'netflix',
+        title: 'Netflix 콘텐츠 카드',
+        description: '포스터 이미지 중심의 카드가 가로로 줄지어 배치됩니다.',
+      },
+    ],
+    relatedUxIds: ['ux-list-to-detail', 'ux-search'],
+    relatedUiIds: ['ui-list', 'ui-carousel', 'ui-avatar'],
+    deviceNotes: {
+      desktop: '3~4열 그리드로 여러 카드를 한눈에 보여줍니다.',
+      tablet: '2열 그리드가 일반적입니다.',
+      mobile: '1열로 쌓아 각 카드가 화면 폭을 가득 채웁니다.',
+      hasMeaningfulDifference: true,
+    },
+    useWhen: [
+      '이미지와 텍스트가 함께 있는 콘텐츠를 여러 개 나열할 때',
+      '각 항목이 독립적으로 클릭되어 상세로 이동할 때',
+    ],
+    avoidWhen: [
+      '텍스트 한 줄짜리 항목처럼 카드로 감쌀 내용이 거의 없을 때',
+      '수백 개 항목을 비교해야 해서 표가 더 적합할 때',
+    ],
+    confusedWith: '리스트 아이템은 한 줄 중심의 간결한 표현이고, 카드는 이미지와 여러 정보를 덩어리로 묶는 표현입니다.',
+    accessibilityChecks: [
+      '카드 전체가 링크라면 링크 이름이 명확한가?',
+      '카드 안에 중첩 클릭 요소가 있어도 키보드로 구분해 접근되는가?',
+      '이미지에 적절한 대체 텍스트가 있는가?',
+    ],
+    vibePrompt:
+      '썸네일, 제목, 설명, 태그가 들어가는 콘텐츠 카드를 만들어줘.\nPC에서 3열, 태블릿 2열, 모바일 1열 그리드로 배치하고\n카드를 클릭하면 상세 페이지로 이동하게 해줘.',
+    demoType: 'static',
+    featured: true,
+  },
+  {
+    id: 'ui-divider',
+    slug: 'divider',
+    easyName: '내용을 나누는 얇은 선',
+    koreanName: '구분선',
+    englishName: 'Divider',
+    summary: '서로 다른 내용 사이에 얇은 선을 그어 시각적으로 구분하는 요소입니다.',
+    category: 'layout',
+    keywords: ['구분선', '나누기', '경계선', '분리선', 'hr'],
+    aliases: ['분리선', '세퍼레이터'],
+    serviceExamples: [
+      {
+        serviceId: 'kakaotalk',
+        title: '카카오톡 설정 목록',
+        description: '설정 그룹 사이에 얇은 선과 여백으로 경계를 만듭니다.',
+      },
+    ],
+    relatedUxIds: ['ux-main-menu'],
+    relatedUiIds: ['ui-list', 'ui-card'],
+    deviceNotes: {
+      hasMeaningfulDifference: false,
+    },
+    useWhen: [
+      '목록이나 메뉴에서 성격이 다른 그룹을 나눌 때',
+      '여백만으로는 경계가 불분명할 때',
+    ],
+    avoidWhen: [
+      '모든 항목 사이에 선을 넣어 화면이 답답해질 때',
+      '여백과 제목만으로 충분히 구분될 때',
+    ],
+    accessibilityChecks: [
+      '장식용 구분선이 스크린 리더에 불필요하게 읽히지 않는가?',
+      '선 색상이 배경과 너무 비슷해 보이지 않지는 않는가?',
+    ],
+    vibePrompt:
+      '설정 목록에서 그룹 사이를 나누는 구분선을 추가해줘.\n장식용 선은 스크린 리더가 읽지 않도록 처리하고\n선 대신 여백으로 충분한 곳에는 선을 넣지 말아줘.',
+    demoType: 'static',
+  },
+  {
+    id: 'ui-hero-section',
+    slug: 'hero-section',
+    easyName: '첫 화면의 큰 소개 영역',
+    koreanName: '히어로 영역',
+    englishName: 'Hero Section',
+    summary: '첫 화면 상단에서 서비스의 핵심 메시지를 크게 보여주는 영역입니다.',
+    category: 'layout',
+    keywords: ['히어로', '메인 배너', '첫 화면', '랜딩', '대문'],
+    aliases: ['메인 비주얼', '점보트론'],
+    serviceExamples: [
+      {
+        serviceId: 'canva',
+        title: 'Canva 홈 상단',
+        description: '무엇을 디자인할지 묻는 큰 제목과 검색창이 첫 화면을 채웁니다.',
+      },
+      {
+        serviceId: 'netflix',
+        title: 'Netflix 대표 콘텐츠 영역',
+        description: '추천 작품이 화면 상단을 크게 차지하며 재생 버튼을 보여줍니다.',
+      },
+    ],
+    relatedUxIds: ['ux-onboarding', 'ux-search'],
+    relatedUiIds: ['ui-header', 'ui-search-field', 'ui-button'],
+    deviceNotes: {
+      desktop: '넓은 화면을 활용해 큰 제목과 이미지, 버튼을 나란히 배치합니다.',
+      tablet: '요소 크기를 줄이고 세로 배치로 전환하기 시작합니다.',
+      mobile: '제목과 버튼 중심으로 줄이고 화면 높이를 과하게 차지하지 않게 합니다.',
+      hasMeaningfulDifference: true,
+    },
+    useWhen: [
+      '첫 방문자에게 서비스의 목적을 한 문장으로 전달할 때',
+      '검색이나 시작하기처럼 첫 행동을 유도할 때',
+    ],
+    avoidWhen: [
+      '매일 쓰는 도구형 화면에서 콘텐츠보다 소개가 앞설 때',
+      '히어로가 화면 전체를 덮어 실제 콘텐츠가 보이지 않을 때',
+    ],
+    accessibilityChecks: [
+      '메인 제목이 h1으로 마크업되어 있는가?',
+      '배경 이미지 위 글자의 대비가 충분한가?',
+      '주요 버튼이 키보드로 바로 접근되는가?',
+    ],
+    vibePrompt:
+      '홈 화면 상단에 히어로 영역을 만들어줘.\n서비스를 한 문장으로 설명하는 큰 h1 제목, 보조 설명, 검색창을 배치하고\n모바일에서 세로로 자연스럽게 쌓이게 해줘.',
+    demoType: 'static',
+  },
+];
