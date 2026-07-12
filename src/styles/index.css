@@ -31,6 +31,9 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family:
+    'PretendardGOV Variable',
+    'Pretendard GOV Variable',
+    PretendardGOV,
     'Pretendard Variable',
     Pretendard,
     -apple-system,
