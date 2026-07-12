@@ -79,7 +79,7 @@ export function Header() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong"
             aria-expanded={menuOpen}
             aria-haspopup="dialog"
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
