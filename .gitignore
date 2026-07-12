@@ -19,3 +19,6 @@ npm-debug.log*
 # test
 coverage
 *.local
+
+# TypeScript build info
+*.tsbuildinfo
