@@ -397,9 +397,9 @@ export const displayItems: UIItem[] = [
         description: '주문부터 배송 완료까지 단계가 시간순으로 표시됩니다.',
       },
       {
-        serviceId: 'google-docs',
-        title: 'Google Docs 버전 기록',
-        description: '문서의 수정 이력이 시간순으로 나열됩니다.',
+        serviceId: 'google-drive',
+        title: 'Google Drive 활동 내역',
+        description: '파일의 세부정보 패널에서 편집·공유 활동이 시간순으로 나열됩니다.',
       },
     ],
     relatedUxIds: ['ux-version-history', 'ux-completion-feedback'],

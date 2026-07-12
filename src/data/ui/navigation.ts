@@ -72,9 +72,9 @@ export const navigationItems: UIItem[] = [
         description: '상품 정보, 리뷰, 문의를 탭으로 나누어 보여줍니다.',
       },
       {
-        serviceId: 'google-calendar',
-        title: 'Google Calendar 보기 전환',
-        description: '일, 주, 월 보기를 전환 버튼으로 바꾸는 방식이 탭과 비슷합니다.',
+        serviceId: 'instagram',
+        title: 'Instagram 프로필 탭',
+        description: '프로필에서 게시물, 릴스, 태그됨을 탭으로 전환해 봅니다.',
       },
     ],
     relatedUxIds: ['ux-tab-switching', 'ux-current-location'],

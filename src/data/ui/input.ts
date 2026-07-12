@@ -170,9 +170,9 @@ export const inputItems: UIItem[] = [
         description: '비밀번호 표시 체크로 입력 내용을 확인할 수 있습니다.',
       },
       {
-        serviceId: 'naver',
-        title: '네이버 로그인',
-        description: '비밀번호 입력과 함께 보안 관련 안내가 제공됩니다.',
+        serviceId: 'instagram',
+        title: 'Instagram 로그인',
+        description: '비밀번호를 입력하면 표시 버튼이 나타나 내용을 확인할 수 있습니다.',
       },
     ],
     relatedUxIds: ['ux-login', 'ux-inline-validation'],

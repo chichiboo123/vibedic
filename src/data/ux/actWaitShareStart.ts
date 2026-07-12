@@ -294,9 +294,9 @@ export const waitPatterns: UXPattern[] = [
         description: '템플릿 추천과 새 페이지 만들기로 시작을 돕습니다.',
       },
       {
-        serviceId: 'google-drive',
-        title: 'Google Drive 빈 폴더',
-        description: '파일을 끌어다 놓거나 새로 만들라는 안내가 표시됩니다.',
+        serviceId: 'coupang',
+        title: '쿠팡 빈 장바구니',
+        description: '장바구니가 비어 있으면 안내 문구와 함께 쇼핑을 이어갈 버튼이 표시됩니다.',
       },
     ],
     badExperience: '텅 빈 화면에 데이터 없음이라는 문장만 떠 있습니다.',

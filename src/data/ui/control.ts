@@ -425,9 +425,9 @@ export const controlItems: UIItem[] = [
         description: '입력한 이메일 주소가 삭제 가능한 칩으로 변합니다.',
       },
       {
-        serviceId: 'youtube',
-        title: 'YouTube 홈 주제 칩',
-        description: '홈 상단의 주제 칩을 눌러 추천 영상을 바꿉니다.',
+        serviceId: 'google-calendar',
+        title: 'Google Calendar 참석자 칩',
+        description: '일정에 추가한 참석자가 삭제 가능한 칩으로 표시됩니다.',
       },
     ],
     relatedUxIds: ['ux-filter', 'ux-multi-choice'],

@@ -86,6 +86,23 @@ export function checkDataIntegrity(
     }
   }
 
+  // 서비스 사례가 여러 항목에서 의미 없이 복사되지 않았는지 검사합니다.
+  const exampleTitleOwners = new Map<string, string>();
+  for (const owner of [...uiItems, ...uxPatterns]) {
+    const seenServices = new Set<string>();
+    for (const example of owner.serviceExamples) {
+      const existing = exampleTitleOwners.get(example.title);
+      if (existing && existing !== owner.id) {
+        errors.push(`사례 제목 중복: "${example.title}" (${existing}, ${owner.id})`);
+      }
+      exampleTitleOwners.set(example.title, owner.id);
+      if (seenServices.has(example.serviceId)) {
+        errors.push(`${owner.id}: 같은 서비스(${example.serviceId}) 사례가 중복됨`);
+      }
+      seenServices.add(example.serviceId);
+    }
+  }
+
   for (const comparison of comparisons) {
     if (!comparison.desktop.trim() || !comparison.tablet.trim() || !comparison.mobile.trim()) {
       errors.push(`비교 ${comparison.id}: 기기 설명이 비어 있음`);
