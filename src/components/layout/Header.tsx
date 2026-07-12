@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Bookmark, Menu, Search, X } from 'lucide-react';
+import { Bookmark, HelpCircle, Menu, Search, X } from 'lucide-react';
 import { useSavedItems } from '../../hooks/useSavedItems';
 import { NavigationDrawer } from './NavigationDrawer';
+import { UsageGuideModal } from './UsageGuideModal';
 
 const menuItems = [
   { to: '/ui', label: 'UI 요소' },
@@ -13,8 +14,10 @@ const menuItems = [
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
   const location = useLocation();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const guideButtonRef = useRef<HTMLButtonElement>(null);
   const { saved } = useSavedItems();
 
   useEffect(() => {
@@ -24,6 +27,16 @@ export function Header() {
   const closeMenu = () => {
     setMenuOpen(false);
     menuButtonRef.current?.focus();
+  };
+
+  const openGuideFromDrawer = () => {
+    setMenuOpen(false);
+    setGuideOpen(true);
+  };
+
+  const closeGuide = () => {
+    setGuideOpen(false);
+    guideButtonRef.current?.focus();
   };
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -76,10 +89,25 @@ export function Header() {
               </span>
             )}
           </Link>
+
+          {/* 넓은 화면: 가로 메뉴 옆에 사용법 버튼을 둡니다. */}
+          <button
+            ref={guideButtonRef}
+            type="button"
+            className="hidden min-h-11 items-center gap-1.5 rounded-full px-3 text-sm text-muted hover:bg-primary-soft hover:text-primary-strong md:inline-flex"
+            aria-haspopup="dialog"
+            aria-label="사용법 보기"
+            onClick={() => setGuideOpen(true)}
+          >
+            <HelpCircle className="h-4 w-4" aria-hidden="true" />
+            사용법
+          </button>
+
+          {/* 좁은 화면: 햄버거 버튼으로 전체 메뉴 드로어를 엽니다. */}
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong md:hidden"
             aria-expanded={menuOpen}
             aria-haspopup="dialog"
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
@@ -94,7 +122,13 @@ export function Header() {
         </div>
       </div>
 
-      <NavigationDrawer open={menuOpen} onClose={closeMenu} menuItems={menuItems} />
+      <NavigationDrawer
+        open={menuOpen}
+        onClose={closeMenu}
+        menuItems={menuItems}
+        onOpenGuide={openGuideFromDrawer}
+      />
+      <UsageGuideModal open={guideOpen} onClose={closeGuide} />
     </header>
   );
 }

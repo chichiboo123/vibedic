@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { NavLink } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { HelpCircle, X } from 'lucide-react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 type MenuItem = { to: string; label: string };
@@ -9,12 +9,14 @@ type NavigationDrawerProps = {
   open: boolean;
   onClose: () => void;
   menuItems: MenuItem[];
+  onOpenGuide: () => void;
 };
 
-// 햄버거 버튼으로 여는 왼쪽 내비게이션 드로어입니다.
+// 햄버거 버튼으로 여는 왼쪽 내비게이션 드로어입니다. 넓은 화면에서는 가로 메뉴가
+// 대신하므로 모바일 폭에서만 나타납니다.
 // 열리면 포커스가 드로어 안으로 이동하고, ESC나 바깥(배경) 클릭으로 닫히며,
 // 닫힌 뒤에는 포커스가 다시 햄버거 버튼으로 돌아갑니다.
-export function NavigationDrawer({ open, onClose, menuItems }: NavigationDrawerProps) {
+export function NavigationDrawer({ open, onClose, menuItems, onOpenGuide }: NavigationDrawerProps) {
   const drawerRef = useFocusTrap<HTMLDivElement>(open, onClose);
 
   if (!open) return null;
@@ -23,7 +25,7 @@ export function NavigationDrawer({ open, onClose, menuItems }: NavigationDrawerP
   // body에 직접 포털로 렌더링합니다.
   return createPortal(
     <div
-      className="fixed inset-0 z-50 bg-ink/50"
+      className="fixed inset-0 z-50 bg-ink/50 md:hidden"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -76,6 +78,16 @@ export function NavigationDrawer({ open, onClose, menuItems }: NavigationDrawerP
               >
                 소개
               </NavLink>
+            </li>
+            <li className="mt-1 border-t border-line pt-1">
+              <button
+                type="button"
+                onClick={onOpenGuide}
+                className="flex min-h-12 w-full items-center gap-2 rounded-md px-3 py-3 text-left text-sm font-medium leading-6 text-ink hover:bg-background"
+              >
+                <HelpCircle className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
+                사용법
+              </button>
             </li>
           </ul>
         </nav>
