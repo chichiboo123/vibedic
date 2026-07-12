@@ -1,0 +1,137 @@
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Bookmark, Menu, Search, X } from 'lucide-react';
+import { useSavedItems } from '../../hooks/useSavedItems';
+
+const menuItems = [
+  { to: '/ui', label: 'UI 요소' },
+  { to: '/ux', label: 'UX 패턴' },
+  { to: '/services', label: '유명 서비스' },
+  { to: '/compare', label: '기기별 비교' },
+];
+
+export function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const { saved } = useSavedItems();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [menuOpen]);
+
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+      isActive ? 'bg-primary-soft text-primary-strong' : 'text-muted hover:text-ink'
+    }`;
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur">
+      <div className="mx-auto flex h-14 max-w-page items-center gap-2 px-4">
+        <Link to="/" className="flex items-center gap-1 text-lg font-bold" aria-label="VibeDic 홈으로 이동">
+          <span className="text-primary-strong">Vibe</span>
+          <span className="text-ink">Dic</span>
+        </Link>
+
+        <nav aria-label="주요 메뉴" className="ml-4 hidden md:block">
+          <ul className="flex items-center gap-1">
+            {menuItems.map((item) => (
+              <li key={item.to}>
+                <NavLink to={item.to} className={navLinkClass}>
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="ml-auto flex items-center gap-1">
+          <Link
+            to="/search"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm text-muted hover:bg-primary-soft hover:text-primary-strong"
+          >
+            <Search className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden sm:inline">검색</span>
+            <span className="sr-only sm:hidden">검색</span>
+          </Link>
+          <Link
+            to="/saved"
+            className="relative inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm text-muted hover:bg-primary-soft hover:text-primary-strong"
+          >
+            <Bookmark className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden sm:inline">저장함</span>
+            <span className="sr-only sm:hidden">저장함</span>
+            {saved.length > 0 && (
+              <span
+                className="absolute -right-0.5 -top-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[11px] font-bold text-white"
+                aria-label={`저장한 항목 ${saved.length}개`}
+              >
+                {saved.length > 99 ? '99+' : saved.length}
+              </span>
+            )}
+          </Link>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <nav id="mobile-menu" aria-label="모바일 메뉴" className="border-t border-line bg-surface md:hidden">
+          <ul className="mx-auto max-w-page px-4 py-2">
+            {menuItems.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `block rounded-md px-3 py-3 text-sm font-medium ${
+                      isActive ? 'bg-primary-soft text-primary-strong' : 'text-ink hover:bg-background'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `block rounded-md px-3 py-3 text-sm font-medium ${
+                    isActive ? 'bg-primary-soft text-primary-strong' : 'text-ink hover:bg-background'
+                  }`
+                }
+              >
+                소개
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
+    </header>
+  );
+}
