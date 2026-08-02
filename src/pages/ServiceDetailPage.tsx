@@ -29,7 +29,7 @@ export function ServiceDetailPage() {
       </nav>
 
       <header className="mt-5 flex items-start gap-4">
-        <ServiceBadge name={service.name} id={service.id} />
+        <ServiceBadge name={service.name} id={service.id} size="lg" />
         <div>
           <h1 className="text-3xl font-bold">{service.name}</h1>
           <p className="mt-2 text-base leading-relaxed">{service.summary}</p>
