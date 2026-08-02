@@ -47,7 +47,7 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       '서비스 상단에 메인 메뉴를 만들어줘.\n현재 페이지에 해당하는 메뉴를 aria-current와 밑줄로 표시하고,\n모바일에서는 햄버거 버튼을 눌러 여는 메뉴 패널로 바뀌게 해줘.',
-    demoType: 'static',
+    demoType: 'main-menu',
   },
   {
     id: 'ui-tab',
@@ -153,7 +153,7 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       '모바일 화면 하단에 고정되는 내비게이션을 만들어줘.\n홈, 검색, 저장함, 프로필 네 개 항목에 아이콘과 텍스트 레이블을 함께 넣고,\n현재 화면을 색상과 아이콘 채움으로 표시해줘.\n본문 마지막 콘텐츠가 가려지지 않게 하단 여백도 추가해줘.',
-    demoType: 'static',
+    demoType: 'bottom-navigation',
     featured: true,
   },
   {
@@ -204,7 +204,7 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       '햄버거 버튼을 누르면 왼쪽에서 열리는 내비게이션 드로어를 만들어줘.\n열릴 때 포커스가 드로어로 이동하고 ESC와 바깥 클릭으로 닫히게 해줘.\n닫힌 뒤에는 포커스가 햄버거 버튼으로 돌아오게 해줘.',
-    demoType: 'static',
+    demoType: 'navigation-drawer',
   },
   {
     id: 'ui-navigation-rail',
@@ -252,7 +252,7 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       '태블릿 폭에서 왼쪽에 붙는 내비게이션 레일을 만들어줘.\n아이콘 아래에 짧은 텍스트 레이블을 함께 표시하고,\n모바일 폭에서는 하단 내비게이션으로, PC 폭에서는 전체 사이드바로 바뀌게 해줘.',
-    demoType: 'static',
+    demoType: 'navigation-rail',
   },
   {
     id: 'ui-breadcrumb',
@@ -408,7 +408,7 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       '파일 카드의 더보기 버튼을 누르면 열리는 드롭다운 메뉴를 만들어줘.\n공유, 이름 바꾸기, 삭제 항목을 넣고 삭제는 빨간색으로 구분해줘.\n화살표 키 이동과 ESC 닫기를 지원하고 닫힌 뒤 포커스가 버튼으로 돌아오게 해줘.',
-    demoType: 'static',
+    demoType: 'dropdown-menu',
   },
   {
     id: 'ui-context-menu',
@@ -457,7 +457,7 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       '파일 목록에서 오른쪽 클릭으로 여는 컨텍스트 메뉴를 만들어줘.\n같은 동작을 더보기 버튼으로도 실행할 수 있게 하고,\nESC로 닫히며 화면 가장자리에서는 위치가 자동으로 조정되게 해줘.',
-    demoType: 'static',
+    demoType: 'context-menu',
   },
   {
     id: 'ui-command-palette',
@@ -506,6 +506,6 @@ export const navigationItems: UIItem[] = [
     ],
     vibePrompt:
       'Ctrl+K(맥은 Cmd+K)로 열리는 명령 팔레트를 만들어줘.\n페이지와 명령을 함께 검색하고 위아래 키로 이동, Enter로 실행되게 해줘.\nESC로 닫히고 결과가 없으면 안내 문구를 보여줘.',
-    demoType: 'static',
+    demoType: 'command-palette',
   },
 ];

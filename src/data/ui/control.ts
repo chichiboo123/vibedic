@@ -503,7 +503,7 @@ export const controlItems: UIItem[] = [
     ],
     vibePrompt:
       '목록 상단에 조건을 켜고 끄는 필터 칩 줄을 만들어줘.\n켜진 칩은 색과 체크 아이콘으로 표시하고 aria-pressed를 적용해줘.\n칩을 누를 때마다 아래 목록 개수가 갱신되게 해줘.',
-    demoType: 'chip',
+    demoType: 'filter-chip',
   },
   {
     id: 'ui-segmented-control',

@@ -47,7 +47,7 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '메시지 목록 화면을 만들어줘.\n각 행에 아바타, 이름, 마지막 메시지, 시간을 배치하고 행 전체를 눌러 상세로 이동하게 해줘.\n항목이 없을 때 보여줄 빈 상태 화면도 함께 만들어줘.',
-    demoType: 'static',
+    demoType: 'list',
   },
   {
     id: 'ui-table',
@@ -95,7 +95,7 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '파일 목록을 표로 보여줘.\n이름, 크기, 수정일 열을 만들고 헤더 클릭으로 정렬되게 해줘.\n정렬 상태를 aria-sort와 화살표 아이콘으로 표시하고,\n모바일에서는 카드 목록으로 전환해줘.',
-    demoType: 'static',
+    demoType: 'table',
   },
   {
     id: 'ui-avatar',
@@ -227,7 +227,7 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '글 목록의 각 항목에 주제 태그를 붙여줘.\n태그를 누르면 같은 태그의 글만 걸러 보여주고,\n적용된 태그 필터를 상단에 표시해줘.',
-    demoType: 'badge',
+    demoType: 'tag',
   },
   {
     id: 'ui-accordion',
@@ -330,7 +330,7 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '추천 콘텐츠 캐러셀을 만들어줘.\n좌우 화살표 버튼과 현재 위치 점 표시를 넣고 모바일에서 스와이프를 지원해줘.\n자동 재생은 넣지 말고 키보드로도 넘길 수 있게 해줘.',
-    demoType: 'static',
+    demoType: 'carousel',
   },
   {
     id: 'ui-calendar',
@@ -378,7 +378,7 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '월간 달력 화면을 만들어줘.\n오늘 날짜를 강조하고 일정이 있는 날에 점을 표시해줘.\n날짜를 누르면 아래에 그날 일정 목록이 나타나게 해줘.',
-    demoType: 'static',
+    demoType: 'calendar',
   },
   {
     id: 'ui-timeline',
@@ -423,7 +423,7 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '주문 배송 상태 타임라인을 만들어줘.\n결제 완료, 배송 준비, 배송 중, 배송 완료 단계를 세로로 나열하고\n현재 단계를 아이콘과 굵은 글씨로 강조해줘.',
-    demoType: 'static',
+    demoType: 'timeline',
   },
   {
     id: 'ui-code-block',
@@ -470,6 +470,6 @@ export const displayItems: UIItem[] = [
     ],
     vibePrompt:
       '프롬프트를 보여주는 코드 블록을 만들어줘.\n오른쪽 위에 복사 버튼을 두고 누르면 복사 완료 토스트를 띄워줘.\n내용이 길면 블록 안에서만 가로 스크롤되게 해줘.',
-    demoType: 'static',
+    demoType: 'code-block',
   },
 ];

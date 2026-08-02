@@ -33,7 +33,7 @@ export function ExampleFigure({ serviceId, serviceName, demoType, category }: Ex
         position === 'top' ? 'top-2' : position === 'bottom' ? 'bottom-2' : 'top-1/2 -translate-y-1/2'
       }`}
     >
-      <div className="max-w-full scale-[0.85] rounded-lg bg-surface p-2 shadow-raised ring-2 ring-primary">
+      <div className="max-w-full scale-[0.7] rounded-lg bg-surface p-2 shadow-raised ring-2 ring-primary">
         <PreviewGlyph demoType={demoType} category={category} />
       </div>
     </div>

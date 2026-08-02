@@ -150,7 +150,7 @@ export const inputItems: UIItem[] = [
     ],
     vibePrompt:
       '문의 내용을 입력받는 긴 글 입력창을 만들어줘.\n최대 500자 제한과 현재 글자 수를 아래에 표시하고,\n제한을 넘으면 오류 스타일과 안내 문구를 보여줘.',
-    demoType: 'text-field',
+    demoType: 'textarea',
   },
   {
     id: 'ui-password-field',
@@ -239,7 +239,7 @@ export const inputItems: UIItem[] = [
     ],
     vibePrompt:
       '최대 인원을 입력받는 숫자 입력창을 만들어줘.\n1~20 범위를 벗어나면 오류 문구를 표시하고,\n모바일에서 숫자 키패드가 뜨게 inputmode를 지정해줘.',
-    demoType: 'text-field',
+    demoType: 'number-input',
   },
   {
     id: 'ui-date-picker',
@@ -329,7 +329,7 @@ export const inputItems: UIItem[] = [
     ],
     vibePrompt:
       '예약 시간을 고르는 시간 선택기를 만들어줘.\n30분 간격의 시간 목록을 보여주고 이미 마감된 시간은 비활성으로 표시해줘.\n키보드로 목록을 탐색해 고를 수 있게 해줘.',
-    demoType: 'select',
+    demoType: 'time-picker',
   },
   {
     id: 'ui-file-upload',
@@ -484,6 +484,6 @@ export const inputItems: UIItem[] = [
     ],
     vibePrompt:
       '6자리 인증번호 입력 UI를 만들어줘.\n한 칸에 한 자리씩 입력되고 자동으로 다음 칸으로 이동하게 해줘.\n전체 코드 붙여넣기를 지원하고 재전송 버튼과 남은 시간을 함께 표시해줘.',
-    demoType: 'static',
+    demoType: 'otp-input',
   },
 ];

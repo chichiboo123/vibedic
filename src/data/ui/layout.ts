@@ -49,7 +49,7 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '웹앱 상단에 고정되는 헤더를 만들어줘.\n왼쪽에 로고, 가운데 또는 오른쪽에 주요 메뉴를 배치하고,\n모바일에서는 메뉴가 햄버거 버튼과 드로어로 바뀌게 해줘.\nheader와 nav 시맨틱 태그를 사용하고 키보드로 모든 메뉴에 접근할 수 있게 해줘.',
-    demoType: 'static',
+    demoType: 'header',
     featured: true,
   },
   {
@@ -97,7 +97,7 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '웹앱 맨 아래에 푸터를 만들어줘.\n서비스 소개, 이용약관, 저작권 문구를 넣고\n모바일에서는 한 열로 쌓이게 해줘.\nfooter 시맨틱 태그를 사용해줘.',
-    demoType: 'static',
+    demoType: 'footer',
   },
   {
     id: 'ui-sidebar',
@@ -151,7 +151,7 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '화면 왼쪽에 고정되는 사이드바 메뉴를 만들어줘.\n현재 선택된 항목을 배경색과 아이콘으로 표시하고,\n태블릿에서는 아이콘만 남게 접히고 모바일에서는 드로어로 바뀌게 해줘.',
-    demoType: 'static',
+    demoType: 'sidebar',
     featured: true,
   },
   {
@@ -201,7 +201,7 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '모바일 화면 상단에 앱 바를 만들어줘.\n왼쪽에 뒤로가기 버튼, 가운데에 화면 제목, 오른쪽에 동작 아이콘 버튼을 배치하고\n모든 아이콘 버튼에 aria-label을 붙여줘.',
-    demoType: 'static',
+    demoType: 'top-app-bar',
   },
   {
     id: 'ui-card',
@@ -255,7 +255,7 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '썸네일, 제목, 설명, 태그가 들어가는 콘텐츠 카드를 만들어줘.\nPC에서 3열, 태블릿 2열, 모바일 1열 그리드로 배치하고\n카드를 클릭하면 상세 페이지로 이동하게 해줘.',
-    demoType: 'static',
+    demoType: 'card',
     featured: true,
   },
   {
@@ -294,7 +294,7 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '설정 목록에서 그룹 사이를 나누는 구분선을 추가해줘.\n장식용 선은 스크린 리더가 읽지 않도록 처리하고\n선 대신 여백으로 충분한 곳에는 선을 넣지 말아줘.',
-    demoType: 'static',
+    demoType: 'divider',
   },
   {
     id: 'ui-hero-section',
@@ -341,6 +341,6 @@ export const layoutItems: UIItem[] = [
     ],
     vibePrompt:
       '홈 화면 상단에 히어로 영역을 만들어줘.\n서비스를 한 문장으로 설명하는 큰 h1 제목, 보조 설명, 검색창을 배치하고\n모바일에서 세로로 자연스럽게 쌓이게 해줘.',
-    demoType: 'static',
+    demoType: 'hero-section',
   },
 ];

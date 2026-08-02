@@ -31,9 +31,15 @@ describe('콘텐츠 데이터 무결성', () => {
     }
   });
 
-  it('인터랙티브 데모가 20개 이상의 UI 항목에 연결되어 있다', () => {
-    const interactive = uiItems.filter((item) => hasInteractiveDemo(item.demoType));
-    expect(interactive.length).toBeGreaterThanOrEqual(20);
+  it('모든 UI 항목이 직접 조작할 수 있는 데모를 갖는다', () => {
+    const missing = uiItems.filter((item) => !hasInteractiveDemo(item.demoType));
+    expect(missing.map((item) => item.slug)).toEqual([]);
+  });
+
+  it('UI 항목마다 서로 다른 데모(썸네일)를 갖는다', () => {
+    const demoTypes = uiItems.map((item) => item.demoType);
+    expect(new Set(demoTypes).size).toBe(uiItems.length);
+    expect(demoTypes).not.toContain('static');
   });
 
   it('모든 UI 항목에 서비스 사례가 1개 이상 있다', () => {
