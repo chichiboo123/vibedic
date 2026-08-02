@@ -154,7 +154,7 @@ export const statusItems: UIItem[] = [
     ],
     vibePrompt:
       '일정 항목을 누르면 옆에 뜨는 상세 팝오버를 만들어줘.\n화면 가장자리에서는 위치가 자동으로 뒤집히게 하고,\nESC와 바깥 클릭으로 닫히며 트리거 버튼에 aria-expanded를 적용해줘.',
-    demoType: 'static',
+    demoType: 'popover',
   },
   {
     id: 'ui-tooltip',
@@ -307,7 +307,7 @@ export const statusItems: UIItem[] = [
     ],
     vibePrompt:
       '목록에서 항목을 누르면 오른쪽에서 열리는 상세 드로어를 만들어줘.\n열릴 때 포커스가 드로어 제목으로 이동하고 ESC로 닫히게 해줘.\n모바일에서는 전체 화면 상세로 전환해줘.',
-    demoType: 'static',
+    demoType: 'drawer',
   },
   {
     id: 'ui-toast',
@@ -640,6 +640,6 @@ export const statusItems: UIItem[] = [
     ],
     vibePrompt:
       '알림 아이콘 위에 안 읽은 개수 배지를 만들어줘.\n0이면 숨기고 100 이상이면 99+로 표시해줘.\n아이콘 버튼의 aria-label에 개수를 포함해 읽히게 해줘.',
-    demoType: 'badge',
+    demoType: 'notification-badge',
   },
 ];
