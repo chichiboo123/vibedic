@@ -29,7 +29,7 @@ export function ServiceExampleList({ examples, demoType, category }: ServiceExam
               />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  {service && <ServiceBadge name={service.name} id={service.id} />}
+                  {service && <ServiceBadge name={service.name} id={service.id} size="sm" />}
                   <p className="text-sm font-semibold">
                     {service ? (
                       <Link
