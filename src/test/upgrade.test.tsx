@@ -170,3 +170,17 @@ describe('새 콘텐츠 페이지', () => {
     expect(screen.getByRole('heading', { level: 1, name: '권한 요청' })).toBeInTheDocument();
   });
 });
+
+describe('홈 용어 띠', () => {
+  it('흐르는 용어를 누르면 해당 UI 상세로 이동하고, 복제본은 보조기기에서 숨긴다', async () => {
+    const user = userEvent.setup();
+    renderApp('/');
+
+    const marquee = screen.getByRole('navigation', { name: 'UI 용어 바로가기' });
+    // 보조기기에는 원본 목록만 노출됩니다.
+    expect(within(marquee).getAllByRole('link')).toHaveLength(uiItems.length);
+
+    await user.click(within(marquee).getByRole('link', { name: '체크박스 Checkbox' }));
+    expect(await screen.findByRole('heading', { level: 1, name: '체크박스' })).toBeInTheDocument();
+  });
+});

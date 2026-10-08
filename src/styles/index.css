@@ -384,12 +384,19 @@ body::after {
   opacity: 1;
 }
 
-/* 흐르는 띠(마키). 마우스를 올리면 멈춥니다. */
+/* 흐르는 띠(마키). 마우스를 올리거나 포커스가 들어오면 멈춥니다. */
 .marquee-track {
-  animation: marquee 40s linear infinite;
+  animation: marquee var(--marquee-duration, 300s) linear infinite;
 }
-.marquee:hover .marquee-track {
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
   animation-play-state: paused;
+}
+/* 움직임을 줄이도록 설정한 경우에는 흐르지 않고 가로로 직접 스크롤해서 봅니다. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
 }
 
 .animate-float {
