@@ -80,7 +80,9 @@ describe('VibeDic 어시스턴트', () => {
     await user.click(screen.getByRole('button', { name: '질문 보내기' }));
 
     expect(await screen.findByText(/설정을 바로 켜고 끄려면/)).toBeInTheDocument();
-    const link = screen.getByRole('link', { name: /토글 스위치/ });
+    // 홈의 용어 띠에도 같은 이름의 링크가 있으므로, 어시스턴트 창 안에서만 찾습니다.
+    const dialog = screen.getByRole('dialog', { name: 'VibeDic 어시스턴트' });
+    const link = within(dialog).getByRole('link', { name: /토글 스위치/ });
     expect(link).toHaveAttribute('href', '/ui/toggle-switch');
 
     // 첫 시도는 체인 최상위 모델(gemini-3.1-flash-lite)이어야 합니다.

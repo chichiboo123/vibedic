@@ -161,17 +161,37 @@ export function HomePage() {
       </section>
 
       {/* ── 흐르는 용어 띠 ───────────────────────────────────── */}
-      <div aria-hidden="true" className="marquee fade-x -mx-4 overflow-hidden border-y border-line py-4">
-        <div className="marquee-track flex w-max gap-8">
-          {[...uiItems, ...uiItems].map((item, index) => (
-            <span key={`${item.id}-${index}`} className="flex shrink-0 items-center gap-2 text-sm">
-              <span className="font-semibold">{item.koreanName}</span>
-              <span className="font-mono text-xs text-muted">{item.englishName}</span>
-              <span className="ml-6 text-primary">✦</span>
-            </span>
+      {/*
+        항목 하나당 5초씩 잡아 천천히 흐르게 합니다. 이름을 누르면 해당 UI 상세로 이동하고,
+        마우스를 올리거나 키보드로 포커스하면 멈춥니다. 끊김 없이 이어지도록 목록을 한 번 더
+        붙이되, 복제본은 보조기기와 Tab 순서에서 숨깁니다.
+      */}
+      <nav aria-label="UI 용어 바로가기" className="marquee fade-x -mx-4 overflow-hidden border-y border-line py-3">
+        <div
+          className="marquee-track flex w-max"
+          style={{ '--marquee-duration': `${uiItems.length * 5}s` } as CSSProperties}
+        >
+          {[0, 1].map((copy) => (
+            <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex shrink-0">
+              {uiItems.map((item) => (
+                <li key={item.id} className="flex shrink-0 items-center">
+                  <Link
+                    to={`/ui/${item.slug}`}
+                    tabIndex={copy === 1 ? -1 : undefined}
+                    className="group flex min-h-10 items-center gap-2 rounded-full px-3 text-sm transition-colors hover:bg-ink/5"
+                  >
+                    <span className="font-semibold group-hover:text-primary-strong">{item.koreanName}</span>
+                    <span className="font-mono text-xs text-muted">{item.englishName}</span>
+                  </Link>
+                  <span aria-hidden="true" className="px-3 text-primary">
+                    ✦
+                  </span>
+                </li>
+              ))}
+            </ul>
           ))}
         </div>
-      </div>
+      </nav>
 
       {/* ── 벤토 그리드 ─────────────────────────────────────── */}
       <section aria-labelledby="entry-heading">
