@@ -18,7 +18,7 @@ export function ServiceBadge({
 export function ServiceCard({ service }: { service: Service }) {
   return (
     // 카드 전체가 링크입니다. 아이콘·설명 어디를 눌러도 상세로 들어갑니다.
-    <article className="group relative flex gap-3 rounded-card border border-line bg-surface p-4 shadow-card transition-shadow hover:shadow-raised">
+    <article className="group relative flex gap-3 rounded-card border border-line bg-surface p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-raised">
       <ServiceBadge name={service.name} id={service.id} />
       <div className="min-w-0 flex-1">
         <h3 className="flex items-center gap-1.5 text-base font-bold">

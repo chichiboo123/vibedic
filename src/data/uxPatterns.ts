@@ -11,16 +11,28 @@ import {
   sharePatterns,
   startPatterns,
 } from './ux/actWaitShareStart';
+import {
+  moreFindPatterns,
+  moreChoosePatterns,
+  moreActPatterns,
+  moreSharePatterns,
+  moreStartPatterns,
+} from './ux/everydayPatterns';
 
 export const uxPatterns: UXPattern[] = [
   ...findPatterns,
+  ...moreFindPatterns,
   ...enterPatterns,
   ...choosePatterns,
+  ...moreChoosePatterns,
   ...movePatterns,
   ...actPatterns,
+  ...moreActPatterns,
   ...waitPatterns,
   ...sharePatterns,
+  ...moreSharePatterns,
   ...startPatterns,
+  ...moreStartPatterns,
 ];
 
 const bySlug = new Map(uxPatterns.map((p) => [p.slug, p]));

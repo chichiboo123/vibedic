@@ -330,7 +330,7 @@ export const navigationItems: UIItem[] = [
         description: '상품 목록 아래에 페이지 번호와 이전·다음 버튼이 있습니다.',
       },
     ],
-    relatedUxIds: ['ux-search', 'ux-list-to-detail'],
+    relatedUxIds: ['ux-search', 'ux-list-to-detail', 'ux-load-more'],
     relatedUiIds: ['ui-list', 'ui-table', 'ui-button'],
     deviceNotes: {
       desktop: '번호를 여러 개 나열해 원하는 쪽으로 바로 이동하게 합니다.',

@@ -22,6 +22,22 @@
 
   --shadow-sm: 0 1px 3px rgba(30, 36, 48, 0.07);
   --shadow-md: 0 6px 24px rgba(30, 36, 48, 0.12);
+
+  /* 분류별 강조색(치수쌤 파스텔 팔레트 기반). 배경은 파스텔, 글자는 명암비를 확보한 진한 색입니다. */
+  --tone-blue-bg: #e3effb;
+  --tone-blue-fg: #1a5f8a;
+  --tone-green-bg: #ddf3e6;
+  --tone-green-fg: #1a6b47;
+  --tone-yellow-bg: #fff4c2;
+  --tone-yellow-fg: #6e5600;
+  --tone-pink-bg: #ffe3ea;
+  --tone-pink-fg: #8a2840;
+  --tone-violet-bg: #ebe9fe;
+  --tone-violet-fg: #4338ca;
+  --tone-orange-bg: #ffe9d6;
+  --tone-orange-fg: #8a4300;
+
+  --color-mark: #fff1a8;
 }
 
 /* 시스템이 다크 모드를 선호하면 사용자가 명시적으로 라이트를 고르기 전까지 기본값으로 적용합니다. */
@@ -42,6 +58,21 @@
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.5);
+
+    --tone-blue-bg: #172b3f;
+    --tone-blue-fg: #9cc9ef;
+    --tone-green-bg: #14301f;
+    --tone-green-fg: #8fd9b0;
+    --tone-yellow-bg: #2f2911;
+    --tone-yellow-fg: #f0d77a;
+    --tone-pink-bg: #361b24;
+    --tone-pink-fg: #f4a9bb;
+    --tone-violet-bg: #25204a;
+    --tone-violet-fg: #b9b0ff;
+    --tone-orange-bg: #33220f;
+    --tone-orange-fg: #f5b98a;
+
+    --color-mark: #5c4d0d;
   }
 }
 
@@ -62,6 +93,21 @@
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.5);
+
+  --tone-blue-bg: #172b3f;
+  --tone-blue-fg: #9cc9ef;
+  --tone-green-bg: #14301f;
+  --tone-green-fg: #8fd9b0;
+  --tone-yellow-bg: #2f2911;
+  --tone-yellow-fg: #f0d77a;
+  --tone-pink-bg: #361b24;
+  --tone-pink-fg: #f4a9bb;
+  --tone-violet-bg: #25204a;
+  --tone-violet-fg: #b9b0ff;
+  --tone-orange-bg: #33220f;
+  --tone-orange-fg: #f5b98a;
+
+  --color-mark: #5c4d0d;
 }
 
 html {
@@ -129,4 +175,93 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 분류 색 묶음. 요소에 tone-* 클래스를 주면 bg-tone / text-tone 유틸리티가 그 색을 씁니다. */
+.tone-blue {
+  --tone-bg: var(--tone-blue-bg);
+  --tone-fg: var(--tone-blue-fg);
+}
+.tone-green {
+  --tone-bg: var(--tone-green-bg);
+  --tone-fg: var(--tone-green-fg);
+}
+.tone-yellow {
+  --tone-bg: var(--tone-yellow-bg);
+  --tone-fg: var(--tone-yellow-fg);
+}
+.tone-pink {
+  --tone-bg: var(--tone-pink-bg);
+  --tone-fg: var(--tone-pink-fg);
+}
+.tone-violet {
+  --tone-bg: var(--tone-violet-bg);
+  --tone-fg: var(--tone-violet-fg);
+}
+.tone-orange {
+  --tone-bg: var(--tone-orange-bg);
+  --tone-fg: var(--tone-orange-fg);
+}
+
+@layer components {
+  /* 자주 반복되는 버튼 모양을 한곳에서 관리합니다. */
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-5 text-sm font-semibold transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-hover;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink hover:border-primary hover:text-primary-strong;
+  }
+  /* 필터·추천어처럼 누를 수 있는 둥근 칩 */
+  .pill {
+    @apply inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 text-sm text-muted transition-colors hover:border-primary hover:text-primary-strong;
+  }
+  .pill[aria-pressed='true'],
+  .pill-active {
+    @apply border-primary bg-primary-soft font-semibold text-primary-strong;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-wide text-primary-strong;
+  }
+  /* 사전 페이지 공통 카드 */
+  .surface-card {
+    @apply rounded-card border border-line bg-surface shadow-card;
+  }
+}
+
+/* 히어로 배경: 파스텔 빛 번짐. 다크 모드에서도 토큰을 따라 자연스럽게 어두워집니다. */
+.hero-glow {
+  background:
+    radial-gradient(40rem 18rem at 10% 0%, var(--tone-violet-bg), transparent 70%),
+    radial-gradient(32rem 16rem at 95% 10%, var(--tone-pink-bg), transparent 70%),
+    radial-gradient(36rem 18rem at 50% 110%, var(--tone-blue-bg), transparent 70%),
+    var(--color-surface);
+}
+
+/* 가로 스크롤 칩 줄에서 스크롤바를 숨깁니다(키보드·터치 스크롤은 그대로). */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+mark {
+  background-color: var(--color-mark);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
 }

@@ -78,7 +78,7 @@ export const inputItems: UIItem[] = [
         description: '돋보기를 누르면 검색창이 열리고 입력 즉시 결과가 갱신됩니다.',
       },
     ],
-    relatedUxIds: ['ux-search', 'ux-autocomplete', 'ux-no-results'],
+    relatedUxIds: ['ux-search', 'ux-autocomplete', 'ux-no-results', 'ux-recent-history'],
     relatedUiIds: ['ui-autocomplete', 'ui-text-field', 'ui-command-palette'],
     deviceNotes: {
       desktop: '헤더에 항상 펼쳐 두고 단축키로 포커스를 줄 수 있습니다.',

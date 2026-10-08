@@ -1,7 +1,7 @@
 {
   "name": "vibedic",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "description": "필요할 때 꺼내 찾는 바이브코딩 UI·UX 사전",
   "scripts": {

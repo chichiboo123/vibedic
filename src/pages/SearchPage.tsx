@@ -4,23 +4,13 @@ import { Clock, Search, X } from 'lucide-react';
 import { useSearch } from '../hooks/useSearch';
 import { useRecentSearches } from '../hooks/useRecentSearches';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { PageHeader } from '../components/common/PageHeader';
 import type { SearchResultType } from '../types';
+import { SearchTypeBadge, searchTypeLabels } from '../components/common/SearchTypeBadge';
 
-const typeLabels: Record<SearchResultType, string> = {
-  ui: 'UI',
-  ux: 'UX',
-  service: '서비스',
-  compare: '비교',
-};
+const typeOrder: SearchResultType[] = ['ui', 'ux', 'versus', 'service', 'compare'];
 
-const typeColors: Record<SearchResultType, string> = {
-  ui: 'bg-indigo-100 text-indigo-700',
-  ux: 'bg-emerald-100 text-emerald-700',
-  service: 'bg-amber-100 text-amber-700',
-  compare: 'bg-sky-100 text-sky-700',
-};
-
-const suggestedTerms = ['버튼', '검색창', '모달', '하단 내비게이션', '자동 저장', '필터', '파일 공유'];
+const suggestedTerms = ['버튼', '검색창', '모달', '하단 내비게이션', '자동 저장', '필터', '무한 스크롤', '권한'];
 
 function HighlightedText({ text, query }: { text: string; query: string }) {
   const trimmed = query.trim();
@@ -32,7 +22,7 @@ function HighlightedText({ text, query }: { text: string; query: string }) {
   return (
     <>
       {text.slice(0, index)}
-      <mark className="rounded-sm bg-amber-100 px-0.5 text-inherit">
+      <mark>
         {text.slice(index, index + trimmed.length)}
       </mark>
       {text.slice(index + trimmed.length)}
@@ -45,12 +35,15 @@ export function SearchPage() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q') ?? '';
+  const typeParam = searchParams.get('type') as SearchResultType | null;
+  const activeType = typeParam && typeOrder.includes(typeParam) ? typeParam : null;
   const [input, setInput] = useState(query);
   const [highlighted, setHighlighted] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const { searches, addSearch, removeSearch, clearSearches } = useRecentSearches();
 
-  const results = useSearch(query);
+  const allResults = useSearch(query);
+  const results = activeType ? allResults.filter((result) => result.type === activeType) : allResults;
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -67,10 +60,17 @@ export function SearchPage() {
   }, [query, addSearch]);
 
   const groupCounts = useMemo(() => {
-    const counts: Record<SearchResultType, number> = { ui: 0, ux: 0, service: 0, compare: 0 };
-    for (const result of results) counts[result.type] += 1;
+    const counts: Record<SearchResultType, number> = { ui: 0, ux: 0, service: 0, compare: 0, versus: 0 };
+    for (const result of allResults) counts[result.type] += 1;
     return counts;
-  }, [results]);
+  }, [allResults]);
+
+  const setType = (type: SearchResultType | null) => {
+    const next: Record<string, string> = {};
+    if (query) next.q = query;
+    if (type) next.type = type;
+    setSearchParams(next, { replace: true });
+  };
 
   const runSearch = (term: string) => {
     const trimmed = term.trim();
@@ -100,10 +100,20 @@ export function SearchPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-2xl font-bold">통합 검색</h1>
-      <p className="mt-1.5 text-sm text-muted">
-        UI 요소, UX 패턴, 유명 서비스, 기기별 비교를 한 번에 찾아보세요.
-      </p>
+      <PageHeader
+        eyebrow="Search"
+        title="통합 검색"
+        description={
+          <>
+            UI 요소, UX 패턴, 헷갈리는 UI 비교, 유명 서비스, 기기별 비교를 한 번에 찾아보세요.
+            <span className="hidden sm:inline">
+              {' '}
+              어느 화면에서든 <kbd className="rounded border border-line bg-surface px-1 text-xs">Ctrl</kbd>{' '}
+              <kbd className="rounded border border-line bg-surface px-1 text-xs">K</kbd> 로 빠른 검색을 열 수 있어요.
+            </span>
+          </>
+        }
+      />
 
       <form
         role="search"
@@ -212,9 +222,30 @@ export function SearchPage() {
       {query && (
         <div className="mt-5">
           <p id="search-status" role="status" className="text-sm text-muted">
-            “{query}” 검색 결과 {results.length}건 · UI {groupCounts.ui} · UX {groupCounts.ux} · 서비스{' '}
-            {groupCounts.service} · 비교 {groupCounts.compare}
+            “{query}” 검색 결과 {allResults.length}건
+            {activeType && ` 중 ${searchTypeLabels[activeType]} ${results.length}건`}
           </p>
+
+          {allResults.length > 0 && (
+            <div role="group" aria-label="결과 유형 필터" className="scrollbar-none -mx-4 mt-3 flex gap-2 overflow-x-auto px-4">
+              <button type="button" aria-pressed={activeType === null} onClick={() => setType(null)} className="pill min-h-9 shrink-0 text-xs">
+                전체 {allResults.length}
+              </button>
+              {typeOrder
+                .filter((type) => groupCounts[type] > 0)
+                .map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    aria-pressed={activeType === type}
+                    onClick={() => setType(activeType === type ? null : type)}
+                    className="pill min-h-9 shrink-0 text-xs"
+                  >
+                    {searchTypeLabels[type]} {groupCounts[type]}
+                  </button>
+                ))}
+            </div>
+          )}
 
           {results.length > 0 ? (
             <ul className="mt-3 space-y-2">
@@ -229,10 +260,8 @@ export function SearchPage() {
                         : 'border-line hover:border-primary'
                     }`}
                   >
-                    <span
-                      className={`mt-0.5 inline-flex shrink-0 rounded-md px-1.5 py-0.5 text-xs font-bold ${typeColors[result.type]}`}
-                    >
-                      {typeLabels[result.type]}
+                    <span className="mt-0.5">
+                      <SearchTypeBadge type={result.type} />
                     </span>
                     <span className="min-w-0">
                       <span className="block text-sm font-semibold">
@@ -271,13 +300,13 @@ export function SearchPage() {
               <div className="mt-5 flex flex-wrap justify-center gap-2">
                 <Link
                   to="/ui"
-                  className="min-h-11 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover"
+                  className="btn-primary"
                 >
                   UI 전체 보기
                 </Link>
                 <Link
                   to="/ux"
-                  className="min-h-11 rounded-lg border border-line bg-surface px-5 py-2.5 text-sm font-semibold hover:bg-background"
+                  className="btn-secondary"
                 >
                   UX 전체 보기
                 </Link>

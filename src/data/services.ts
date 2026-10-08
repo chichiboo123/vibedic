@@ -21,7 +21,7 @@ export const services: Service[] = [
     summary: '카드 그리드, 필터 칩, 하단 내비게이션 등 탐색 UI의 교과서 같은 서비스입니다.',
     officialUrl: 'https://www.youtube.com',
     relatedUiIds: ['ui-card', 'ui-filter-chip', 'ui-bottom-navigation', 'ui-skeleton', 'ui-toggle-switch', 'ui-tab'],
-    relatedUxIds: ['ux-search', 'ux-filter', 'ux-loading', 'ux-share-action', 'ux-tab-switching'],
+    relatedUxIds: ['ux-search', 'ux-filter', 'ux-loading', 'ux-share-action', 'ux-tab-switching', 'ux-notifications'],
     deviceHighlights: [
       'PC 사이드바가 창 폭에 따라 내비게이션 레일로 줄어듭니다.',
       '모바일 앱은 하단 내비게이션과 바텀 시트 중심으로 재구성됩니다.',
@@ -47,7 +47,7 @@ export const services: Service[] = [
     summary: '하단 내비게이션과 무한 피드, 공유 시트 등 모바일 문법의 표준을 보여줍니다.',
     officialUrl: 'https://www.instagram.com',
     relatedUiIds: ['ui-bottom-navigation', 'ui-carousel', 'ui-avatar', 'ui-bottom-sheet', 'ui-notification-badge', 'ui-icon-button'],
-    relatedUxIds: ['ux-main-menu', 'ux-back-navigation', 'ux-comments', 'ux-share-action'],
+    relatedUxIds: ['ux-main-menu', 'ux-back-navigation', 'ux-comments', 'ux-share-action', 'ux-load-more'],
     deviceHighlights: [
       'PC 웹에서는 게시물이 가운데 모달로 열립니다.',
       '모바일에서는 스와이프와 더블 탭 같은 제스처가 중심입니다.',
@@ -125,7 +125,7 @@ export const services: Service[] = [
     summary: '검색, 필터, 옵션 선택, 주문 확인까지 쇼핑 UX 전 과정을 참고할 수 있습니다.',
     officialUrl: 'https://www.coupang.com',
     relatedUiIds: ['ui-search-field', 'ui-filter-chip', 'ui-stepper', 'ui-checkbox', 'ui-timeline', 'ui-tab', 'ui-breadcrumb'],
-    relatedUxIds: ['ux-search', 'ux-filter', 'ux-sort', 'ux-input-confirm', 'ux-single-choice', 'ux-back-navigation'],
+    relatedUxIds: ['ux-search', 'ux-filter', 'ux-sort', 'ux-input-confirm', 'ux-single-choice', 'ux-back-navigation', 'ux-recent-history'],
     deviceHighlights: [
       'PC에서는 필터 사이드바와 상품 그리드를 함께 보여줍니다.',
       '모바일에서는 필터가 바텀 시트로 열리고 목록이 한 열이 됩니다.',
@@ -138,7 +138,7 @@ export const services: Service[] = [
     summary: '통합 검색과 자동 완성, 방대한 메뉴 구조를 다루는 국내 대표 포털입니다.',
     officialUrl: 'https://www.naver.com',
     relatedUiIds: ['ui-search-field', 'ui-autocomplete', 'ui-main-menu', 'ui-tab', 'ui-footer'],
-    relatedUxIds: ['ux-search', 'ux-autocomplete', 'ux-login', 'ux-inline-validation', 'ux-main-menu'],
+    relatedUxIds: ['ux-search', 'ux-autocomplete', 'ux-login', 'ux-inline-validation', 'ux-main-menu', 'ux-permission-request'],
     deviceHighlights: [
       'PC 홈은 여러 열의 콘텐츠 패널로 구성됩니다.',
       '모바일 홈은 검색창과 세로 피드 중심으로 재구성됩니다.',
@@ -151,7 +151,7 @@ export const services: Service[] = [
     summary: '날짜·인원 선택과 필터, 단계별 입력 등 예약 UX의 교과서입니다.',
     officialUrl: 'https://www.airbnb.co.kr',
     relatedUiIds: ['ui-date-picker', 'ui-stepper', 'ui-range-slider', 'ui-card', 'ui-combo-box', 'ui-accordion', 'ui-carousel'],
-    relatedUxIds: ['ux-date-selection', 'ux-filter', 'ux-step-input', 'ux-input-confirm', 'ux-default-values'],
+    relatedUxIds: ['ux-date-selection', 'ux-filter', 'ux-step-input', 'ux-input-confirm', 'ux-default-values', 'ux-favorite'],
     deviceHighlights: [
       'PC에서는 지도와 목록을 나란히 보며 탐색합니다.',
       '모바일에서는 검색 조건 입력이 전체 화면 단계로 전환됩니다.',
@@ -164,7 +164,7 @@ export const services: Service[] = [
     summary: '대화형 입력, 스트리밍 응답, 빈 화면 예시 등 AI 서비스 UX의 기준점입니다.',
     officialUrl: 'https://chatgpt.com',
     relatedUiIds: ['ui-textarea', 'ui-code-block', 'ui-spinner', 'ui-sidebar', 'ui-empty-state'],
-    relatedUxIds: ['ux-loading', 'ux-error-recovery', 'ux-first-run-guide', 'ux-undo'],
+    relatedUxIds: ['ux-loading', 'ux-error-recovery', 'ux-first-run-guide', 'ux-undo', 'ux-plan-comparison'],
     deviceHighlights: [
       'PC에서는 대화 목록 사이드바와 대화 화면이 나란히 보입니다.',
       '모바일에서는 사이드바가 드로어로 바뀌고 입력창이 하단에 고정됩니다.',

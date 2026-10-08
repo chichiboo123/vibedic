@@ -1,12 +1,27 @@
 import { Link } from 'react-router-dom';
+import { Info } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { PageHeader } from '../components/common/PageHeader';
+import { uiItems } from '../data/uiItems';
+import { uxPatterns } from '../data/uxPatterns';
+import { versusTopics } from '../data/versus';
+import { services } from '../data/services';
+import { deviceComparisons } from '../data/deviceComparisons';
+
+const stats = [
+  { label: 'UI 요소', value: uiItems.length, to: '/ui' },
+  { label: 'UX 패턴', value: uxPatterns.length, to: '/ux' },
+  { label: '헷갈리는 UI 비교', value: versusTopics.length, to: '/versus' },
+  { label: '유명 서비스', value: services.length, to: '/services' },
+  { label: '기기별 비교', value: deviceComparisons.length, to: '/compare' },
+];
 
 export function AboutPage() {
   useDocumentTitle('소개');
   return (
     <article className="mx-auto max-w-2xl">
-      <h1 className="text-2xl font-bold">VibeDic 소개</h1>
-      <p className="mt-3 text-base font-medium text-primary-strong">
+      <PageHeader eyebrow="About" Icon={Info} title="VibeDic 소개" />
+      <p className="mt-4 text-base font-medium text-primary-strong">
         “필요할 때 꺼내 찾는 바이브코딩 UI·UX 사전”
       </p>
       <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -14,6 +29,17 @@ export function AboutPage() {
         찾아보고, 실제 유명 서비스에서 어떻게 쓰이는지 확인하며, PC·태블릿·모바일 환경의 차이를
         이해할 수 있도록 돕는 사례 기반 학습 사전입니다.
       </p>
+
+      <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
+        {stats.map((stat) => (
+          <li key={stat.label}>
+            <Link to={stat.to} className="surface-card block p-3 text-center transition-colors hover:border-primary">
+              <span className="block text-2xl font-extrabold text-primary-strong">{stat.value}</span>
+              <span className="mt-0.5 block text-xs text-muted">{stat.label}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
 
       <Section title="UI와 UX는 어떻게 다른가요?">
         <p>
@@ -40,13 +66,28 @@ export function AboutPage() {
         </p>
       </Section>
 
+      <Section title="이름이 비슷한 UI는 어떻게 구분하나요?">
+        <p>
+          모달과 바텀 시트, 칩과 태그처럼 모양도 이름도 비슷한 요소는{' '}
+          <Link to="/versus" className="font-medium text-primary-strong hover:underline">
+            헷갈리는 UI 구분하기
+          </Link>
+          에서 같은 기준으로 나란히 비교합니다. 정확한 이름을 알면 AI에게도 정확하게 요청할 수 있어요.
+          요청 방법은{' '}
+          <Link to="/guide" className="font-medium text-primary-strong hover:underline">
+            프롬프트 가이드
+          </Link>
+          에 정리했습니다.
+        </p>
+      </Section>
+
       <Section title="콘텐츠 작성 원칙">
         <ul className="list-disc space-y-1.5 pl-5">
           <li>전문 용어보다 쉬운 설명을 먼저 보여줍니다.</li>
           <li>한국어 이름과 공식 영문 명칭을 함께 표시합니다.</li>
           <li>설명보다 직접 조작할 수 있는 데모를 우선합니다.</li>
           <li>기기별 차이가 의미 있는 경우에만 비교합니다.</li>
-          <li>바이브코딩에 바로 쓸 수 있는 프롬프트를 제공합니다.</li>
+          <li>바이브코딩에 바로 쓸 수 있는 프롬프트를 제공하고, 기술 스택과 공통 조건을 골라 덧붙일 수 있게 합니다.</li>
         </ul>
       </Section>
 
@@ -72,16 +113,10 @@ export function AboutPage() {
       </Section>
 
       <div className="mt-10 flex flex-wrap gap-2">
-        <Link
-          to="/ui"
-          className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
-        >
+        <Link to="/ui" className="btn-primary">
           UI 사전 시작하기
         </Link>
-        <Link
-          to="/ux"
-          className="inline-flex min-h-11 items-center rounded-lg border border-line bg-surface px-5 text-sm font-semibold hover:bg-background"
-        >
+        <Link to="/ux" className="btn-secondary">
           UX 사전 시작하기
         </Link>
       </div>
@@ -92,7 +127,7 @@ export function AboutPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-8" aria-label={title}>
-      <h2 className="mb-2 text-base font-bold">{title}</h2>
+      <h2 className="mb-2 text-lg font-bold">{title}</h2>
       <div className="text-sm leading-relaxed text-muted">{children}</div>
     </section>
   );

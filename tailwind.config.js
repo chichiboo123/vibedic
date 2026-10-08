@@ -30,6 +30,14 @@ export default {
         success: themeColor('--color-success'),
         warning: themeColor('--color-warning'),
         error: themeColor('--color-error'),
+        // tone-* 클래스(분류 색 묶음) 안에서만 의미가 있는 색입니다.
+        tone: {
+          DEFAULT: themeColor('--tone-bg'),
+          fg: themeColor('--tone-fg'),
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.25s ease-out both',
       },
       borderRadius: {
         card: 'var(--radius-lg)',

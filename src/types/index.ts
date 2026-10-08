@@ -185,4 +185,17 @@ export type SavedItemRef = {
   id: string;
 };
 
-export type SearchResultType = 'ui' | 'ux' | 'service' | 'compare';
+export type SearchResultType = 'ui' | 'ux' | 'service' | 'compare' | 'versus';
+
+// 헷갈리기 쉬운 UI 요소 묶음을 같은 기준으로 나란히 비교하는 주제입니다.
+export type VersusTopic = {
+  id: string;
+  slug: string;
+  title: string;
+  question: string;
+  // 비교하는 UI 항목 ID. rows의 values와 같은 순서입니다.
+  uiIds: string[];
+  rows: { label: string; values: string[] }[];
+  rule: string;
+  promptTip: string;
+};

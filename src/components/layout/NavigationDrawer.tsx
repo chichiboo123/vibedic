@@ -1,9 +1,16 @@
 import { createPortal } from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { HelpCircle, X } from 'lucide-react';
+import { Logo } from './Logo';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 type MenuItem = { to: string; label: string };
+
+const secondaryItems: MenuItem[] = [
+  { to: '/guide', label: '프롬프트 가이드' },
+  { to: '/saved', label: '저장함' },
+  { to: '/about', label: '소개' },
+];
 
 type NavigationDrawerProps = {
   open: boolean;
@@ -25,7 +32,7 @@ export function NavigationDrawer({ open, onClose, menuItems, onOpenGuide }: Navi
   // body에 직접 포털로 렌더링합니다.
   return createPortal(
     <div
-      className="fixed inset-0 z-50 bg-black/50 md:hidden"
+      className="fixed inset-0 z-50 bg-black/50 lg:hidden"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -38,10 +45,7 @@ export function NavigationDrawer({ open, onClose, menuItems, onOpenGuide }: Navi
         className="relative flex h-full w-72 max-w-[80vw] flex-col bg-surface shadow-raised animate-[drawer-in_0.2s_ease-out]"
       >
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
-          <span className="text-base font-bold">
-            <span className="text-primary-strong">Vibe</span>
-            <span className="text-ink">Dic</span>
-          </span>
+          <Logo size="sm" />
           <button
             type="button"
             aria-label="메뉴 닫기"
@@ -67,18 +71,20 @@ export function NavigationDrawer({ open, onClose, menuItems, onOpenGuide }: Navi
                 </NavLink>
               </li>
             ))}
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  `block min-h-12 rounded-md px-3 py-3 text-sm font-medium leading-6 ${
-                    isActive ? 'bg-primary-soft text-primary-strong' : 'text-ink hover:bg-background'
-                  }`
-                }
-              >
-                소개
-              </NavLink>
-            </li>
+            {secondaryItems.map((item, index) => (
+              <li key={item.to} className={index === 0 ? 'mt-1 border-t border-line pt-1' : undefined}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `block min-h-12 rounded-md px-3 py-3 text-sm font-medium leading-6 ${
+                      isActive ? 'bg-primary-soft text-primary-strong' : 'text-ink hover:bg-background'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
             <li className="mt-1 border-t border-line pt-1">
               <button
                 type="button"

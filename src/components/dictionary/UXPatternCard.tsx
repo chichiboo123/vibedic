@@ -57,7 +57,7 @@ export function UXPatternCard({ pattern }: { pattern: UXPattern }) {
 
   return (
     // 카드 전체가 링크입니다. 썸네일이든 설명이든 어디를 눌러도 상세로 들어갑니다.
-    <article className="group relative flex flex-col rounded-card border border-line bg-surface shadow-card transition-shadow hover:shadow-raised">
+    <article className="group relative flex flex-col rounded-card border border-line bg-surface shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-raised">
       <div className="relative">
         <UXFlowPreview pattern={pattern} />
         <span className="pointer-events-none absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-surface px-2 py-0.5 text-[10px] font-semibold text-primary-strong opacity-0 shadow-card transition-opacity group-hover:opacity-100">

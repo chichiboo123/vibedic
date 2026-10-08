@@ -1,10 +1,11 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ExternalLink, Monitor } from 'lucide-react';
 import { findServiceBySlug } from '../data/services';
 import { RelatedUICards, RelatedUXCards } from '../components/dictionary/RelatedLinks';
 import { ServiceBadge } from '../components/dictionary/ServiceCard';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { NotFoundPage } from './NotFoundPage';
+import { Breadcrumb, DetailSection } from '../components/detail/DetailParts';
 
 export function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,22 +17,12 @@ export function ServiceDetailPage() {
 
   return (
     <article className="mx-auto max-w-3xl">
-      <nav aria-label="현재 위치" className="text-xs text-muted">
-        <ol className="flex items-center gap-1.5">
-          <li>
-            <Link to="/services" className="hover:text-ink">유명 서비스</Link>
-          </li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" className="font-medium text-ink">
-            {service.name}
-          </li>
-        </ol>
-      </nav>
+      <Breadcrumb items={[{ to: '/services', label: '유명 서비스' }, { label: service.name }]} />
 
       <header className="mt-5 flex items-start gap-4">
         <ServiceBadge name={service.name} id={service.id} size="lg" />
         <div>
-          <h1 className="text-3xl font-bold">{service.name}</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight">{service.name}</h1>
           <p className="mt-2 text-base leading-relaxed">{service.summary}</p>
           <a
             href={service.officialUrl}
@@ -46,8 +37,7 @@ export function ServiceDetailPage() {
         </div>
       </header>
 
-      <section className="mt-10" aria-label="기기별 차이가 두드러지는 사례">
-        <h2 className="mb-3 text-lg font-bold">PC·태블릿·모바일 차이가 두드러지는 사례</h2>
+      <DetailSection id="devices" title="PC·태블릿·모바일 차이가 두드러지는 사례">
         <ul className="space-y-2">
           {service.deviceHighlights.map((highlight) => (
             <li key={highlight} className="flex items-start gap-2 rounded-card border border-line bg-surface px-4 py-3 text-sm">
@@ -56,17 +46,15 @@ export function ServiceDetailPage() {
             </li>
           ))}
         </ul>
-      </section>
+      </DetailSection>
 
-      <section className="mt-10" aria-label="참고할 UI 요소">
-        <h2 className="mb-3 text-lg font-bold">참고할 UI 요소</h2>
+      <DetailSection id="ui" title="참고할 UI 요소">
         <RelatedUICards ids={service.relatedUiIds} />
-      </section>
+      </DetailSection>
 
-      <section className="mt-10" aria-label="참고할 UX 패턴">
-        <h2 className="mb-3 text-lg font-bold">참고할 UX 패턴</h2>
+      <DetailSection id="ux" title="참고할 UX 패턴">
         <RelatedUXCards ids={service.relatedUxIds} />
-      </section>
+      </DetailSection>
 
       <p className="mt-10 rounded-card border border-line bg-surface p-4 text-xs leading-relaxed text-muted">
         서비스 및 상표의 권리는 각 권리자에게 있습니다. VibeDic은 UI·UX 학습을 위해 공개적으로 관찰

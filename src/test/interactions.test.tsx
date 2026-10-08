@@ -77,7 +77,10 @@ describe('주요 인터랙션', () => {
     await user.type(input, '토글{Enter}');
 
     expect(await screen.findByText(/검색 결과/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /토글 스위치/ })).toBeInTheDocument();
+    // 토글 스위치 UI 항목이 첫 결과로 오고, 함께 비교하는 "헷갈리는 UI" 주제도 결과에 나옵니다.
+    const links = screen.getAllByRole('link', { name: /토글 스위치/ });
+    expect(links[0]).toHaveAttribute('href', '/ui/toggle-switch');
+    expect(links.some((link) => link.getAttribute('href') === '/versus#checkbox-toggle-radio')).toBe(true);
   });
 
   it('검색 결과가 없으면 다음 행동을 안내한다', async () => {

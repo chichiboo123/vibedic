@@ -72,7 +72,7 @@ export const displayItems: UIItem[] = [
         description: '속성을 열로 추가하며 표 형태로 데이터를 관리합니다.',
       },
     ],
-    relatedUxIds: ['ux-sort', 'ux-multi-choice'],
+    relatedUxIds: ['ux-sort', 'ux-multi-choice', 'ux-plan-comparison'],
     relatedUiIds: ['ui-list', 'ui-pagination', 'ui-checkbox'],
     deviceNotes: {
       desktop: '많은 열을 한눈에 비교하는 데 가장 강력합니다.',

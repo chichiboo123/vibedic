@@ -130,7 +130,7 @@ export const statusItems: UIItem[] = [
         description: '아이콘 자리를 누르면 이모지 선택 팝오버가 뜹니다.',
       },
     ],
-    relatedUxIds: ['ux-list-to-detail', 'ux-first-run-guide'],
+    relatedUxIds: ['ux-list-to-detail', 'ux-first-run-guide', 'ux-notifications'],
     relatedUiIds: ['ui-tooltip', 'ui-modal', 'ui-dropdown-menu'],
     deviceNotes: {
       desktop: '클릭한 요소 근처에 떠서 문맥을 유지합니다.',
@@ -387,7 +387,7 @@ export const statusItems: UIItem[] = [
         description: '결제 관련 안내가 상단 배너로 표시됩니다.',
       },
     ],
-    relatedUxIds: ['ux-error-recovery', 'ux-offline'],
+    relatedUxIds: ['ux-error-recovery', 'ux-offline', 'ux-permission-request'],
     relatedUiIds: ['ui-toast', 'ui-alert-dialog', 'ui-empty-state'],
     deviceNotes: {
       desktop: '헤더 위나 아래에 전체 폭 띠로 표시합니다.',
@@ -526,7 +526,7 @@ export const statusItems: UIItem[] = [
         description: '콘텐츠가 준비되는 동안 어두운 자리 표시가 나타납니다.',
       },
     ],
-    relatedUxIds: ['ux-loading'],
+    relatedUxIds: ['ux-loading', 'ux-load-more'],
     relatedUiIds: ['ui-spinner', 'ui-progress-bar', 'ui-card'],
     deviceNotes: {
       hasMeaningfulDifference: false,
@@ -619,7 +619,7 @@ export const statusItems: UIItem[] = [
         description: '하트 아이콘에 새 알림 개수가 표시됩니다.',
       },
     ],
-    relatedUxIds: ['ux-completion-feedback', 'ux-comments'],
+    relatedUxIds: ['ux-completion-feedback', 'ux-comments', 'ux-notifications'],
     relatedUiIds: ['ui-badge', 'ui-icon-button', 'ui-bottom-navigation'],
     deviceNotes: {
       hasMeaningfulDifference: false,

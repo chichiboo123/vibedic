@@ -13,6 +13,8 @@ import { SearchPage } from './pages/SearchPage';
 import { SavedPage } from './pages/SavedPage';
 import { AboutPage } from './pages/AboutPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { VersusPage } from './pages/VersusPage';
+import { GuidePage } from './pages/GuidePage';
 
 export default function App() {
   return (
@@ -27,6 +29,8 @@ export default function App() {
           <Route path="services" element={<ServicesPage />} />
           <Route path="services/:slug" element={<ServiceDetailPage />} />
           <Route path="compare" element={<ComparePage />} />
+          <Route path="versus" element={<VersusPage />} />
+          <Route path="guide" element={<GuidePage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="saved" element={<SavedPage />} />
           <Route path="about" element={<AboutPage />} />
