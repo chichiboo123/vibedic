@@ -55,12 +55,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="flex items-center gap-2 rounded-full bg-zinc-800 px-4 py-2.5 text-sm text-white shadow-raised"
+            className="flex animate-fade-up items-center gap-2 rounded-full bg-[#15151b] py-2.5 pl-3 pr-4 text-sm font-medium text-white shadow-raised ring-1 ring-white/10"
           >
             {toast.message.includes('복사') || toast.message.includes('저장') ? (
-              <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" aria-hidden="true" />
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-[#d9ff43]" aria-hidden="true" />
             ) : (
-              <Info className="h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
+              <Info className="h-4 w-4 shrink-0 text-[#a998ff]" aria-hidden="true" />
             )}
             <span>{toast.message}</span>
           </div>

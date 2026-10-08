@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#6366f1" />
+    <meta name="theme-color" content="#f7f7f8" />
     <script>
       // 화면이 그려지기 전에 테마를 정해서 라이트→다크 깜빡임(FOUC)을 막습니다.
       (function () {
@@ -18,16 +18,22 @@
                 : 'light';
           document.documentElement.setAttribute('data-theme', theme);
           var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', theme === 'dark' ? '#12141c' : '#6366f1');
+          if (meta) meta.setAttribute('content', theme === 'dark' ? '#08080b' : '#f7f7f8');
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
       })();
     </script>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-gov-dynamic-subset.css"
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov-dynamic-subset.css"
     />
     <title>VibeDic | 바이브코딩 UI UX 사전</title>
     <meta

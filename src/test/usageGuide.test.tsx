@@ -14,7 +14,7 @@ describe('사용법 안내 모달', () => {
     const dialog = await screen.findByRole('dialog', { name: '이렇게 꺼내 찾아보세요' });
     expect(dialog).toBeInTheDocument();
     expect(dialog.contains(document.activeElement)).toBe(true);
-    expect(within(dialog).getAllByRole('listitem')).toHaveLength(6);
+    expect(within(dialog).getAllByRole('listitem')).toHaveLength(7);
   });
 
   it('ESC로 닫히고 포커스가 사용법 버튼으로 돌아온다', async () => {

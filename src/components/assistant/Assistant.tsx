@@ -118,7 +118,7 @@ export function Assistant() {
         aria-label={open ? 'VibeDic 어시스턴트 닫기' : 'VibeDic 어시스턴트 열기'}
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-raised transition-colors hover:bg-primary-hover"
+        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-ink text-background shadow-raised ring-4 ring-primary/25 transition-transform hover:scale-105 active:scale-95"
       >
         {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Bot className="h-7 w-7" aria-hidden="true" />}
       </button>
@@ -127,9 +127,9 @@ export function Assistant() {
         <div
           role="dialog"
           aria-label="VibeDic 어시스턴트"
-          className="fixed inset-x-2 bottom-20 top-16 z-50 flex flex-col overflow-hidden rounded-card border border-line bg-surface shadow-raised sm:inset-auto sm:bottom-20 sm:right-4 sm:top-auto sm:h-[min(36rem,calc(100dvh-7rem))] sm:w-[24rem]"
+          className="fixed inset-x-2 bottom-20 top-20 z-50 flex animate-fade-up flex-col overflow-hidden rounded-[1.5rem] border border-line bg-surface shadow-raised sm:inset-auto sm:bottom-20 sm:right-4 sm:top-auto sm:h-[min(36rem,calc(100dvh-7rem))] sm:w-[24rem]"
         >
-          <header className="flex items-center gap-2 border-b border-line bg-primary-soft/60 px-4 py-3">
+          <header className="flex items-center gap-2 border-b border-line px-4 py-3">
             <Sparkles className="h-4 w-4 shrink-0 text-primary-strong" aria-hidden="true" />
             <h2 className="text-sm font-bold">VibeDic 어시스턴트</h2>
             {!needsKey && modelIndex !== null ? (

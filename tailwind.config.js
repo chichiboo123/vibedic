@@ -18,6 +18,11 @@ export default {
       colors: {
         background: themeColor('--color-background'),
         surface: themeColor('--color-surface'),
+        elevated: themeColor('--color-elevated'),
+        accent: {
+          DEFAULT: themeColor('--color-accent'),
+          ink: themeColor('--color-accent-ink'),
+        },
         ink: themeColor('--color-text'),
         muted: themeColor('--color-text-muted'),
         primary: {
@@ -30,6 +35,18 @@ export default {
         success: themeColor('--color-success'),
         warning: themeColor('--color-warning'),
         error: themeColor('--color-error'),
+        // tone-* 클래스(분류 색 묶음) 안에서만 의미가 있는 색입니다.
+        tone: {
+          DEFAULT: themeColor('--tone-bg'),
+          fg: themeColor('--tone-fg'),
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.25s ease-out both',
+      },
+      fontFamily: {
+        mono: ['"Geist Mono"', '"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
       },
       borderRadius: {
         card: 'var(--radius-lg)',

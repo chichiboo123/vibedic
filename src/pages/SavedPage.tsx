@@ -8,6 +8,7 @@ import { findUXPatternById, uxPatterns } from '../data/uxPatterns';
 import { UIItemCard } from '../components/dictionary/UIItemCard';
 import { UXPatternCard } from '../components/dictionary/UXPatternCard';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { PageHeader } from '../components/common/PageHeader';
 import { useToast } from '../components/common/ToastProvider';
 
 export function SavedPage() {
@@ -49,14 +50,12 @@ export function SavedPage() {
 
   return (
     <div>
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-bold">저장함</h1>
-          <p className="mt-1.5 text-sm text-muted" role="status">
-            UI {savedUI.length}개, UX {savedUX.length}개를 저장했어요.
-          </p>
-        </div>
-        {saved.length > 0 && (
+      <PageHeader
+        eyebrow="Saved"
+        Icon={Bookmark}
+        title="저장함"
+        description={<span role="status">UI {savedUI.length}개, UX {savedUX.length}개를 저장했어요.</span>}
+        actions={saved.length > 0 && (
           <button
             type="button"
             onClick={handleClearSaved}
@@ -71,10 +70,10 @@ export function SavedPage() {
             {confirmClear ? '한 번 더 누르면 전체 삭제돼요' : '전체 삭제'}
           </button>
         )}
-      </header>
+      />
 
       {saved.length === 0 ? (
-        <div className="mt-8 rounded-card border border-line bg-surface p-10 text-center">
+        <div className="surface-card mt-8 p-10 text-center">
           <Bookmark className="mx-auto h-10 w-10 text-line" aria-hidden="true" />
           <p className="mt-4 text-base font-semibold">아직 저장한 항목이 없어요.</p>
           <p className="mt-1.5 text-sm leading-relaxed text-muted">
@@ -85,13 +84,13 @@ export function SavedPage() {
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             <Link
               to="/ui"
-              className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
+              className="btn-primary"
             >
               UI 요소 둘러보기
             </Link>
             <Link
               to="/ux"
-              className="inline-flex min-h-11 items-center rounded-lg border border-line bg-surface px-5 text-sm font-semibold hover:bg-background"
+              className="btn-secondary"
             >
               UX 패턴 둘러보기
             </Link>
@@ -142,7 +141,7 @@ export function SavedPage() {
               <li key={`${ref.type}-${ref.id}`}>
                 <Link
                   to={ref.type === 'ui' ? `/ui/${slug}` : `/ux/${slug}`}
-                  className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 text-sm hover:border-primary hover:text-primary-strong"
+                  className="pill text-ink"
                 >
                   <span className="text-xs text-muted">{ref.type === 'ui' ? 'UI' : 'UX'}</span>
                   {name}

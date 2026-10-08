@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Monitor, Smartphone, Tablet } from 'lucide-react';
+import { MonitorSmartphone, Monitor, Smartphone, Tablet } from 'lucide-react';
 import { deviceComparisons } from '../data/deviceComparisons';
 import type { DeviceComparison } from '../types';
 import { RelatedUICards, RelatedUXCards } from '../components/dictionary/RelatedLinks';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { PageHeader } from '../components/common/PageHeader';
 
 const deviceMeta = [
   { key: 'desktop', label: 'PC', Icon: Monitor },
@@ -25,13 +26,12 @@ export function ComparePage() {
 
   return (
     <div>
-      <header>
-        <h1 className="text-2xl font-bold">기기별 비교</h1>
-        <p className="mt-1.5 text-sm text-muted">
-          같은 UI와 UX가 PC, 태블릿, 모바일에서 어떻게 달라지는지 {deviceComparisons.length}가지
-          주제로 비교해 보세요.
-        </p>
-      </header>
+      <PageHeader
+        eyebrow="Devices"
+        Icon={MonitorSmartphone}
+        title="기기별 비교"
+        description={`같은 UI와 UX가 PC, 태블릿, 모바일에서 어떻게 달라지는지 ${deviceComparisons.length}가지 주제로 비교해 보세요.`}
+      />
 
       <nav aria-label="비교 주제 목차" className="mt-5">
         <ul className="flex flex-wrap gap-2">
@@ -39,7 +39,7 @@ export function ComparePage() {
             <li key={comparison.id}>
               <a
                 href={`#/compare#${comparison.slug}`}
-                className="inline-flex min-h-9 items-center rounded-full border border-line bg-surface px-3 text-xs text-muted hover:border-primary hover:text-primary-strong"
+                className="pill min-h-9 text-xs"
               >
                 {comparison.title}
               </a>
@@ -64,7 +64,7 @@ function ComparisonSection({ comparison }: { comparison: DeviceComparison }) {
     <section
       id={comparison.slug}
       aria-label={comparison.title}
-      className="scroll-mt-20 rounded-card border border-line bg-surface p-5"
+      className="scroll-mt-28 rounded-[1.5rem] border border-line bg-surface p-5 shadow-card sm:p-7"
     >
       <h2 className="text-lg font-bold">{comparison.title}</h2>
       <p className="mt-1 text-sm text-muted">{comparison.summary}</p>
@@ -93,7 +93,7 @@ function ComparisonSection({ comparison }: { comparison: DeviceComparison }) {
               aria-pressed={activeDevice === key}
               onClick={() => setActiveDevice(key)}
               className={`flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-lg text-sm font-medium ${
-                activeDevice === key ? 'bg-surface text-primary-strong shadow-card' : 'text-muted'
+                activeDevice === key ? 'bg-surface text-ink shadow-card' : 'text-muted'
               }`}
             >
               <Icon className="h-4 w-4" aria-hidden="true" />

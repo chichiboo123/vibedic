@@ -5,6 +5,7 @@ import { uiItems } from '../data/uiItems';
 import { uxPatterns } from '../data/uxPatterns';
 import { services } from '../data/services';
 import { deviceComparisons } from '../data/deviceComparisons';
+import { versusTopics } from '../data/versus';
 import { uiCategoryById, uxCategoryById } from '../data/categories';
 
 export type SearchDoc = {
@@ -102,6 +103,25 @@ function buildDocs(): SearchDoc[] {
       subtitle: '기기별 비교',
       description: comparison.summary,
       href: `/compare#${comparison.slug}`,
+      haystack,
+      compact: compactText(haystack),
+    });
+  }
+
+  for (const topic of versusTopics) {
+    const itemNames = topic.uiIds.flatMap((id) => {
+      const item = uiItems.find((candidate) => candidate.id === id);
+      return item ? [item.koreanName, item.englishName] : [];
+    });
+    const haystack = [topic.title, topic.question, topic.rule, '차이', '비교', '구분', ...itemNames];
+    docs.push({
+      type: 'versus',
+      id: topic.id,
+      slug: topic.slug,
+      title: `${topic.title} 차이`,
+      subtitle: '헷갈리는 UI 구분',
+      description: topic.rule,
+      href: `/versus#${topic.slug}`,
       haystack,
       compact: compactText(haystack),
     });

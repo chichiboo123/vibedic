@@ -80,7 +80,7 @@ export const controlItems: UIItem[] = [
         description: '검색, 통화, 메뉴가 아이콘 버튼으로 나란히 있습니다.',
       },
     ],
-    relatedUxIds: ['ux-save-action', 'ux-share-action'],
+    relatedUxIds: ['ux-save-action', 'ux-share-action', 'ux-favorite'],
     relatedUiIds: ['ui-button', 'ui-tooltip', 'ui-fab'],
     deviceNotes: {
       desktop: '호버 시 툴팁으로 이름을 보여줄 수 있습니다.',
@@ -528,7 +528,7 @@ export const controlItems: UIItem[] = [
         description: '파일 보기를 목록형과 격자형으로 전환합니다.',
       },
     ],
-    relatedUxIds: ['ux-tab-switching', 'ux-single-choice'],
+    relatedUxIds: ['ux-tab-switching', 'ux-single-choice', 'ux-plan-comparison'],
     relatedUiIds: ['ui-tab', 'ui-radio-button', 'ui-filter-chip'],
     deviceNotes: {
       desktop: '보기 전환 버튼으로 툴바 안에 자연스럽게 들어갑니다.',

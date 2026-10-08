@@ -26,10 +26,10 @@ export function SaveButton({ type, id, name, withLabel = false }: SaveButtonProp
       onClick={handleClick}
       aria-pressed={saved}
       aria-label={saved ? `${name} 저장 해제` : `${name} 저장`}
-      className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border px-3 text-sm transition-colors ${
+      className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full border px-3 text-sm transition-all active:scale-95 ${
         saved
-          ? 'border-primary bg-primary-soft text-primary-strong'
-          : 'border-line bg-surface text-muted hover:border-primary hover:text-primary-strong'
+          ? 'border-ink bg-ink text-background'
+          : 'border-line bg-surface/70 text-muted backdrop-blur hover:border-ink/30 hover:text-ink'
       }`}
     >
       <Bookmark className={`h-4 w-4 ${saved ? 'fill-current' : ''}`} aria-hidden="true" />

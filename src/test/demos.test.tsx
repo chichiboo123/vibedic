@@ -86,13 +86,15 @@ describe('직접 살펴보기 데모', () => {
     expect(within(demo).getByText('읽지 않은 알림 0개')).toBeInTheDocument();
   });
 
-  it('목록 카드 썸네일에 데모 표시가 붙고 카드를 눌러 상세로 들어간다', async () => {
+  it('목록 카드 썸네일에 분류 표시가 붙고 카드를 눌러 상세로 들어간다', async () => {
     const user = userEvent.setup();
     renderApp('/ui?category=layout');
 
-    expect(screen.getAllByText('직접 조작 데모').length).toBe(
-      uiItems.filter((item) => item.category === 'layout').length,
-    );
+    const cards = screen.getAllByRole('article');
+    expect(cards).toHaveLength(uiItems.filter((item) => item.category === 'layout').length);
+    for (const card of cards) {
+      expect(within(card).getByText('화면 나누기')).toBeInTheDocument();
+    }
 
     await user.click(screen.getByRole('link', { name: '사이드바' }));
     expect(await screen.findByRole('heading', { level: 1, name: '사이드바' })).toBeInTheDocument();

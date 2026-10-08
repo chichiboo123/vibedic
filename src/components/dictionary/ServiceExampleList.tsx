@@ -19,7 +19,7 @@ export function ServiceExampleList({ examples, demoType, category }: ServiceExam
           return (
             <li
               key={example.title}
-              className="flex flex-col gap-3 rounded-card border border-line bg-surface p-4 sm:flex-row sm:items-center"
+              className="flex flex-col gap-4 rounded-[1.25rem] border border-line bg-surface p-3 pr-5 sm:flex-row sm:items-center"
             >
               <ExampleFigure
                 serviceId={example.serviceId}

@@ -5,6 +5,7 @@ import {
   Bot,
   Copy,
   MonitorSmartphone,
+  Scale,
   Search,
   Tag,
   Telescope,
@@ -21,12 +22,17 @@ const steps = [
   {
     icon: Search,
     title: '궁금한 것을 검색해요',
-    description: '화면에서 본 UI나 겪고 있는 UX 상황을 키워드로 찾아보세요.',
+    description: '화면에서 본 UI나 겪고 있는 UX 상황을 키워드로 찾아보세요. 어디서나 Ctrl(⌘) + K 또는 / 키로 빠른 검색을 열 수 있어요.',
   },
   {
     icon: Tag,
     title: '이름과 역할을 확인해요',
     description: '쉬운 이름, 한국어 공식 명칭, 영문 명칭을 함께 보여줘요.',
+  },
+  {
+    icon: Scale,
+    title: '헷갈리는 이름을 구분해요',
+    description: '모달과 바텀 시트처럼 비슷한 요소는 비교표로 차이를 한눈에 확인해요.',
   },
   {
     icon: Telescope,
@@ -41,7 +47,7 @@ const steps = [
   {
     icon: Copy,
     title: '프롬프트를 복사해요',
-    description: '내 웹앱에 바로 적용할 수 있는 바이브코딩 프롬프트를 복사해요.',
+    description: '기술 스택과 반응형·접근성 같은 조건을 골라 덧붙인 뒤, 내 웹앱용 프롬프트를 복사해요.',
   },
   {
     icon: Bookmark,
@@ -117,18 +123,10 @@ export function UsageGuideModal({ open, onClose }: UsageGuideModalProps) {
         </div>
 
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link
-            to="/ui"
-            onClick={onClose}
-            className="min-h-11 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover"
-          >
+          <Link to="/ui" onClick={onClose} className="btn-primary">
             UI 사전 둘러보기
           </Link>
-          <Link
-            to="/ux"
-            onClick={onClose}
-            className="min-h-11 rounded-lg border border-line px-4 py-2.5 text-sm font-semibold hover:bg-background"
-          >
+          <Link to="/ux" onClick={onClose} className="btn-secondary">
             UX 사전 둘러보기
           </Link>
         </div>

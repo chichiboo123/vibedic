@@ -2,66 +2,144 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * VibeDic 디자인 토큰
+ * 무채색(zinc) 바탕 + 일렉트릭 바이올렛 한 가지 강조색 + 라임 하이라이트.
+ * 다크 모드는 거의 검정에 가까운 바탕 위에 오로라 빛과 그레인을 얹습니다.
+ */
 :root {
-  --color-background: #f8f9fc;
+  --color-background: #f7f7f8;
   --color-surface: #ffffff;
-  --color-text: #1e2430;
-  --color-text-muted: #5b6472;
-  --color-primary: #6366f1;
-  --color-primary-soft: #eef0fe;
-  --color-primary-strong: #4649d8;
-  --color-primary-hover: #4649d8;
-  --color-border: #e3e7ef;
-  --color-success: #15803d;
+  --color-elevated: #ffffff;
+  --color-text: #0b0b0f;
+  --color-text-muted: #63636e;
+  --color-primary: #6a4dff;
+  --color-primary-soft: #efebff;
+  --color-primary-strong: #5233f0;
+  --color-primary-hover: #5233f0;
+  --color-accent: #d9ff43;
+  --color-accent-ink: #1b2100;
+  --color-border: #e6e6ea;
+  --color-success: #12803f;
   --color-warning: #b45309;
   --color-error: #dc2626;
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
 
-  --shadow-sm: 0 1px 3px rgba(30, 36, 48, 0.07);
-  --shadow-md: 0 6px 24px rgba(30, 36, 48, 0.12);
+  --shadow-sm: 0 1px 2px rgba(12, 12, 20, 0.04), 0 1px 1px rgba(12, 12, 20, 0.03);
+  --shadow-md: 0 1px 2px rgba(12, 12, 20, 0.04), 0 12px 32px -8px rgba(40, 24, 120, 0.16);
+
+  --aurora-1: rgba(122, 92, 255, 0.22);
+  --aurora-2: rgba(255, 118, 186, 0.16);
+  --aurora-3: rgba(74, 196, 255, 0.14);
+  --grid-dot: rgba(12, 12, 20, 0.07);
+  --grain-opacity: 0.035;
+
+  /* 분류별 강조색. 바탕은 옅게, 글자는 명암비를 확보한 진한 색입니다. */
+  --tone-blue-bg: #e6f1ff;
+  --tone-blue-fg: #0b5bb5;
+  --tone-green-bg: #e2f8ea;
+  --tone-green-fg: #11703d;
+  --tone-yellow-bg: #f6ffd0;
+  --tone-yellow-fg: #4d5c00;
+  --tone-pink-bg: #ffe6f1;
+  --tone-pink-fg: #a3195b;
+  --tone-violet-bg: #efebff;
+  --tone-violet-fg: #4b2fe0;
+  --tone-orange-bg: #fff0e3;
+  --tone-orange-fg: #a24500;
+
+  --color-mark: #e4ff7a;
 }
 
 /* 시스템이 다크 모드를 선호하면 사용자가 명시적으로 라이트를 고르기 전까지 기본값으로 적용합니다. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-background: #12141c;
-    --color-surface: #1a1d29;
-    --color-text: #e7e9f2;
-    --color-text-muted: #9aa1b8;
-    --color-primary: #6366f1;
-    --color-primary-soft: #242a52;
-    --color-primary-strong: #818cf8;
-    --color-primary-hover: #4649d8;
-    --color-border: #2c3040;
+    --color-background: #08080b;
+    --color-surface: #111116;
+    --color-elevated: #17171e;
+    --color-text: #f4f4f6;
+    --color-text-muted: #9a9aa8;
+    --color-primary: #7b63ff;
+    --color-primary-soft: #1d1840;
+    --color-primary-strong: #a998ff;
+    --color-primary-hover: #6a4dff;
+    --color-accent: #d9ff43;
+    --color-accent-ink: #1b2100;
+    --color-border: #24242d;
     --color-success: #4ade80;
     --color-warning: #fbbf24;
     --color-error: #f87171;
 
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.03), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+
+    --aurora-1: rgba(110, 80, 255, 0.28);
+    --aurora-2: rgba(255, 80, 170, 0.13);
+    --aurora-3: rgba(40, 160, 255, 0.12);
+    --grid-dot: rgba(255, 255, 255, 0.06);
+    --grain-opacity: 0.06;
+
+    --tone-blue-bg: #0f2238;
+    --tone-blue-fg: #8cc4ff;
+    --tone-green-bg: #0e2a1b;
+    --tone-green-fg: #7fe0a6;
+    --tone-yellow-bg: #232a07;
+    --tone-yellow-fg: #dcff6a;
+    --tone-pink-bg: #33101f;
+    --tone-pink-fg: #ff9ccb;
+    --tone-violet-bg: #1d1840;
+    --tone-violet-fg: #b7a9ff;
+    --tone-orange-bg: #2e1a0a;
+    --tone-orange-fg: #ffb47a;
+
+    --color-mark: #4a5a00;
   }
 }
 
 /* 사용자가 헤더의 테마 버튼으로 명시적으로 고른 값. 시스템 설정보다 우선합니다. */
 :root[data-theme='dark'] {
-  --color-background: #12141c;
-  --color-surface: #1a1d29;
-  --color-text: #e7e9f2;
-  --color-text-muted: #9aa1b8;
-  --color-primary: #6366f1;
-  --color-primary-soft: #242a52;
-  --color-primary-strong: #818cf8;
-  --color-primary-hover: #4649d8;
-  --color-border: #2c3040;
+  --color-background: #08080b;
+  --color-surface: #111116;
+  --color-elevated: #17171e;
+  --color-text: #f4f4f6;
+  --color-text-muted: #9a9aa8;
+  --color-primary: #7b63ff;
+  --color-primary-soft: #1d1840;
+  --color-primary-strong: #a998ff;
+  --color-primary-hover: #6a4dff;
+  --color-accent: #d9ff43;
+  --color-accent-ink: #1b2100;
+  --color-border: #24242d;
   --color-success: #4ade80;
   --color-warning: #fbbf24;
   --color-error: #f87171;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.03), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+
+  --aurora-1: rgba(110, 80, 255, 0.28);
+  --aurora-2: rgba(255, 80, 170, 0.13);
+  --aurora-3: rgba(40, 160, 255, 0.12);
+  --grid-dot: rgba(255, 255, 255, 0.06);
+  --grain-opacity: 0.06;
+
+  --tone-blue-bg: #0f2238;
+  --tone-blue-fg: #8cc4ff;
+  --tone-green-bg: #0e2a1b;
+  --tone-green-fg: #7fe0a6;
+  --tone-yellow-bg: #232a07;
+  --tone-yellow-fg: #dcff6a;
+  --tone-pink-bg: #33101f;
+  --tone-pink-fg: #ff9ccb;
+  --tone-violet-bg: #1d1840;
+  --tone-violet-fg: #b7a9ff;
+  --tone-orange-bg: #2e1a0a;
+  --tone-orange-fg: #ffb47a;
+
+  --color-mark: #4a5a00;
 }
 
 html {
@@ -89,12 +167,41 @@ body {
     'Malgun Gothic',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* 한국어가 낱말 중간에서 끊기지 않도록 어절 단위로 줄을 바꿉니다. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 화면 전체에 깔리는 오로라 빛 번짐과 필름 그레인. 콘텐츠 뒤에 고정됩니다. */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+body::before {
+  background:
+    radial-gradient(50rem 28rem at 12% -8%, var(--aurora-1), transparent 65%),
+    radial-gradient(40rem 24rem at 92% -4%, var(--aurora-2), transparent 65%),
+    radial-gradient(46rem 26rem at 60% 12%, var(--aurora-3), transparent 70%);
+}
+body::after {
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
 *:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -119,6 +226,42 @@ body {
   }
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--tilt, 0deg));
+  }
+}
+
+@keyframes shimmer-text {
+  to {
+    background-position: 200% center;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -129,4 +272,147 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* 분류 색 묶음. 요소에 tone-* 클래스를 주면 bg-tone / text-tone-fg 유틸리티가 그 색을 씁니다. */
+.tone-blue {
+  --tone-bg: var(--tone-blue-bg);
+  --tone-fg: var(--tone-blue-fg);
+}
+.tone-green {
+  --tone-bg: var(--tone-green-bg);
+  --tone-fg: var(--tone-green-fg);
+}
+.tone-yellow {
+  --tone-bg: var(--tone-yellow-bg);
+  --tone-fg: var(--tone-yellow-fg);
+}
+.tone-pink {
+  --tone-bg: var(--tone-pink-bg);
+  --tone-fg: var(--tone-pink-fg);
+}
+.tone-violet {
+  --tone-bg: var(--tone-violet-bg);
+  --tone-fg: var(--tone-violet-fg);
+}
+.tone-orange {
+  --tone-bg: var(--tone-orange-bg);
+  --tone-fg: var(--tone-orange-fg);
+}
+
+@layer components {
+  /* 버튼: 주요 버튼은 글자색과 바탕색을 뒤집은 잉크 버튼, 보조 버튼은 테두리만 있는 버튼입니다. */
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-5 text-sm font-semibold transition-all duration-200 active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply btn bg-ink text-background shadow-card hover:-translate-y-px hover:shadow-raised;
+  }
+  .btn-accent {
+    @apply btn bg-primary text-white shadow-card hover:-translate-y-px hover:bg-primary-hover hover:shadow-raised;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface/70 text-ink backdrop-blur hover:border-ink/30 hover:bg-surface;
+  }
+  /* 필터·추천어처럼 누를 수 있는 둥근 칩 */
+  .pill {
+    @apply inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface/70 px-3.5 text-sm text-muted backdrop-blur transition-colors hover:border-ink/25 hover:text-ink;
+  }
+  .pill[aria-pressed='true'],
+  .pill-active {
+    @apply border-ink bg-ink font-semibold text-background hover:border-ink hover:text-background;
+  }
+  /* 모노 폰트의 작은 머리말 */
+  .eyebrow {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted;
+  }
+  /* 사전 페이지 공통 카드 */
+  .surface-card {
+    @apply rounded-card border border-line bg-surface shadow-card;
+  }
+  /* 유리처럼 비치는 면 */
+  .glass {
+    @apply border border-line/80 bg-surface/70 backdrop-blur-xl backdrop-saturate-150;
+  }
+  /* 도식 뒤에 깔리는 점 격자 */
+  .dot-grid {
+    background-color: var(--color-background);
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+  /* 무지개빛으로 흐르는 강조 글자 */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-primary) 0%,
+      #ff5fae 35%,
+      #ff9d4d 55%,
+      var(--color-primary) 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer-text 8s linear infinite;
+  }
+}
+
+/*
+ * 스포트라이트 카드: 마우스를 따라 은은한 빛이 번집니다.
+ * --spot-x / --spot-y는 Layout의 포인터 이벤트가 채워 줍니다.
+ */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    22rem circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    color-mix(in srgb, var(--color-primary) 12%, transparent),
+    transparent 60%
+  );
+  z-index: -1;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* 흐르는 띠(마키). 마우스를 올리면 멈춥니다. */
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* 가로 스크롤 칩 줄에서 스크롤바를 숨깁니다(키보드·터치 스크롤은 그대로). */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* 가장자리가 흐려지는 가로 스크롤 영역 */
+.fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+mark {
+  background-color: var(--color-mark);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 2px;
 }
