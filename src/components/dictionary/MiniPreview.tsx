@@ -6,9 +6,11 @@ export function MiniPreview({ item }: { item: UIItem }) {
   return (
     <div
       aria-hidden="true"
-      className="flex h-28 items-center justify-center overflow-hidden rounded-t-card border-b border-line bg-background px-3"
+      className="dot-grid flex h-36 items-center justify-center overflow-hidden rounded-[0.9rem] border border-line/70 px-3"
     >
-      <PreviewGlyph demoType={item.demoType} category={item.category} />
+      <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+        <PreviewGlyph demoType={item.demoType} category={item.category} />
+      </span>
     </div>
   );
 }

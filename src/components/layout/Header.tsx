@@ -74,19 +74,23 @@ export function Header() {
   };
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-      isActive ? 'bg-primary-soft text-primary-strong' : 'text-muted hover:text-ink'
+    `inline-flex min-h-9 items-center rounded-full px-3.5 text-sm font-medium transition-all ${
+      isActive ? 'bg-surface text-ink shadow-card ring-1 ring-line' : 'text-muted hover:text-ink'
     }`;
 
+  const iconButtonClass =
+    'inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm text-muted transition-colors hover:bg-ink/5 hover:text-ink';
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-page items-center gap-2 px-4">
-        <Link to="/" className="flex items-center rounded-md" aria-label="VibeDic 홈으로 이동">
+    // 화면 위에 떠 있는 섬(island) 모양의 유리 헤더입니다.
+    <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4">
+      <div className="glass mx-auto flex h-14 max-w-page items-center gap-2 rounded-full pl-4 pr-1.5 shadow-raised">
+        <Link to="/" className="flex items-center rounded-full" aria-label="VibeDic 홈으로 이동">
           <Logo />
         </Link>
 
-        <nav aria-label="주요 메뉴" className="ml-4 hidden lg:block">
-          <ul className="flex items-center gap-1">
+        <nav aria-label="주요 메뉴" className="ml-3 hidden lg:block">
+          <ul className="flex items-center gap-0.5 rounded-full bg-background/70 p-1 ring-1 ring-line/70">
             {menuItems.map((item) => (
               <li key={item.to}>
                 <NavLink to={item.to} className={navLinkClass}>
@@ -97,31 +101,31 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="ml-auto flex items-center gap-1">
+        <div className="ml-auto flex items-center gap-0.5">
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
             aria-haspopup="dialog"
             aria-label="빠른 검색 열기"
             aria-keyshortcuts="Control+K Meta+K /"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm text-muted hover:bg-primary-soft hover:text-primary-strong sm:border sm:border-line sm:bg-background sm:pr-2"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full px-3 text-sm text-muted transition-colors hover:bg-ink/5 hover:text-ink sm:min-h-10 sm:bg-background/80 sm:pl-3.5 sm:pr-1.5 sm:ring-1 sm:ring-line"
           >
             <Search className="h-4 w-4" aria-hidden="true" />
             <span className="hidden sm:inline">검색</span>
-            <kbd className="hidden rounded-md border border-line bg-surface px-1.5 py-0.5 font-sans text-[11px] text-muted sm:inline">
+            <kbd className="hidden rounded-full bg-surface px-2 py-0.5 font-mono text-[10px] text-muted ring-1 ring-line sm:inline">
               {isMac ? '⌘K' : 'Ctrl K'}
             </kbd>
           </button>
           <Link
             to="/saved"
-            className="relative inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm text-muted hover:bg-primary-soft hover:text-primary-strong"
+            className={`relative ${iconButtonClass}`}
           >
             <Bookmark className="h-4 w-4" aria-hidden="true" />
-            <span className="hidden sm:inline">저장함</span>
-            <span className="sr-only sm:hidden">저장함</span>
+            <span className="hidden xl:inline">저장함</span>
+            <span className="sr-only xl:hidden">저장함</span>
             {saved.length > 0 && (
               <span
-                className="absolute -right-0.5 -top-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[11px] font-bold text-white"
+                className="absolute right-0 top-0.5 inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-1 font-mono text-[10px] font-bold text-accent-ink ring-2 ring-surface"
                 aria-label={`저장한 항목 ${saved.length}개`}
               >
                 {saved.length > 99 ? '99+' : saved.length}
@@ -135,20 +139,20 @@ export function Header() {
           <button
             ref={guideButtonRef}
             type="button"
-            className="hidden min-h-11 items-center gap-1.5 rounded-full px-3 text-sm text-muted hover:bg-primary-soft hover:text-primary-strong lg:inline-flex"
+            className="hidden min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm text-muted transition-colors hover:bg-ink/5 hover:text-ink lg:inline-flex"
             aria-haspopup="dialog"
             aria-label="사용법 보기"
             onClick={() => setGuideOpen(true)}
           >
             <HelpCircle className="h-4 w-4" aria-hidden="true" />
-            사용법
+            <span className="hidden xl:inline">사용법</span>
           </button>
 
           {/* 좁은 화면: 햄버거 버튼으로 전체 메뉴 드로어를 엽니다. */}
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-primary-soft hover:text-primary-strong lg:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-ink text-background transition-transform active:scale-95 lg:hidden"
             aria-expanded={menuOpen}
             aria-haspopup="dialog"
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}

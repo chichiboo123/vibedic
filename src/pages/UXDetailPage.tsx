@@ -59,7 +59,7 @@ export function UXDetailPage() {
 
   return (
     <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_12rem]">
-      <article className="min-w-0">
+      <article className="min-w-0 [counter-reset:section]">
         <Breadcrumb
           items={[
             { to: '/ux', label: 'UX 패턴' },
@@ -68,25 +68,25 @@ export function UXDetailPage() {
           ]}
         />
 
-        <header className="mt-5">
+        <header className="mt-6 animate-fade-up border-b border-line pb-8">
           <p className={`tone-${tone} inline-flex items-center gap-1.5 rounded-full bg-tone px-2.5 py-1 text-xs font-semibold text-tone-fg`}>
             <CategoryIcon className="h-3.5 w-3.5" aria-hidden="true" />
             {category.name}
           </p>
           <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{pattern.koreanName}</h1>
-              <p className="mt-1 text-lg font-medium text-muted">{pattern.englishName}</p>
+              <h1 className="text-[2.75rem] font-extrabold leading-none tracking-[-0.045em] sm:text-6xl">{pattern.koreanName}</h1>
+              <p className="mt-2 font-serif text-2xl italic text-muted sm:text-3xl">{pattern.englishName}</p>
             </div>
             <div className="flex items-center gap-2">
               <ShareLinkButton name={pattern.koreanName} />
               <SaveButton type="ux" id={pattern.id} name={pattern.koreanName} withLabel />
             </div>
           </div>
-          <blockquote className="mt-4 rounded-card border-l-4 border-primary bg-primary-soft/50 px-4 py-3 text-base font-medium text-primary-strong">
+          <blockquote className="mt-6 border-l-2 border-ink pl-4 text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
             “{pattern.userGoal}”
           </blockquote>
-          <p className="mt-4 text-base leading-relaxed">{pattern.summary}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed">{pattern.summary}</p>
         </header>
 
         <DetailJumpBar entries={toc} />
@@ -98,8 +98,8 @@ export function UXDetailPage() {
                 <span className="flex flex-col items-center">
                   <span
                     aria-hidden="true"
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                      stepIndex === 0 ? 'bg-primary text-white' : 'bg-primary-soft text-primary-strong'
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-mono text-xs font-bold ${
+                      stepIndex === 0 ? 'bg-ink text-background' : 'bg-surface text-muted ring-1 ring-line'
                     }`}
                   >
                     {stepIndex + 1}
@@ -108,7 +108,7 @@ export function UXDetailPage() {
                     <span aria-hidden="true" className="my-1 w-0.5 flex-1 rounded-full bg-line" />
                   )}
                 </span>
-                <span className="mb-2 flex min-h-11 flex-1 items-center rounded-card border border-line bg-surface px-4 py-2 text-sm font-medium">
+                <span className="mb-2 flex min-h-12 flex-1 items-center rounded-2xl border border-line bg-surface px-4 py-2 text-[15px] font-medium">
                   {step}
                 </span>
               </li>
@@ -168,7 +168,7 @@ export function UXDetailPage() {
         <DetailSection id="checklist" title="점검하기">
           <ul className="space-y-2">
             {pattern.checklist.slice(0, 5).map((check) => (
-              <li key={check} className="surface-card flex items-start gap-2 px-4 py-3 text-sm shadow-none">
+              <li key={check} className="flex items-start gap-2.5 rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden="true" />
                 {check}
               </li>

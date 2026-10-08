@@ -18,6 +18,11 @@ export default {
       colors: {
         background: themeColor('--color-background'),
         surface: themeColor('--color-surface'),
+        elevated: themeColor('--color-elevated'),
+        accent: {
+          DEFAULT: themeColor('--color-accent'),
+          ink: themeColor('--color-accent-ink'),
+        },
         ink: themeColor('--color-text'),
         muted: themeColor('--color-text-muted'),
         primary: {
@@ -38,6 +43,10 @@ export default {
       },
       animation: {
         'fade-up': 'fade-up 0.25s ease-out both',
+      },
+      fontFamily: {
+        mono: ['"Geist Mono"', '"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
       },
       borderRadius: {
         card: 'var(--radius-lg)',

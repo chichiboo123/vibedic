@@ -3,7 +3,7 @@ import { useCallback, useEffect, useSyncExternalStore } from 'react';
 export type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'vibedic:theme';
-const THEME_COLOR: Record<Theme, string> = { light: '#6366f1', dark: '#12141c' };
+const THEME_COLOR: Record<Theme, string> = { light: '#f7f7f8', dark: '#08080b' };
 
 function syncThemeColorMeta(next: Theme) {
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[next]);

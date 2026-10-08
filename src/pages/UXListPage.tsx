@@ -68,7 +68,7 @@ export function UXListPage() {
             }}
           aria-label="UX 패턴 이름으로 걸러내기"
           placeholder="이름으로 걸러내기"
-          className="min-h-11 w-full rounded-full border border-line bg-surface pl-10 pr-4 text-sm"
+          className="min-h-12 w-full rounded-full border border-line bg-surface/70 pl-10 pr-4 text-sm backdrop-blur transition-shadow focus:shadow-raised"
         />
       </div>
 

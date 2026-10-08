@@ -92,7 +92,7 @@ export function GuidePage() {
               <div className="flex items-start gap-3">
                 <span
                   aria-hidden="true"
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink font-mono text-xs font-bold text-background"
                 >
                   {index + 1}
                 </span>

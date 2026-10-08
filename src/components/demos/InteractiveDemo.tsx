@@ -163,12 +163,17 @@ export function InteractiveDemo({ item }: { item: UIItem }) {
   const Demo = item.demoType === 'static' ? undefined : demoRegistry[item.demoType];
 
   return (
-    <div className="rounded-card border-2 border-dashed border-primary/40 bg-primary-soft/40 p-1.5">
-      <p className="flex items-center gap-1.5 px-3 pt-2 text-xs font-semibold uppercase tracking-wide text-primary-strong">
+    <div className="rounded-[1.5rem] border border-line bg-surface p-2 shadow-card">
+      <p className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-muted">
+        <span aria-hidden="true" className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
+        </span>
+        <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink">Live demo</span>
         <Hand className="h-3.5 w-3.5" aria-hidden="true" />
         {Demo ? '데모 영역 · 직접 조작해 보세요' : '데모 영역 · 실제 예시로 살펴보세요'}
       </p>
-      <div className="mt-1.5 rounded-[calc(var(--radius-lg)-4px)] bg-surface p-5">
+      <div className="dot-grid rounded-[1.1rem] border border-line/70 p-5 sm:p-8">
         {Demo ? (
           <Demo />
         ) : (

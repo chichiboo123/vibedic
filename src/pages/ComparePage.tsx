@@ -64,7 +64,7 @@ function ComparisonSection({ comparison }: { comparison: DeviceComparison }) {
     <section
       id={comparison.slug}
       aria-label={comparison.title}
-      className="surface-card scroll-mt-20 p-5 sm:p-6"
+      className="scroll-mt-28 rounded-[1.5rem] border border-line bg-surface p-5 shadow-card sm:p-7"
     >
       <h2 className="text-lg font-bold">{comparison.title}</h2>
       <p className="mt-1 text-sm text-muted">{comparison.summary}</p>
@@ -93,7 +93,7 @@ function ComparisonSection({ comparison }: { comparison: DeviceComparison }) {
               aria-pressed={activeDevice === key}
               onClick={() => setActiveDevice(key)}
               className={`flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-lg text-sm font-medium ${
-                activeDevice === key ? 'bg-surface text-primary-strong shadow-card' : 'text-muted'
+                activeDevice === key ? 'bg-surface text-ink shadow-card' : 'text-muted'
               }`}
             >
               <Icon className="h-4 w-4" aria-hidden="true" />

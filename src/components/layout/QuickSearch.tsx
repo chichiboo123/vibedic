@@ -143,7 +143,7 @@ function QuickSearchDialog({ onClose }: { onClose: () => void }) {
                   onMouseEnter={() => setActive(index)}
                   onClick={() => go(option.href)}
                   className={`flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 ${
-                    index === active ? 'bg-primary-soft' : ''
+                    index === active ? 'bg-ink/[0.06]' : ''
                   }`}
                 >
                   {option.type ? (

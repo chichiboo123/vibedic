@@ -56,7 +56,7 @@ export function DeviceTabs({ notes }: { notes: DeviceNotes }) {
             onClick={() => setActive(key)}
             onKeyDown={handleKeyDown}
             className={`flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-md px-3 text-sm font-medium transition-colors ${
-              active === key ? 'bg-surface text-primary-strong shadow-card' : 'text-muted hover:text-ink'
+              active === key ? 'bg-surface text-ink shadow-card' : 'text-muted hover:text-ink'
             }`}
           >
             <Icon className="h-4 w-4" aria-hidden="true" />

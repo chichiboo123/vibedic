@@ -39,10 +39,10 @@ export function PromptBuilder({ base }: { base: string }) {
   const addedCount = options.addons.length + (options.stack === 'none' ? 0 : 1);
 
   return (
-    <div className="surface-card overflow-hidden">
-      <div className="space-y-3 border-b border-line bg-background/60 p-4">
+    <div className="overflow-hidden rounded-[1.5rem] border border-line bg-surface shadow-card">
+      <div className="space-y-3 border-b border-line p-5">
         <p className="flex items-center gap-1.5 text-sm font-semibold">
-          <SlidersHorizontal className="h-4 w-4 text-primary" aria-hidden="true" />
+          <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
           내 프로젝트에 맞게 조건 더하기
         </p>
         <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
@@ -94,11 +94,20 @@ export function PromptBuilder({ base }: { base: string }) {
           </div>
         </div>
       </div>
-      <div className="p-4">
-        <pre className="max-h-80 overflow-auto whitespace-pre-wrap rounded-md bg-background p-4 font-mono text-sm leading-relaxed">
-          {prompt}
-        </pre>
-        <div className="mt-3 flex flex-wrap items-center gap-3">
+      <div className="p-3">
+        {/* 터미널 창처럼 꾸민 프롬프트 미리보기 */}
+        <div className="overflow-hidden rounded-[1.1rem] bg-[#0d0d12] text-[#e9e9ef] ring-1 ring-white/5">
+          <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-white/10 px-4 py-2.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+            <span className="ml-2 font-mono text-[11px] text-white/40">prompt.md</span>
+          </div>
+          <pre className="max-h-80 overflow-auto whitespace-pre-wrap p-4 font-mono text-[13px] leading-relaxed">
+            {prompt}
+          </pre>
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-3 px-1 pb-1">
           <CopyPromptButton text={prompt} />
           <p className="text-xs text-muted" aria-live="polite">
             {addedCount > 0 ? `조건 ${addedCount}개를 더했어요.` : 'ChatGPT, Claude, Gemini 등 어디에 붙여 넣어도 돼요.'}

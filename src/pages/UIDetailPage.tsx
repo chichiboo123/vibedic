@@ -57,7 +57,7 @@ export function UIDetailPage() {
 
   return (
     <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_12rem]">
-      <article className="min-w-0">
+      <article className="min-w-0 [counter-reset:section]">
         <Breadcrumb
           items={[
             { to: '/ui', label: 'UI 요소' },
@@ -66,22 +66,22 @@ export function UIDetailPage() {
           ]}
         />
 
-        <header className="mt-5">
+        <header className="mt-6 animate-fade-up border-b border-line pb-8">
           <p className={`tone-${tone} inline-flex items-center gap-1.5 rounded-full bg-tone px-2.5 py-1 text-xs font-semibold text-tone-fg`}>
             <CategoryIcon className="h-3.5 w-3.5" aria-hidden="true" />
             {category.easyName} · {item.easyName}
           </p>
           <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{item.koreanName}</h1>
-              <p className="mt-1 text-lg font-medium text-primary-strong">{item.englishName}</p>
+              <h1 className="text-[2.75rem] font-extrabold leading-none tracking-[-0.045em] sm:text-6xl">{item.koreanName}</h1>
+              <p className="mt-2 font-serif text-2xl italic text-muted sm:text-3xl">{item.englishName}</p>
             </div>
             <div className="flex items-center gap-2">
               <ShareLinkButton name={item.koreanName} />
               <SaveButton type="ui" id={item.id} name={item.koreanName} withLabel />
             </div>
           </div>
-          <p className="mt-4 text-base leading-relaxed">{item.summary}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed">{item.summary}</p>
           {item.aliases.length > 0 && (
             <p className="mt-2 text-sm text-muted">다른 이름: {item.aliases.join(', ')}</p>
           )}
@@ -181,7 +181,7 @@ export function UIDetailPage() {
         <DetailSection id="checklist" title="점검하기">
           <ul className="space-y-2">
             {item.accessibilityChecks.slice(0, 5).map((check) => (
-              <li key={check} className="surface-card flex items-start gap-2 px-4 py-3 text-sm shadow-none">
+              <li key={check} className="flex items-start gap-2.5 rounded-2xl border border-line bg-surface px-4 py-3.5 text-sm">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden="true" />
                 {check}
               </li>

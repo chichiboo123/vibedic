@@ -8,9 +8,13 @@ export type TocEntry = { id: string; title: string };
 // 상세 페이지의 한 구획. 목차에서 바로 이동할 수 있게 id를 붙입니다.
 export function DetailSection({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section id={id} className="mt-12 scroll-mt-24" aria-label={title}>
-      <h2 className="mb-4 flex items-center gap-2 text-xl font-bold tracking-tight">
-        <span aria-hidden="true" className="h-5 w-1 rounded-full bg-primary" />
+    <section id={id} className="mt-16 scroll-mt-28 [counter-increment:section]" aria-label={title}>
+      <h2 className="mb-5 flex items-baseline gap-3 text-2xl font-extrabold tracking-[-0.03em]">
+        {/* 구획 번호는 CSS 카운터로 매깁니다(01, 02 …). */}
+        <span
+          aria-hidden="true"
+          className="font-mono text-xs font-medium tracking-normal text-muted before:content-[counter(section,decimal-leading-zero)]"
+        />
         {title}
       </h2>
       {children}
@@ -58,8 +62,8 @@ function useActiveSection(entries: TocEntry[]): string | null {
 export function DetailToc({ entries }: { entries: TocEntry[] }) {
   const active = useActiveSection(entries);
   return (
-    <nav aria-label="이 페이지 목차" className="sticky top-24 hidden lg:block">
-      <p className="flex items-center gap-1.5 text-xs font-semibold text-muted">
+    <nav aria-label="이 페이지 목차" className="sticky top-28 hidden lg:block">
+      <p className="eyebrow flex items-center gap-1.5">
         <ListTree className="h-3.5 w-3.5" aria-hidden="true" />이 페이지에서
       </p>
       <ul className="mt-3 space-y-0.5 border-l border-line">
@@ -71,7 +75,7 @@ export function DetailToc({ entries }: { entries: TocEntry[] }) {
               aria-current={active === entry.id ? 'location' : undefined}
               className={`-ml-px block w-full border-l-2 py-1.5 pl-3 text-left text-[13px] transition-colors ${
                 active === entry.id
-                  ? 'border-primary font-semibold text-primary-strong'
+                  ? 'border-ink font-semibold text-ink'
                   : 'border-transparent text-muted hover:text-ink'
               }`}
             >
@@ -116,7 +120,7 @@ export function ShareLinkButton({ name }: { name: string }) {
       type="button"
       onClick={handleClick}
       aria-label={`${name} 링크 복사`}
-      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line bg-surface px-3 text-sm text-muted transition-colors hover:border-primary hover:text-primary-strong"
+      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line bg-surface/70 px-3 text-sm text-muted backdrop-blur transition-colors hover:border-ink/30 hover:text-ink"
     >
       <Link2 className="h-4 w-4" aria-hidden="true" />
     </button>
@@ -132,13 +136,13 @@ export function PrevNextNav({ prev, next, label }: { prev: Neighbor; next: Neigh
       {prev ? (
         <Link
           to={prev.to}
-          className="group surface-card flex items-center gap-3 p-4 transition-colors hover:border-primary"
+          className="group spotlight flex items-center gap-3 rounded-[1.25rem] border border-line bg-surface p-5 transition-all hover:-translate-y-0.5 hover:shadow-raised"
         >
           <ArrowLeft className="h-4 w-4 shrink-0 text-muted transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
           <span className="min-w-0">
-            <span className="block text-xs text-muted">이전</span>
-            <span className="block truncate font-semibold">{prev.title}</span>
-            <span className="block truncate text-xs text-muted">{prev.subtitle}</span>
+            <span className="eyebrow block">Prev</span>
+            <span className="mt-1 block truncate text-lg font-bold tracking-tight">{prev.title}</span>
+            <span className="block truncate font-mono text-[11px] text-muted">{prev.subtitle}</span>
           </span>
         </Link>
       ) : (
@@ -147,12 +151,12 @@ export function PrevNextNav({ prev, next, label }: { prev: Neighbor; next: Neigh
       {next && (
         <Link
           to={next.to}
-          className="group surface-card flex items-center justify-end gap-3 p-4 text-right transition-colors hover:border-primary"
+          className="group spotlight flex items-center justify-end gap-3 rounded-[1.25rem] border border-line bg-surface p-5 text-right transition-all hover:-translate-y-0.5 hover:shadow-raised"
         >
           <span className="min-w-0">
-            <span className="block text-xs text-muted">다음</span>
-            <span className="block truncate font-semibold">{next.title}</span>
-            <span className="block truncate text-xs text-muted">{next.subtitle}</span>
+            <span className="eyebrow block">Next</span>
+            <span className="mt-1 block truncate text-lg font-bold tracking-tight">{next.title}</span>
+            <span className="block truncate font-mono text-[11px] text-muted">{next.subtitle}</span>
           </span>
           <ArrowRight className="h-4 w-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
         </Link>

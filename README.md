@@ -38,7 +38,7 @@ VibeDic은 바이브코딩으로 웹사이트와 애플리케이션을 만드는
 - **저장함 & 최근 본 항목** — 로그인 없이 `localStorage`로 관리
 - **바이브코딩 프롬프트 복사** — 모든 항목에 AI에게 바로 붙여 넣을 수 있는 프롬프트 제공
 - **VibeDic 어시스턴트 (Gemini)** — 우측 하단 플로팅 버튼으로 여는 AI 채팅. 상황을 설명하면 사전 항목을 링크로 추천하고 구현용 프롬프트를 제안. 5개 모델 폴백 체인과 배터리 형태의 사용 모델 표시, 모바일 반응형 지원
-- **PretendardGOV 웹폰트** — 정부 디자인 시스템 계열 한글 폰트를 전체에 적용
+- **웹폰트** — 한글은 PretendardGOV, 영문 보조 서체로 Geist Mono·Instrument Serif
 - **다크/라이트 모드** — 헤더의 토글 버튼으로 즉시 전환, 선택값은 `localStorage`에 저장되어 다음 방문에도 유지되며 저장된 값이 없으면 시스템(OS) 설정을 따름. 첫 렌더 전에 테마를 적용하는 인라인 스크립트로 새로고침 시 깜빡임(FOUC) 방지
 
 ## 화면 구조
@@ -67,7 +67,7 @@ GitHub Pages에서 새로고침 시 404가 발생하지 않도록 `HashRouter`�
 - React Router 6 (`HashRouter`)
 - Lucide React (아이콘)
 - Fuse.js (검색)
-- PretendardGOV 웹폰트 (jsDelivr CDN)
+- PretendardGOV 웹폰트 (jsDelivr CDN), Geist Mono·Instrument Serif (Google Fonts)
 - Google Gemini API (어시스턴트, 사용자/환경변수 키)
 - Vitest + React Testing Library
 - ESLint 9
@@ -228,9 +228,15 @@ Gemini 3.1 Flash Lite → Gemini 3.5 Flash → Gemini 3 Flash → Gemini 2.5 Fla
 
 ## 디자인 시스템
 
-- 색은 `src/styles/index.css`의 CSS 변수(라이트/다크)로 관리하고, Tailwind 색 이름(`primary`, `surface`, `line` 등)으로 씁니다.
-- 분류 강조색은 치수쌤 파스텔 팔레트(블루·그린·옐로·핑크)를 바탕으로 한 `tone-*` 클래스입니다. 요소에 `tone-blue`를 주면 그 안에서 `bg-tone`/`text-tone-fg`가 해당 색이 되며, 다크 모드용 값도 따로 정의되어 있습니다. 분류별 아이콘·색 짝은 `src/components/dictionary/categoryVisuals.ts`에 있습니다.
-- 반복되는 모양은 컴포넌트 클래스로 묶었습니다: `btn-primary`, `btn-secondary`, `pill`(누르는 둥근 칩, `aria-pressed="true"`면 활성 모양), `surface-card`, `eyebrow`.
+트렌디한 에디토리얼·테크 무드를 목표로 합니다.
+
+- **색**: 무채색(zinc) 바탕 + 일렉트릭 바이올렛(`primary`) 한 가지 강조색 + 라임(`accent`) 하이라이트. 라이트/다크 값은 `src/styles/index.css`의 CSS 변수로 관리하고 Tailwind 색 이름으로 씁니다. 다크 모드는 거의 검정(`#08080b`)에 가까운 바탕입니다.
+- **배경**: 화면 전체에 오로라 빛 번짐(radial gradient)과 필름 그레인(SVG 노이즈)을 고정으로 깔았습니다. 도식 영역은 점 격자(`dot-grid`) 위에 놓입니다.
+- **타이포**: 한글은 PretendardGOV, 큰 제목은 굵고 자간을 좁힌 디스플레이 스타일. 영문 이름·머리말·숫자는 Geist Mono, 영문 강조는 Instrument Serif 이탤릭(Google Fonts). 한글이 낱말 중간에서 끊기지 않도록 `word-break: keep-all`.
+- **레이아웃**: 화면 위에 떠 있는 유리(glass) 섬 헤더, 홈의 벤토 그리드, 번호가 붙은 섹션 머리말(01 — …), 흐르는 용어 띠(마키), 거대 워드마크 푸터.
+- **인터랙션**: 카드 위에서 마우스를 따라오는 스포트라이트(`spotlight`), 호버 시 살짝 떠오르는 카드와 확대되는 도식, 히어로의 떠다니는 스티커 카드. `prefers-reduced-motion`이면 모든 움직임을 끕니다.
+- **컴포넌트 클래스**: `btn-primary`(글자·바탕을 뒤집은 잉크 버튼), `btn-accent`, `btn-secondary`, `pill`(`aria-pressed="true"`면 잉크로 채워짐), `surface-card`, `glass`, `eyebrow`, `text-gradient`, `dot-grid`.
+- **분류 색**: `tone-*` 클래스를 주면 그 안에서 `bg-tone`/`text-tone-fg`가 해당 분류 색이 됩니다. 분류별 아이콘·색 짝은 `src/components/dictionary/categoryVisuals.ts`.
 - 빌드 시 React·라우터와 기타 라이브러리를 별도 청크로 나눠, 콘텐츠만 바뀐 배포에서도 라이브러리는 브라우저 캐시를 재사용합니다.
 
 ## 접근성 구현
