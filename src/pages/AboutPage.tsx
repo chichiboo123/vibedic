@@ -20,7 +20,7 @@ export function AboutPage() {
   useDocumentTitle('소개');
   return (
     <article className="mx-auto max-w-2xl">
-      <PageHeader eyebrow="About" Icon={Info} title="VibeDic 소개" />
+      <PageHeader eyebrow="소개" Icon={Info} title="VibeDic 소개" />
       <p className="mt-4 text-base font-medium text-primary-strong">
         “필요할 때 꺼내 찾는 바이브코딩 UI·UX 사전”
       </p>

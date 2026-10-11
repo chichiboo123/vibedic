@@ -1,35 +1,25 @@
 import { useId, useMemo, useState } from 'react';
 import { SlidersHorizontal } from 'lucide-react';
-import { buildPrompt, promptAddons, promptStacks } from '../../data/promptKit';
-import { readJSON, writeJSON } from '../../utils/storage';
+import {
+  buildPrompt,
+  promptAddons,
+  promptStacks,
+  readPromptOptions,
+  writePromptOptions,
+  type PromptOptions,
+} from '../../data/promptKit';
 import { CopyPromptButton } from './CopyPromptButton';
-
-const STORAGE_KEY = 'vibedic:prompt-options';
-
-type PromptOptions = { stack: string; addons: string[] };
-
-const defaultOptions: PromptOptions = { stack: 'none', addons: [] };
-
-function readOptions(): PromptOptions {
-  const stored = readJSON<Partial<PromptOptions>>(STORAGE_KEY, defaultOptions);
-  return {
-    stack: promptStacks.some((option) => option.id === stored.stack) ? stored.stack! : 'none',
-    addons: Array.isArray(stored.addons)
-      ? stored.addons.filter((id) => promptAddons.some((addon) => addon.id === id))
-      : [],
-  };
-}
 
 // 항목의 기본 프롬프트에 기술 스택과 공통 조건을 골라 덧붙이는 영역입니다.
 // 고른 옵션은 저장해 두어 다른 항목에서도 그대로 이어집니다.
 export function PromptBuilder({ base }: { base: string }) {
-  const [options, setOptions] = useState<PromptOptions>(readOptions);
+  const [options, setOptions] = useState<PromptOptions>(readPromptOptions);
   const stackGroupId = useId();
   const addonGroupId = useId();
 
   const update = (next: PromptOptions) => {
     setOptions(next);
-    writeJSON(STORAGE_KEY, next);
+    writePromptOptions(next);
   };
 
   const prompt = useMemo(
@@ -56,7 +46,7 @@ export function PromptBuilder({ base }: { base: string }) {
                 type="button"
                 aria-pressed={options.stack === stack.id}
                 onClick={() => update({ ...options, stack: stack.id })}
-                className="pill min-h-9 px-3 text-xs"
+                className="pill min-h-10 px-3 text-xs"
               >
                 {stack.label}
               </button>
@@ -84,7 +74,7 @@ export function PromptBuilder({ base }: { base: string }) {
                         : [...options.addons, addon.id],
                     })
                   }
-                  className="pill min-h-9 px-3 text-xs"
+                  className="pill min-h-10 px-3 text-xs"
                 >
                   {active ? '✓ ' : '+ '}
                   {addon.label}

@@ -6,10 +6,13 @@ export function MiniPreview({ item }: { item: UIItem }) {
   return (
     <div
       aria-hidden="true"
-      className="dot-grid flex h-36 items-center justify-center overflow-hidden rounded-[0.9rem] border border-line/70 px-3"
+      className="dot-grid flex h-full min-h-24 items-center justify-center overflow-hidden rounded-[0.9rem] border border-line/70 px-1 sm:h-36 sm:px-3"
     >
-      <span className="transition-transform duration-500 ease-out group-hover:scale-110">
-        <PreviewGlyph demoType={item.demoType} category={item.category} />
+      {/* 휴대폰의 가로형 카드에서는 썸네일이 작아지므로 도식도 줄여 보여 줍니다. */}
+      <span className="scale-[0.6] sm:scale-100">
+        <span className="block transition-transform duration-500 ease-out group-hover:scale-110">
+          <PreviewGlyph demoType={item.demoType} category={item.category} />
+        </span>
       </span>
     </div>
   );

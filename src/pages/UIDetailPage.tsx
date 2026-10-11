@@ -10,6 +10,8 @@ import { RelatedUICards, RelatedUXCards } from '../components/dictionary/Related
 import { uiCategoryVisuals } from '../components/dictionary/categoryVisuals';
 import { SaveButton } from '../components/common/SaveButton';
 import { PromptBuilder } from '../components/common/PromptBuilder';
+import { CopyPromptButton } from '../components/common/CopyPromptButton';
+import { buildSavedPrompt } from '../data/promptKit';
 import { ServiceExampleList } from '../components/dictionary/ServiceExampleList';
 import {
   Breadcrumb,
@@ -46,9 +48,9 @@ export function UIDetailPage() {
 
   const toc: TocEntry[] = [
     { id: 'demo', title: '직접 살펴보기' },
+    { id: 'when', title: '언제 사용하나요?' },
     { id: 'examples', title: '어디에서 볼 수 있나요?' },
     { id: 'devices', title: '기기에서는 어떻게 달라지나요?' },
-    { id: 'when', title: '언제 사용하나요?' },
     ...(item.relatedUxIds.length > 0 ? [{ id: 'related-ux', title: '함께 알아보면 좋은 UX' }] : []),
     ...(item.relatedUiIds.length > 0 ? [{ id: 'related-ui', title: '관련 UI 요소' }] : []),
     { id: 'prompt', title: '내 웹앱에 적용하기' },
@@ -76,7 +78,13 @@ export function UIDetailPage() {
               <h1 className="text-[2.75rem] font-extrabold leading-none tracking-[-0.045em] sm:text-6xl">{item.koreanName}</h1>
               <p className="mt-2 font-serif text-2xl italic text-muted sm:text-3xl">{item.englishName}</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              {/* 이 사이트의 최종 목적인 "프롬프트 가져가기"를 제목 옆에서 바로 할 수 있게 합니다. */}
+              <CopyPromptButton
+                text={() => buildSavedPrompt(item.vibePrompt)}
+                label="프롬프트 바로 복사"
+                variant="secondary"
+              />
               <ShareLinkButton name={item.koreanName} />
               <SaveButton type="ui" id={item.id} name={item.koreanName} withLabel />
             </div>
@@ -101,14 +109,6 @@ export function UIDetailPage() {
               ))}
             </div>
           )}
-        </DetailSection>
-
-        <DetailSection id="examples" title="어디에서 볼 수 있나요?">
-          <ServiceExampleList examples={item.serviceExamples} demoType={item.demoType} category={item.category} />
-        </DetailSection>
-
-        <DetailSection id="devices" title="기기에서는 어떻게 달라지나요?">
-          <DeviceTabs notes={item.deviceNotes} />
         </DetailSection>
 
         <DetailSection id="when" title="언제 사용하나요?">
@@ -160,6 +160,14 @@ export function UIDetailPage() {
               ))}
             </ul>
           )}
+        </DetailSection>
+
+        <DetailSection id="examples" title="어디에서 볼 수 있나요?">
+          <ServiceExampleList examples={item.serviceExamples} demoType={item.demoType} category={item.category} />
+        </DetailSection>
+
+        <DetailSection id="devices" title="기기에서는 어떻게 달라지나요?">
+          <DeviceTabs notes={item.deviceNotes} />
         </DetailSection>
 
         {item.relatedUxIds.length > 0 && (

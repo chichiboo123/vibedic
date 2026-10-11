@@ -9,6 +9,8 @@ import { RelatedUICards, RelatedUXCards } from '../components/dictionary/Related
 import { uxCategoryVisuals } from '../components/dictionary/categoryVisuals';
 import { SaveButton } from '../components/common/SaveButton';
 import { PromptBuilder } from '../components/common/PromptBuilder';
+import { CopyPromptButton } from '../components/common/CopyPromptButton';
+import { buildSavedPrompt } from '../data/promptKit';
 import { ServiceExampleList } from '../components/dictionary/ServiceExampleList';
 import {
   Breadcrumb,
@@ -48,9 +50,9 @@ export function UXDetailPage() {
 
   const toc: TocEntry[] = [
     { id: 'flow', title: '대표 흐름' },
+    ...(hasExperience ? [{ id: 'better', title: '더 나은 경험' }] : []),
     { id: 'ui', title: '사용되는 UI 요소' },
     { id: 'examples', title: '유명 서비스 사례' },
-    ...(hasExperience ? [{ id: 'better', title: '더 나은 경험' }] : []),
     { id: 'devices', title: '기기별 차이' },
     ...(hasRelatedUx ? [{ id: 'related-ux', title: '관련 UX 패턴' }] : []),
     { id: 'prompt', title: '내 웹앱에 적용하기' },
@@ -78,7 +80,12 @@ export function UXDetailPage() {
               <h1 className="text-[2.75rem] font-extrabold leading-none tracking-[-0.045em] sm:text-6xl">{pattern.koreanName}</h1>
               <p className="mt-2 font-serif text-2xl italic text-muted sm:text-3xl">{pattern.englishName}</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <CopyPromptButton
+                text={() => buildSavedPrompt(pattern.vibePrompt)}
+                label="프롬프트 바로 복사"
+                variant="secondary"
+              />
               <ShareLinkButton name={pattern.koreanName} />
               <SaveButton type="ux" id={pattern.id} name={pattern.koreanName} withLabel />
             </div>
@@ -116,18 +123,6 @@ export function UXDetailPage() {
           </ol>
         </DetailSection>
 
-        <DetailSection id="ui" title="사용되는 UI 요소">
-          <RelatedUICards ids={pattern.relatedUiIds} />
-        </DetailSection>
-
-        <DetailSection id="examples" title="유명 서비스 사례">
-          <ServiceExampleList
-            examples={pattern.serviceExamples}
-            demoType={coreUiItem?.demoType ?? 'static'}
-            category={coreUiItem?.category ?? 'display'}
-          />
-        </DetailSection>
-
         {hasExperience && (
           <DetailSection id="better" title="더 나은 경험">
             <div className="grid gap-3 sm:grid-cols-2">
@@ -150,6 +145,18 @@ export function UXDetailPage() {
             </div>
           </DetailSection>
         )}
+
+        <DetailSection id="ui" title="사용되는 UI 요소">
+          <RelatedUICards ids={pattern.relatedUiIds} />
+        </DetailSection>
+
+        <DetailSection id="examples" title="유명 서비스 사례">
+          <ServiceExampleList
+            examples={pattern.serviceExamples}
+            demoType={coreUiItem?.demoType ?? 'static'}
+            category={coreUiItem?.category ?? 'display'}
+          />
+        </DetailSection>
 
         <DetailSection id="devices" title="기기별 차이">
           <DeviceTabs notes={pattern.deviceNotes} />

@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 
 const footerGroups = [
   {
-    title: 'Dictionary',
+    title: '사전',
     links: [
       { to: '/ui', label: 'UI 요소' },
       { to: '/ux', label: 'UX 패턴' },
@@ -12,7 +12,7 @@ const footerGroups = [
     ],
   },
   {
-    title: 'Explore',
+    title: '살펴보기',
     links: [
       { to: '/services', label: '유명 서비스' },
       { to: '/compare', label: '기기별 비교' },

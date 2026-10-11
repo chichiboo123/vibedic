@@ -1,3 +1,5 @@
+import { readJSON, writeJSON } from '../utils/storage';
+
 // 사전 항목의 기본 프롬프트에 덧붙이는 공통 조건입니다.
 // 상세 페이지의 프롬프트 빌더와 프롬프트 가이드 페이지에서 함께 씁니다.
 
@@ -74,4 +76,29 @@ export function buildPrompt(base: string, stackId: string, addonIds: string[]): 
     if (addonIds.includes(addon.id)) lines.push(addon.line);
   }
   return lines.join('\n');
+}
+
+// 프롬프트 빌더에서 고른 옵션을 저장해 두고, 상세 페이지 위쪽의 "바로 복사" 버튼도 같은 옵션을 쓰게 합니다.
+const OPTIONS_STORAGE_KEY = 'vibedic:prompt-options';
+
+export type PromptOptions = { stack: string; addons: string[] };
+
+export function readPromptOptions(): PromptOptions {
+  const stored = readJSON<Partial<PromptOptions>>(OPTIONS_STORAGE_KEY, { stack: 'none', addons: [] });
+  return {
+    stack: promptStacks.some((option) => option.id === stored.stack) ? (stored.stack as string) : 'none',
+    addons: Array.isArray(stored.addons)
+      ? stored.addons.filter((id) => promptAddons.some((addon) => addon.id === id))
+      : [],
+  };
+}
+
+export function writePromptOptions(options: PromptOptions) {
+  writeJSON(OPTIONS_STORAGE_KEY, options);
+}
+
+/** 저장된 옵션을 반영한 최종 프롬프트 */
+export function buildSavedPrompt(base: string): string {
+  const options = readPromptOptions();
+  return buildPrompt(base, options.stack, options.addons);
 }
