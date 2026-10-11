@@ -14,7 +14,7 @@ export function ServicesPage() {
         title="유명 서비스"
         description={`자주 쓰는 서비스에서 UI와 UX가 어떻게 쓰이는지 살펴보세요. 총 ${services.length}개 서비스가 있어요.`}
       />
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div data-reveal-each className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}

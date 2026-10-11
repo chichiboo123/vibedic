@@ -101,7 +101,7 @@ export function SavedPage() {
           {savedUI.length > 0 && (
             <section aria-label="저장한 UI 요소">
               <h2 className="mb-3 text-lg font-bold">저장한 UI 요소 ({savedUI.length})</h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div data-reveal-each className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {savedUI.map((item) => (
                   <UIItemCard key={item.id} item={item} />
                 ))}
@@ -111,7 +111,7 @@ export function SavedPage() {
           {savedUX.length > 0 && (
             <section aria-label="저장한 UX 패턴">
               <h2 className="mb-3 text-lg font-bold">저장한 UX 패턴 ({savedUX.length})</h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div data-reveal-each className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {savedUX.map((pattern) => (
                   <UXPatternCard key={pattern.id} pattern={pattern} />
                 ))}
@@ -155,7 +155,7 @@ export function SavedPage() {
       {saved.length === 0 && (
         <section aria-label="추천 항목" className="mt-12">
           <h2 className="mb-3 text-lg font-bold">이런 항목부터 시작해 보세요</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div data-reveal-each className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {recommendedUI.map((item) => (
               <UIItemCard key={item.id} item={item} />
             ))}

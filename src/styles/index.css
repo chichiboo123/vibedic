@@ -423,3 +423,93 @@ mark {
   border-radius: 3px;
   padding: 0 2px;
 }
+
+/* ──────────────────────────────────────────────────────────
+ * 스크롤 효과
+ * - 나타나기: [data-reveal] / [data-reveal-stagger] / [data-reveal-each]
+ *   (html.reveal-ready는 IntersectionObserver가 있고 움직임 줄이기가 꺼져 있을 때만 붙습니다.
+ *    그래서 스크립트가 없거나 움직임을 줄인 사용자는 처음부터 모두 보입니다.)
+ * - 애니메이션은 fill-mode backwards만 써서, 끝난 뒤에는 카드 호버 효과를 방해하지 않습니다.
+ * ────────────────────────────────────────────────────────── */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes reveal-blur {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(12px);
+  }
+}
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+
+.reveal-ready [data-reveal]:not(.is-revealed),
+.reveal-ready [data-reveal-stagger]:not(.is-revealed) > *,
+.reveal-ready [data-reveal-each] > :not(.is-revealed) {
+  opacity: 0;
+}
+
+[data-reveal].is-revealed {
+  animation: reveal-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+[data-reveal='blur'].is-revealed {
+  animation-name: reveal-blur;
+}
+[data-reveal='scale'].is-revealed {
+  animation-name: reveal-scale;
+}
+[data-reveal='left'].is-revealed {
+  animation-name: reveal-left;
+}
+
+/* 묶음 안의 아이템이 차례로(계단식) 나타납니다. */
+[data-reveal-stagger].is-revealed > * {
+  animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+[data-reveal-stagger].is-revealed > :nth-child(2) { animation-delay: 70ms; }
+[data-reveal-stagger].is-revealed > :nth-child(3) { animation-delay: 140ms; }
+[data-reveal-stagger].is-revealed > :nth-child(4) { animation-delay: 210ms; }
+[data-reveal-stagger].is-revealed > :nth-child(5) { animation-delay: 280ms; }
+[data-reveal-stagger].is-revealed > :nth-child(6) { animation-delay: 350ms; }
+[data-reveal-stagger].is-revealed > :nth-child(n + 7) { animation-delay: 420ms; }
+
+/* 긴 목록은 아이템마다 따로 관찰하고, 한 줄(최대 4칸) 안에서만 살짝 시차를 둡니다. */
+[data-reveal-each] > .is-revealed {
+  animation: reveal-up 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+[data-reveal-each] > .is-revealed:nth-child(4n + 2) { animation-delay: 60ms; }
+[data-reveal-each] > .is-revealed:nth-child(4n + 3) { animation-delay: 120ms; }
+[data-reveal-each] > .is-revealed:nth-child(4n + 4) { animation-delay: 180ms; }
+
+/* 스크롤에 따라 한 단어씩 또렷해지는 문장. --progress(0~1)는 스크립트가 채웁니다. */
+.scroll-words .word {
+  opacity: clamp(0.14, calc(var(--progress, 1) * (var(--n) + 6) - var(--i)), 1);
+  transition: opacity 0.15s linear;
+}
+
+/* 히어로 패럴랙스: --sy(스크롤 px)에 따라 요소마다 다른 속도로 움직입니다. */
+.parallax {
+  transform: translate3d(0, calc(var(--sy, 0) * var(--speed, 0) * -1px), 0);
+  will-change: transform;
+}
+
+/* 겹쳐 쌓이는 카드: 뒤에 깔린 장 수(--depth)만큼 작아집니다. */
+.stack-card {
+  transform: scale(calc(1 - var(--depth, 0) * 0.05));
+  transform-origin: 50% 0;
+  transition: transform 0.25s ease-out;
+}

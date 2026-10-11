@@ -3,9 +3,12 @@ import { useEffect } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { Assistant } from '../assistant/Assistant';
+import { BackToTopButton, ScrollProgressBar } from '../scroll/ScrollChrome';
+import { useRevealOnScroll } from '../../hooks/useScrollEffects';
 
 export function Layout() {
   const location = useLocation();
+  useRevealOnScroll();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,6 +30,7 @@ export function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <ScrollProgressBar />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:text-background focus:px-4 focus:py-2"
@@ -38,6 +42,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <BackToTopButton />
       <Assistant />
     </div>
   );

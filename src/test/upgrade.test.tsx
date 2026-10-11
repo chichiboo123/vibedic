@@ -184,3 +184,35 @@ describe('홈 용어 띠', () => {
     expect(await screen.findByRole('heading', { level: 1, name: '체크박스' })).toBeInTheDocument();
   });
 });
+
+describe('스크롤 효과', () => {
+  it('홈에 스크롤 문장, 단계 카드, UX 분류 가로 구간이 있고 링크로 이동한다', async () => {
+    const user = userEvent.setup();
+    renderApp('/');
+
+    expect(screen.getByRole('region', { name: 'VibeDic이 하는 일' })).toHaveTextContent(/이름을 알면/);
+    expect(screen.getByRole('heading', { level: 3, name: '프롬프트로 가져가요' })).toBeInTheDocument();
+
+    const journey = screen.getByRole('region', { name: '사용자는 무엇을 하고 싶을까요?' });
+    expect(within(journey).getAllByRole('link')).toHaveLength(8);
+    await user.click(within(journey).getByRole('link', { name: /원하는 정보를 찾고 싶어요/ }));
+    expect(await screen.findByRole('heading', { level: 1, name: 'UX 패턴' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '원하는 정보를 찾고 싶어요' })).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('맨 위로 버튼은 처음엔 숨겨져 있고 Tab 순서에서도 빠진다', () => {
+    renderApp('/');
+    // 숨김 상태(aria-hidden)에서는 접근 가능한 이름 계산이 빠지므로 레이블 속성으로 찾습니다.
+    const button = document.querySelector('button[aria-label="맨 위로 이동"]');
+    expect(button).not.toBeNull();
+    expect(screen.queryByRole('button', { name: '맨 위로 이동' })).not.toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-hidden', 'true');
+    expect(button).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('IntersectionObserver가 없는 환경에서는 내용을 숨기지 않는다', () => {
+    renderApp('/ui');
+    expect(document.documentElement.classList.contains('reveal-ready')).toBe(false);
+    expect(screen.getByRole('heading', { level: 3, name: '토스트' })).toBeInTheDocument();
+  });
+});

@@ -7,6 +7,7 @@ import { UsageGuideModal } from './UsageGuideModal';
 import { ThemeToggle } from './ThemeToggle';
 import { QuickSearch } from './QuickSearch';
 import { Logo } from './Logo';
+import { useScrollDirection } from '../../hooks/useScrollEffects';
 
 const menuItems = [
   { to: '/ui', label: 'UI 요소' },
@@ -37,6 +38,9 @@ export function Header() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const guideButtonRef = useRef<HTMLButtonElement>(null);
   const { saved } = useSavedItems();
+  // 아래로 내리면 헤더를 위로 숨기고, 올리면 다시 내려 보여 줍니다(메뉴·검색이 열려 있을 땐 항상 보임).
+  const { scrolled, hidden } = useScrollDirection();
+  const headerHidden = hidden && !menuOpen && !searchOpen && !guideOpen;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -83,8 +87,16 @@ export function Header() {
 
   return (
     // 화면 위에 떠 있는 섬(island) 모양의 유리 헤더입니다.
-    <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4">
-      <div className="glass mx-auto flex h-14 max-w-page items-center gap-2 rounded-full pl-4 pr-1.5 shadow-raised">
+    <header
+      className={`sticky top-0 z-40 px-3 pt-3 transition-transform duration-300 ease-out focus-within:translate-y-0 sm:px-4 ${
+        headerHidden ? '-translate-y-[130%]' : 'translate-y-0'
+      }`}
+    >
+      <div
+        className={`glass mx-auto flex h-14 max-w-page items-center gap-2 rounded-full pl-4 pr-1.5 transition-shadow duration-300 ${
+          scrolled ? 'shadow-raised' : 'shadow-card'
+        }`}
+      >
         <Link to="/" className="flex items-center rounded-full" aria-label="VibeDic 홈으로 이동">
           <Logo />
         </Link>
