@@ -239,6 +239,24 @@ Gemini 3.1 Flash Lite → Gemini 3.5 Flash → Gemini 3 Flash → Gemini 2.5 Fla
 - **분류 색**: `tone-*` 클래스를 주면 그 안에서 `bg-tone`/`text-tone-fg`가 해당 분류 색이 됩니다. 분류별 아이콘·색 짝은 `src/components/dictionary/categoryVisuals.ts`.
 - 빌드 시 React·라우터와 기타 라이브러리를 별도 청크로 나눠, 콘텐츠만 바뀐 배포에서도 라이브러리는 브라우저 캐시를 재사용합니다.
 
+## 스크롤 효과
+
+외부 라이브러리 없이 IntersectionObserver와 `requestAnimationFrame` 한 번당 한 번 계산하는 스크롤 핸들러로 만들었습니다. 매 프레임 React 상태를 바꾸지 않고 CSS 변수(`--progress`, `--sy`, `--depth`)나 `style`을 직접 갱신해 가볍게 동작합니다. 코드는 `src/hooks/useScrollEffects.ts`, `src/components/scroll/`에 있습니다.
+
+| 효과 | 위치 | 설명 |
+| --- | --- | --- |
+| 나타나기(reveal) | 전 페이지 | `data-reveal`(아래서 위로·`blur`·`scale`·`left`), `data-reveal-stagger`(묶음 계단식), `data-reveal-each`(긴 목록은 아이템마다) |
+| 읽기 진행률 막대 | 화면 맨 위 | 페이지를 얼마나 읽었는지 그라데이션 막대로 표시 |
+| 스마트 헤더 | 전 페이지 | 아래로 내리면 숨고, 올리면 다시 나타남. 메뉴·검색이 열려 있거나 포커스가 있으면 항상 보임 |
+| 맨 위로 버튼 | 전 페이지 | 600px 이상 내려가면 나타나고, 테두리 고리가 읽은 만큼 채워짐 |
+| 패럴랙스 | 홈 히어로 | 떠 있는 스티커 카드마다 다른 속도로 움직여 깊이감 연출 |
+| 스크롤 텍스트 리빌 | 홈 | 화면에 고정된 문장이 스크롤에 맞춰 한 단어씩 또렷해짐 |
+| 겹쳐 쌓이는 카드 | 홈 “How it works” | 단계 카드가 위에 붙으며 쌓이고, 뒤에 깔린 카드는 작아짐 |
+| 가로 스크롤 고정 구간 | 홈 “UX Journeys” | 세로로 내리는 동안 UX 분류 카드가 옆으로 흘러감(1024px 이상). 좁은 화면에서는 손으로 넘기는 목록 |
+| 숫자 카운트업 | 홈 숫자 카드 | 화면에 들어오면 0부터 세어 올라감 |
+
+`prefers-reduced-motion`(움직임 줄이기)을 켠 사용자나 IntersectionObserver가 없는 환경에서는 처음부터 모든 내용이 보이고, 패럴랙스·고정 구간·쌓임 효과가 꺼집니다. 스크롤 자체를 가로채는 스크롤 재킹은 쓰지 않습니다.
+
 ## 접근성 구현
 
 - `header` / `nav` / `main` / `section` / `footer` 시맨틱 구조와 본문 바로가기 링크

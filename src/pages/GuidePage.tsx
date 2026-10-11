@@ -85,7 +85,7 @@ export function GuidePage() {
         description="AI는 정확한 이름과 조건을 들을수록 원하는 화면을 정확하게 만들어요. 사전을 프롬프트에 활용하는 다섯 가지 방법을 정리했어요."
       />
 
-      <ol className="mt-8 space-y-5">
+      <ol data-reveal-each className="mt-8 space-y-5">
         {principles.map((principle, index) => (
           <li key={principle.title}>
             <section aria-labelledby={`principle-${index}`} className="surface-card p-5 sm:p-6">

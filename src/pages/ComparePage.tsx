@@ -63,6 +63,7 @@ function ComparisonSection({ comparison }: { comparison: DeviceComparison }) {
   return (
     <section
       id={comparison.slug}
+      data-reveal
       aria-label={comparison.title}
       className="scroll-mt-28 rounded-[1.5rem] border border-line bg-surface p-5 shadow-card sm:p-7"
     >

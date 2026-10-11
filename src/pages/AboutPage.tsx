@@ -126,7 +126,7 @@ export function AboutPage() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-8" aria-label={title}>
+    <section data-reveal className="mt-8" aria-label={title}>
       <h2 className="mb-2 text-lg font-bold">{title}</h2>
       <div className="text-sm leading-relaxed text-muted">{children}</div>
     </section>

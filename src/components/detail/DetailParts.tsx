@@ -8,7 +8,7 @@ export type TocEntry = { id: string; title: string };
 // 상세 페이지의 한 구획. 목차에서 바로 이동할 수 있게 id를 붙입니다.
 export function DetailSection({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section id={id} className="mt-16 scroll-mt-28 [counter-increment:section]" aria-label={title}>
+    <section id={id} data-reveal className="mt-16 scroll-mt-28 [counter-increment:section]" aria-label={title}>
       <h2 className="mb-5 flex items-baseline gap-3 text-2xl font-extrabold tracking-[-0.03em]">
         {/* 구획 번호는 CSS 카운터로 매깁니다(01, 02 …). */}
         <span

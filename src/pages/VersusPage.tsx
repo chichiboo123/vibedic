@@ -53,7 +53,7 @@ function VersusSection({ topic }: { topic: VersusTopic }) {
   const headingId = `versus-${topic.slug}-title`;
 
   return (
-    <section id={topic.slug} aria-labelledby={headingId} className="scroll-mt-28 rounded-[1.5rem] border border-line bg-surface p-5 shadow-card sm:p-7">
+    <section id={topic.slug} data-reveal aria-labelledby={headingId} className="scroll-mt-28 rounded-[1.5rem] border border-line bg-surface p-5 shadow-card sm:p-7">
       <p className="text-sm font-medium text-primary-strong">{topic.question}</p>
       <h2 id={headingId} className="mt-1.5 text-2xl font-extrabold tracking-[-0.03em]">
         {topic.title}
