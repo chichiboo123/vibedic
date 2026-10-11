@@ -308,7 +308,7 @@ export const displayItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-list-to-detail', 'ux-tab-switching'],
-    relatedUiIds: ['ui-card', 'ui-pagination', 'ui-icon-button'],
+    relatedUiIds: ['ui-card', 'ui-pagination', 'ui-icon-button', 'ui-horizontal-scroll'],
     deviceNotes: {
       desktop: '좌우 화살표 버튼이 주된 조작 수단입니다.',
       tablet: '스와이프와 화살표를 함께 지원합니다.',

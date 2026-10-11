@@ -129,7 +129,7 @@ export const controlItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-save-action', 'ux-form-filling'],
-    relatedUiIds: ['ui-button', 'ui-icon-button', 'ui-bottom-navigation'],
+    relatedUiIds: ['ui-button', 'ui-icon-button', 'ui-bottom-navigation', 'ui-back-to-top'],
     deviceNotes: {
       desktop: '아이콘과 텍스트를 함께 쓴 확장형 버튼이 더 자연스럽습니다.',
       tablet: '스크롤과 무관하게 접근할 수 있는 위치가 장점입니다.',

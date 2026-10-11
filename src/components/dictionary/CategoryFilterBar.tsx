@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import type { CategoryVisual } from './categoryVisuals';
 
 type FilterCategory<T extends string> = {
@@ -20,11 +21,21 @@ export function CategoryFilterBar<T extends string>({
   total: number;
   onChange: (id: T | null) => void;
 }) {
+  // 좁은 화면에서는 칩 줄이 가로로 스크롤되므로, 선택된 칩이 화면 밖에 있으면 보이는 곳으로 당겨 옵니다.
+  const groupRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const group = groupRef.current;
+    const selected = group?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (!group || !selected || group.scrollWidth <= group.clientWidth) return;
+    group.scrollTo({ left: selected.offsetLeft - group.clientWidth / 2 + selected.offsetWidth / 2 });
+  }, [active]);
+
   return (
     <div
+      ref={groupRef}
       role="group"
       aria-label="카테고리 필터"
-      className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+      className="scrollbar-none relative -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
     >
       <button
         type="button"

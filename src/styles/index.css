@@ -50,6 +50,8 @@
   --tone-violet-fg: #4b2fe0;
   --tone-orange-bg: #fff0e3;
   --tone-orange-fg: #a24500;
+  --tone-cyan-bg: #def7fb;
+  --tone-cyan-fg: #00677a;
 
   --color-mark: #e4ff7a;
 }
@@ -94,6 +96,10 @@
     --tone-violet-fg: #b7a9ff;
     --tone-orange-bg: #2e1a0a;
     --tone-orange-fg: #ffb47a;
+  --tone-cyan-bg: #082a30;
+  --tone-cyan-fg: #6fe0f0;
+    --tone-cyan-bg: #082a30;
+    --tone-cyan-fg: #6fe0f0;
 
     --color-mark: #4a5a00;
   }
@@ -298,6 +304,10 @@ body::after {
 .tone-orange {
   --tone-bg: var(--tone-orange-bg);
   --tone-fg: var(--tone-orange-fg);
+}
+.tone-cyan {
+  --tone-bg: var(--tone-cyan-bg);
+  --tone-fg: var(--tone-cyan-fg);
 }
 
 @layer components {

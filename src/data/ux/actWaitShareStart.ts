@@ -644,7 +644,7 @@ export const startPatterns: UXPattern[] = [
     category: 'start',
     keywords: ['온보딩', '첫 사용', '시작 안내', '튜토리얼', '환영'],
     flowSteps: ['환영 화면', '목적 선택', '핵심 기능 안내', '첫 작업 완료', '일상 사용 시작'],
-    relatedUiIds: ['ui-carousel', 'ui-progress-bar', 'ui-button', 'ui-hero-section'],
+    relatedUiIds: ['ui-carousel', 'ui-progress-bar', 'ui-button', 'ui-hero-section', 'ui-scroll-reveal'],
     relatedUxIds: ['ux-first-run-guide', 'ux-social-login'],
     serviceExamples: [
       {

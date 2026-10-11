@@ -6,6 +6,7 @@ import {
   Keyboard,
   LayoutPanelTop,
   ListChecks,
+  MoveVertical,
   Megaphone,
   MousePointerClick,
   PanelsTopLeft,
@@ -18,7 +19,7 @@ import {
 } from 'lucide-react';
 import type { UICategoryId, UXCategoryId } from '../../types';
 
-export type Tone = 'blue' | 'green' | 'yellow' | 'pink' | 'violet' | 'orange';
+export type Tone = 'blue' | 'green' | 'yellow' | 'pink' | 'violet' | 'orange' | 'cyan';
 
 export type CategoryVisual = {
   Icon: LucideIcon;
@@ -34,6 +35,7 @@ export const uiCategoryVisuals: Record<UICategoryId, CategoryVisual> = {
   input: { Icon: Keyboard, tone: 'yellow' },
   display: { Icon: PanelsTopLeft, tone: 'pink' },
   status: { Icon: Megaphone, tone: 'orange' },
+  motion: { Icon: MoveVertical, tone: 'cyan' },
 };
 
 export const uxCategoryVisuals: Record<UXCategoryId, CategoryVisual> = {

@@ -750,7 +750,7 @@ export const movePatterns: UXPattern[] = [
     category: 'move',
     keywords: ['현재 위치', '길찾기', '위치 표시', '어디'],
     flowSteps: ['화면 진입', '제목·메뉴 강조 확인', '경로 확인', '다음 이동 결정'],
-    relatedUiIds: ['ui-breadcrumb', 'ui-main-menu', 'ui-tab', 'ui-top-app-bar'],
+    relatedUiIds: ['ui-breadcrumb', 'ui-main-menu', 'ui-tab', 'ui-top-app-bar', 'ui-scroll-progress'],
     relatedUxIds: ['ux-main-menu', 'ux-back-navigation'],
     serviceExamples: [
       {

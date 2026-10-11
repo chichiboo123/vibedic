@@ -329,7 +329,7 @@ export function HomePage() {
 
       {/* ── 분류 ─────────────────────────────────────────────── */}
       <HomeSection index="04" eyebrow="Categories" title="분류로 찾아보기" moreTo="/ui" moreLabel="UI 요소 전체 보기">
-        <ul data-reveal-stagger className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <ul data-reveal-stagger className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
           {uiCategories.map((category, categoryIndex) => {
             const { Icon, tone } = uiCategoryVisuals[category.id];
             const count = uiItems.filter((item) => item.category === category.id).length;

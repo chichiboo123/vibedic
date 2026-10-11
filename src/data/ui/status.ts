@@ -482,7 +482,7 @@ export const statusItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-upload-progress', 'ux-loading', 'ux-step-input'],
-    relatedUiIds: ['ui-spinner', 'ui-skeleton', 'ui-file-upload'],
+    relatedUiIds: ['ui-spinner', 'ui-skeleton', 'ui-file-upload', 'ui-scroll-progress'],
     deviceNotes: {
       hasMeaningfulDifference: false,
     },
@@ -527,7 +527,7 @@ export const statusItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-loading', 'ux-load-more'],
-    relatedUiIds: ['ui-spinner', 'ui-progress-bar', 'ui-card'],
+    relatedUiIds: ['ui-spinner', 'ui-progress-bar', 'ui-card', 'ui-scroll-reveal'],
     deviceNotes: {
       hasMeaningfulDifference: false,
     },

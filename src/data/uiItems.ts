@@ -5,6 +5,7 @@ import { controlItems } from './ui/control';
 import { inputItems } from './ui/input';
 import { displayItems } from './ui/display';
 import { statusItems } from './ui/status';
+import { motionItems } from './ui/motion';
 
 export const uiItems: UIItem[] = [
   ...layoutItems,
@@ -13,6 +14,7 @@ export const uiItems: UIItem[] = [
   ...inputItems,
   ...displayItems,
   ...statusItems,
+  ...motionItems,
 ];
 
 const bySlug = new Map(uiItems.map((item) => [item.slug, item]));

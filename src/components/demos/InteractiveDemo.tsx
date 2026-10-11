@@ -82,6 +82,18 @@ import {
 
 // 모든 UI 항목은 자기만의 데모를 갖습니다.
 // DemoType과 UI 항목이 1:1이라, 여기에 빠진 항목이 있으면 타입 검사에서 걸립니다.
+import {
+  BackToTopDemo,
+  CountUpDemo,
+  HideOnScrollHeaderDemo,
+  HorizontalScrollDemo,
+  ParallaxDemo,
+  ScrollProgressDemo,
+  ScrollRevealDemo,
+  ScrollTextRevealDemo,
+  StackingCardsDemo,
+} from './motionDemos';
+
 const demoRegistry: Record<Exclude<DemoType, 'static'>, ComponentType> = {
   // 조작
   button: ButtonDemo,
@@ -152,6 +164,16 @@ const demoRegistry: Record<Exclude<DemoType, 'static'>, ComponentType> = {
   skeleton: SkeletonDemo,
   'empty-state': EmptyStateDemo,
   'notification-badge': NotificationBadgeDemo,
+  // 움직임·스크롤
+  'scroll-reveal': ScrollRevealDemo,
+  parallax: ParallaxDemo,
+  'scroll-progress': ScrollProgressDemo,
+  'back-to-top': BackToTopDemo,
+  'hide-on-scroll-header': HideOnScrollHeaderDemo,
+  'scroll-text-reveal': ScrollTextRevealDemo,
+  'stacking-cards': StackingCardsDemo,
+  'horizontal-scroll': HorizontalScrollDemo,
+  'count-up': CountUpDemo,
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

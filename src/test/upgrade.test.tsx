@@ -216,3 +216,62 @@ describe('스크롤 효과', () => {
     expect(screen.getByRole('heading', { level: 3, name: '토스트' })).toBeInTheDocument();
   });
 });
+
+describe('움직임·스크롤 분류', () => {
+  const motionSlugs = [
+    'scroll-reveal',
+    'parallax-scrolling',
+    'scroll-progress',
+    'back-to-top',
+    'hide-on-scroll-header',
+    'scroll-text-reveal',
+    'stacking-cards',
+    'horizontal-scroll-section',
+    'count-up',
+  ];
+
+  it('새 분류에 9개 항목이 있고 목록 필터로 볼 수 있다', async () => {
+    const user = userEvent.setup();
+    expect(uiItems.filter((item) => item.category === 'motion').map((item) => item.slug)).toEqual(motionSlugs);
+
+    renderApp('/ui');
+    await user.click(screen.getByRole('button', { name: '움직임·스크롤' }));
+    expect(screen.getAllByRole('article')).toHaveLength(9);
+    expect(screen.getByRole('heading', { level: 3, name: '패럴랙스 스크롤' })).toBeInTheDocument();
+  });
+
+  it.each([
+    ['스크롤 효과', 'scroll-reveal'],
+    ['패럴렉스', 'parallax-scrolling'],
+    ['TOP 버튼', 'back-to-top'],
+    ['sticky', 'hide-on-scroll-header'],
+    ['가로 스크롤', 'horizontal-scroll-section'],
+    ['카운터', 'count-up'],
+  ])('"%s"로 검색하면 %s 항목이 나온다', (query, slug) => {
+    expect(searchAll(query).some((result) => result.type === 'ui' && result.slug === slug)).toBe(true);
+  });
+
+  it('상세 페이지마다 직접 조작 데모가 있다', () => {
+    for (const slug of motionSlugs) {
+      const { unmount } = renderApp(`/ui/${slug}`);
+      const region = screen.getByRole('region', { name: '직접 살펴보기' });
+      expect(within(region).getByText('데모 영역 · 직접 조작해 보세요')).toBeInTheDocument();
+      unmount();
+    }
+  });
+
+  it('맨 위로 버튼 데모는 목록을 내리면 버튼이 나타난다', () => {
+    renderApp('/ui/back-to-top');
+    const area = screen.getByRole('region', { name: '상품 목록 스크롤 영역' });
+    area.scrollTop = 400;
+    fireEvent.scroll(area);
+    expect(screen.getByRole('button', { name: '맨 위로 이동(데모)' })).toBeInTheDocument();
+    expect(screen.getByText(/버튼이 나타났어요/)).toBeInTheDocument();
+  });
+
+  it('Apple 서비스 상세에서 움직임 항목으로 연결된다', () => {
+    renderApp('/services/apple');
+    const related = screen.getByRole('region', { name: '참고할 UI 요소' });
+    expect(within(related).getByRole('link', { name: /겹쳐 쌓이는 카드/ })).toHaveAttribute('href', '/ui/stacking-cards');
+  });
+});

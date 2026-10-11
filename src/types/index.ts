@@ -17,7 +17,8 @@ export type UICategoryId =
   | 'control'
   | 'input'
   | 'display'
-  | 'status';
+  | 'status'
+  | 'motion';
 
 export type UXCategoryId =
   | 'find'
@@ -101,6 +102,16 @@ export type DemoType =
   | 'skeleton'
   | 'empty-state'
   | 'notification-badge'
+  // 움직임·스크롤 (motion)
+  | 'scroll-reveal'
+  | 'parallax'
+  | 'scroll-progress'
+  | 'back-to-top'
+  | 'hide-on-scroll-header'
+  | 'scroll-text-reveal'
+  | 'stacking-cards'
+  | 'horizontal-scroll'
+  | 'count-up'
   | 'static';
 
 export type UIItem = {
