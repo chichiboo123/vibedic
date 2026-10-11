@@ -25,7 +25,7 @@ export const layoutItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-main-menu', 'ux-current-location'],
-    relatedUiIds: ['ui-top-app-bar', 'ui-main-menu', 'ui-footer'],
+    relatedUiIds: ['ui-top-app-bar', 'ui-main-menu', 'ui-footer', 'ui-hide-on-scroll-header'],
     deviceNotes: {
       desktop: '가로 공간이 넓어 로고, 메뉴, 검색, 프로필을 한 줄에 모두 배치할 수 있습니다.',
       tablet: '메뉴 일부를 아이콘으로 줄이거나 드로어로 옮겨 공간을 확보합니다.',
@@ -178,7 +178,7 @@ export const layoutItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-back-navigation', 'ux-current-location'],
-    relatedUiIds: ['ui-header', 'ui-icon-button', 'ui-bottom-navigation'],
+    relatedUiIds: ['ui-header', 'ui-icon-button', 'ui-bottom-navigation', 'ui-hide-on-scroll-header'],
     deviceNotes: {
       desktop: 'PC 웹에서는 보통 더 넓은 헤더가 같은 역할을 대신합니다.',
       tablet: '화면이 넓어 제목 옆에 더 많은 동작 버튼을 둘 수 있습니다.',
@@ -232,7 +232,7 @@ export const layoutItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-list-to-detail', 'ux-search'],
-    relatedUiIds: ['ui-list', 'ui-carousel', 'ui-avatar'],
+    relatedUiIds: ['ui-list', 'ui-carousel', 'ui-avatar', 'ui-stacking-cards'],
     deviceNotes: {
       desktop: '3~4열 그리드로 여러 카드를 한눈에 보여줍니다.',
       tablet: '2열 그리드가 일반적입니다.',
@@ -319,7 +319,7 @@ export const layoutItems: UIItem[] = [
       },
     ],
     relatedUxIds: ['ux-onboarding', 'ux-search'],
-    relatedUiIds: ['ui-header', 'ui-search-field', 'ui-button'],
+    relatedUiIds: ['ui-header', 'ui-search-field', 'ui-button', 'ui-parallax', 'ui-scroll-text-reveal'],
     deviceNotes: {
       desktop: '넓은 화면을 활용해 큰 제목과 이미지, 버튼을 나란히 배치합니다.',
       tablet: '요소 크기를 줄이고 세로 배치로 전환하기 시작합니다.',

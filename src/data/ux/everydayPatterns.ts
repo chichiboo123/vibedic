@@ -14,7 +14,7 @@ export const moreFindPatterns: UXPattern[] = [
     category: 'find',
     keywords: ['무한 스크롤', '더보기', '더 보기 버튼', '다음 페이지', '피드', '스크롤 로딩', 'load more'],
     flowSteps: ['목록 스크롤', '목록 끝 도달', '다음 내용 로딩 표시', '새 항목 이어 붙이기', '끝이면 마지막 안내'],
-    relatedUiIds: ['ui-list', 'ui-skeleton', 'ui-spinner', 'ui-pagination', 'ui-button'],
+    relatedUiIds: ['ui-list', 'ui-skeleton', 'ui-spinner', 'ui-pagination', 'ui-button', 'ui-back-to-top'],
     relatedUxIds: ['ux-loading', 'ux-list-to-detail', 'ux-back-navigation'],
     serviceExamples: [
       {

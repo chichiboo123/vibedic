@@ -20,7 +20,7 @@ export const services: Service[] = [
     name: 'YouTube',
     summary: '카드 그리드, 필터 칩, 하단 내비게이션 등 탐색 UI의 교과서 같은 서비스입니다.',
     officialUrl: 'https://www.youtube.com',
-    relatedUiIds: ['ui-card', 'ui-filter-chip', 'ui-bottom-navigation', 'ui-skeleton', 'ui-toggle-switch', 'ui-tab'],
+    relatedUiIds: ['ui-card', 'ui-filter-chip', 'ui-bottom-navigation', 'ui-skeleton', 'ui-toggle-switch', 'ui-tab', 'ui-hide-on-scroll-header'],
     relatedUxIds: ['ux-search', 'ux-filter', 'ux-loading', 'ux-share-action', 'ux-tab-switching', 'ux-notifications'],
     deviceHighlights: [
       'PC 사이드바가 창 폭에 따라 내비게이션 레일로 줄어듭니다.',
@@ -46,7 +46,7 @@ export const services: Service[] = [
     name: 'Instagram',
     summary: '하단 내비게이션과 무한 피드, 공유 시트 등 모바일 문법의 표준을 보여줍니다.',
     officialUrl: 'https://www.instagram.com',
-    relatedUiIds: ['ui-bottom-navigation', 'ui-carousel', 'ui-avatar', 'ui-bottom-sheet', 'ui-notification-badge', 'ui-icon-button'],
+    relatedUiIds: ['ui-bottom-navigation', 'ui-carousel', 'ui-avatar', 'ui-bottom-sheet', 'ui-notification-badge', 'ui-icon-button', 'ui-hide-on-scroll-header'],
     relatedUxIds: ['ux-main-menu', 'ux-back-navigation', 'ux-comments', 'ux-share-action', 'ux-load-more'],
     deviceHighlights: [
       'PC 웹에서는 게시물이 가운데 모달로 열립니다.',
@@ -59,7 +59,7 @@ export const services: Service[] = [
     name: 'Notion',
     summary: '사이드바 트리, 명령 팔레트, 자동 저장으로 문서 도구 UX를 대표합니다.',
     officialUrl: 'https://www.notion.com',
-    relatedUiIds: ['ui-sidebar', 'ui-command-palette', 'ui-breadcrumb', 'ui-accordion', 'ui-drawer', 'ui-tag'],
+    relatedUiIds: ['ui-sidebar', 'ui-command-palette', 'ui-breadcrumb', 'ui-accordion', 'ui-drawer', 'ui-tag', 'ui-scroll-progress'],
     relatedUxIds: ['ux-autosave', 'ux-main-menu', 'ux-empty-state', 'ux-version-history', 'ux-permission-selection'],
     deviceHighlights: [
       'PC에서는 사이드바와 문서, 댓글 패널을 함께 펼칠 수 있습니다.',
@@ -124,7 +124,7 @@ export const services: Service[] = [
     name: '쿠팡',
     summary: '검색, 필터, 옵션 선택, 주문 확인까지 쇼핑 UX 전 과정을 참고할 수 있습니다.',
     officialUrl: 'https://www.coupang.com',
-    relatedUiIds: ['ui-search-field', 'ui-filter-chip', 'ui-stepper', 'ui-checkbox', 'ui-timeline', 'ui-tab', 'ui-breadcrumb'],
+    relatedUiIds: ['ui-search-field', 'ui-filter-chip', 'ui-stepper', 'ui-checkbox', 'ui-timeline', 'ui-tab', 'ui-breadcrumb', 'ui-back-to-top', 'ui-horizontal-scroll'],
     relatedUxIds: ['ux-search', 'ux-filter', 'ux-sort', 'ux-input-confirm', 'ux-single-choice', 'ux-back-navigation', 'ux-recent-history'],
     deviceHighlights: [
       'PC에서는 필터 사이드바와 상품 그리드를 함께 보여줍니다.',
@@ -137,7 +137,7 @@ export const services: Service[] = [
     name: '네이버',
     summary: '통합 검색과 자동 완성, 방대한 메뉴 구조를 다루는 국내 대표 포털입니다.',
     officialUrl: 'https://www.naver.com',
-    relatedUiIds: ['ui-search-field', 'ui-autocomplete', 'ui-main-menu', 'ui-tab', 'ui-footer'],
+    relatedUiIds: ['ui-search-field', 'ui-autocomplete', 'ui-main-menu', 'ui-tab', 'ui-footer', 'ui-back-to-top'],
     relatedUxIds: ['ux-search', 'ux-autocomplete', 'ux-login', 'ux-inline-validation', 'ux-main-menu', 'ux-permission-request'],
     deviceHighlights: [
       'PC 홈은 여러 열의 콘텐츠 패널로 구성됩니다.',
@@ -189,7 +189,7 @@ export const services: Service[] = [
     name: 'Duolingo',
     summary: '온보딩, 진행률, 격려 피드백 등 학습 동기 부여 UX의 대표 사례입니다.',
     officialUrl: 'https://www.duolingo.com',
-    relatedUiIds: ['ui-progress-bar', 'ui-button', 'ui-badge', 'ui-carousel', 'ui-empty-state'],
+    relatedUiIds: ['ui-progress-bar', 'ui-button', 'ui-badge', 'ui-carousel', 'ui-empty-state', 'ui-count-up'],
     relatedUxIds: ['ux-onboarding', 'ux-social-login', 'ux-completion-feedback', 'ux-step-input'],
     deviceHighlights: [
       '모바일 중심 설계로 큰 버튼과 한 화면 한 과제를 유지합니다.',
@@ -207,6 +207,19 @@ export const services: Service[] = [
     deviceHighlights: [
       'PC에서는 월간 격자에 일정 제목까지 표시됩니다.',
       '모바일에서는 일정 목록 중심 보기와 하루 보기가 기본이 됩니다.',
+    ],
+  },
+  {
+    id: 'apple',
+    slug: 'apple',
+    name: 'Apple',
+    summary: '제품 소개 페이지에서 스크롤에 맞춰 나타나고 움직이는 연출, 겹쳐 쌓인 지갑 카드 같은 움직임 UI의 대표 사례입니다.',
+    officialUrl: 'https://www.apple.com',
+    relatedUiIds: ['ui-scroll-reveal', 'ui-parallax', 'ui-scroll-text-reveal', 'ui-stacking-cards', 'ui-hero-section', 'ui-header'],
+    relatedUxIds: ['ux-onboarding', 'ux-first-run-guide', 'ux-list-to-detail'],
+    deviceHighlights: [
+      'PC 제품 페이지는 큰 이미지와 문장을 화면에 고정한 채 스크롤에 맞춰 바꿔 보여줍니다.',
+      '모바일에서는 같은 연출을 줄이고 이미지와 문단을 세로로 차례대로 보여줍니다.',
     ],
   },
 ];

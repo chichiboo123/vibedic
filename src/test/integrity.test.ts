@@ -20,8 +20,8 @@ describe('콘텐츠 데이터 무결성', () => {
     expect(deviceComparisons.length).toBeGreaterThanOrEqual(10);
   });
 
-  it('UI 사전은 6개, UX 사전은 8개 분류로 구성된다', () => {
-    expect(uiCategories).toHaveLength(6);
+  it('UI 사전은 7개, UX 사전은 8개 분류로 구성된다', () => {
+    expect(uiCategories).toHaveLength(7);
     expect(uxCategories).toHaveLength(8);
     for (const category of uiCategories) {
       expect(uiItems.some((item) => item.category === category.id)).toBe(true);

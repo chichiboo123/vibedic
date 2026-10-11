@@ -17,8 +17,14 @@ const phoneServices = new Set(['kakaotalk', 'instagram', 'duolingo']);
 
 // 요소 성격에 따라 강조 패널의 위치를 정합니다.
 function overlayPosition(demoType: DemoType, category: UICategoryId): 'top' | 'center' | 'bottom' {
-  if (demoType === 'bottom-sheet' || demoType === 'toast' || demoType === 'fab') return 'bottom';
-  if (demoType === 'banner' || demoType === 'breadcrumb') return 'top';
+  if (demoType === 'bottom-sheet' || demoType === 'toast' || demoType === 'fab' || demoType === 'back-to-top') return 'bottom';
+  if (
+    demoType === 'banner' ||
+    demoType === 'breadcrumb' ||
+    demoType === 'scroll-progress' ||
+    demoType === 'hide-on-scroll-header'
+  )
+    return 'top';
   if (category === 'layout' && demoType === 'static') return 'top';
   return 'center';
 }

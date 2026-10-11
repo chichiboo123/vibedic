@@ -813,6 +813,95 @@ export function PreviewGlyph({
         </div>
       );
 
+    // ── 움직임·스크롤 ────────────────────────────────────────
+    case 'scroll-reveal':
+      return (
+        <div className="w-28 space-y-1.5">
+          <span className="block h-4 rounded-md border border-line bg-surface" />
+          <span className="block h-4 translate-y-0.5 rounded-md border border-line bg-surface opacity-60" />
+          <span className="block h-4 translate-y-1.5 rounded-md border border-dashed border-primary/60 bg-primary-soft opacity-40" />
+        </div>
+      );
+    case 'parallax':
+      return (
+        <div className="relative h-16 w-28 overflow-hidden rounded-md border border-line bg-primary-soft">
+          <span className="absolute -left-2 bottom-0 h-8 w-16 rounded-t-full bg-primary/30" />
+          <span className="absolute -right-3 bottom-0 h-10 w-20 rounded-t-full bg-primary/50" />
+          <span className="absolute bottom-1 left-3 h-4 w-8 rounded-sm bg-surface shadow-card" />
+          <span className="absolute right-2 top-1.5 text-[9px] text-primary-strong">↑↑ ↑</span>
+        </div>
+      );
+    case 'scroll-progress':
+      return (
+        <div className="h-16 w-28 overflow-hidden rounded-md border border-line bg-surface">
+          <span className="block h-1 w-3/5 bg-gradient-to-r from-primary to-[#ff5fae]" />
+          <div className="space-y-1 p-1.5">
+            <span className="block h-1.5 rounded bg-line" />
+            <span className="block h-1.5 w-4/5 rounded bg-line" />
+            <span className="block h-1.5 rounded bg-line/60" />
+            <span className="block h-1.5 w-2/3 rounded bg-line/60" />
+          </div>
+        </div>
+      );
+    case 'back-to-top':
+      return (
+        <div className="relative h-16 w-24 rounded-md border border-line bg-surface p-1.5">
+          <span className="block h-1.5 rounded bg-line" />
+          <span className="mt-1 block h-1.5 w-3/4 rounded bg-line" />
+          <span className="absolute bottom-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-primary bg-surface text-[10px] font-bold text-primary-strong shadow-card">
+            ↑
+          </span>
+        </div>
+      );
+    case 'hide-on-scroll-header':
+      return (
+        <div className="relative h-16 w-24 overflow-hidden rounded-md border border-line bg-surface">
+          <span className="absolute inset-x-0 -top-1 flex h-3.5 items-center gap-1 border-b border-line bg-primary-soft px-1.5 opacity-70">
+            <span className="h-1 w-5 rounded bg-primary/60" />
+          </span>
+          <div className="space-y-1 p-1.5 pt-4">
+            <span className="block h-1.5 rounded bg-line" />
+            <span className="block h-1.5 w-4/5 rounded bg-line" />
+          </div>
+          <span className="absolute right-1 top-4 text-[9px] text-primary-strong">↓ 숨김</span>
+        </div>
+      );
+    case 'scroll-text-reveal':
+      return (
+        <p className="w-28 text-[11px] font-extrabold leading-tight">
+          <span>이름을 알면 </span>
+          <span className="text-primary">정확하게</span>
+          <span className="opacity-30"> 말할 수 있어요</span>
+        </p>
+      );
+    case 'stacking-cards':
+      return (
+        <div className="relative h-16 w-24">
+          <span className="absolute inset-x-3 top-0 h-10 rounded-md border border-line bg-line/60" />
+          <span className="absolute inset-x-1.5 top-1.5 h-11 rounded-md border border-line bg-line/40" />
+          <span className="absolute inset-x-0 top-3 h-12 rounded-md border border-line bg-surface shadow-card" />
+        </div>
+      );
+    case 'horizontal-scroll':
+      return (
+        <div className="flex w-28 items-center gap-1 overflow-hidden">
+          {[0, 1, 2].map((index) => (
+            <span
+              key={index}
+              className={`h-12 w-10 shrink-0 rounded-md border border-line ${index === 0 ? 'bg-primary-soft' : 'bg-surface'}`}
+            />
+          ))}
+          <span className="text-[10px] text-primary-strong">→</span>
+        </div>
+      );
+    case 'count-up':
+      return (
+        <div className="text-center">
+          <span className="font-mono text-2xl font-bold tracking-tighter text-primary-strong">1,280</span>
+          <span className="block text-[9px] text-muted">0 → 1,280</span>
+        </div>
+      );
+
     default:
       return <CategoryFallback category={category} />;
   }

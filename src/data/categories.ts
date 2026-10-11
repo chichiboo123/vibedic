@@ -37,6 +37,12 @@ export const uiCategories: CategoryMeta<UICategoryId>[] = [
     name: '상태를 알려주는 요소',
     description: '토스트, 스피너, 빈 상태처럼 지금 무슨 일이 일어나는지 알려주는 요소입니다.',
   },
+  {
+    id: 'motion',
+    easyName: '움직임·스크롤',
+    name: '스크롤과 움직임으로 보여주는 요소',
+    description: '스크롤하면 나타나거나 움직이며, 읽는 흐름과 지금 위치를 알려주는 효과와 요소입니다.',
+  },
 ];
 
 export const uxCategories: CategoryMeta<UXCategoryId>[] = [
