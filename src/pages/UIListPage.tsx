@@ -54,10 +54,10 @@ export function UIListPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="UI Dictionary"
+        eyebrow="UI 사전"
         Icon={Layers}
         title="UI 요소"
-        description={`화면에서 본 요소의 이름과 역할, 사용 사례를 찾아보세요. 총 ${uiItems.length}개 항목이 있어요.`}
+        description={`버튼·창·메뉴처럼 화면에 보이는 요소의 이름과 쓰임을 찾는 곳이에요. 생김새가 떠오르는 분류를 고르거나 이름으로 걸러 보세요. 총 ${uiItems.length}개 항목이 있어요.`}
       />
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">

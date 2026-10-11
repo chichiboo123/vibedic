@@ -27,7 +27,7 @@ export function ComparePage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Devices"
+        eyebrow="반응형 차이"
         Icon={MonitorSmartphone}
         title="기기별 비교"
         description={`같은 UI와 UX가 PC, 태블릿, 모바일에서 어떻게 달라지는지 ${deviceComparisons.length}가지 주제로 비교해 보세요.`}
@@ -39,7 +39,7 @@ export function ComparePage() {
             <li key={comparison.id}>
               <a
                 href={`#/compare#${comparison.slug}`}
-                className="pill min-h-9 text-xs"
+                className="pill min-h-10 text-xs"
               >
                 {comparison.title}
               </a>

@@ -15,7 +15,7 @@ function UXFlowPreview({ pattern }: { pattern: UXPattern }) {
   return (
     <div
       aria-hidden="true"
-      className="dot-grid flex h-36 items-center gap-3 overflow-hidden rounded-[0.9rem] border border-line/70 px-4"
+      className="dot-grid hidden h-36 items-center gap-3 overflow-hidden rounded-[0.9rem] border border-line/70 px-4 sm:flex"
     >
       <ol className="min-w-0 flex-1 space-y-1">
         {steps.map((step, index) => (
@@ -57,17 +57,18 @@ export function UXPatternCard({ pattern }: { pattern: UXPattern }) {
 
   return (
     // 카드 전체가 링크입니다. 썸네일이든 설명이든 어디를 눌러도 상세로 들어갑니다.
-    <article className="spotlight group relative flex flex-col rounded-[1.25rem] border border-line bg-surface p-2 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-raised">
+    <article className="spotlight group relative flex min-w-0 flex-col rounded-[1.25rem] border border-line bg-surface p-2 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-raised">
       <div className="relative">
         <UXFlowPreview pattern={pattern} />
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-ink text-background opacity-0 transition-all duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute right-2 top-2 hidden h-7 w-7 items-center sm:flex justify-center rounded-full bg-ink text-background opacity-0 transition-all duration-300 group-hover:opacity-100"
         >
           <ArrowUpRight className="h-3.5 w-3.5" />
         </span>
       </div>
-      <div className="flex flex-1 flex-col px-2.5 pb-2 pt-3.5">
+      {/* 휴대폰에서는 흐름 도식을 숨기고 목표·이름·설명만 보여 목록을 짧게 만듭니다. */}
+      <div className="flex flex-1 flex-col px-2.5 pb-2 pt-2 sm:pt-3.5">
         <p className="text-[13px] font-medium leading-snug text-primary-strong">“{pattern.userGoal}”</p>
         <h3 className="mt-2 text-[17px] font-bold tracking-tight">
           <Link
@@ -77,10 +78,10 @@ export function UXPatternCard({ pattern }: { pattern: UXPattern }) {
             {pattern.koreanName}
           </Link>
         </h3>
-        <p className="font-mono text-[11px] text-muted">{pattern.englishName}</p>
+        <p className="font-mono text-xs text-muted">{pattern.englishName}</p>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{pattern.summary}</p>
         {relatedUiNames.length > 0 && (
-          <p className="mt-3 flex flex-wrap gap-1.5">
+          <p className="mt-3 hidden flex-wrap gap-1.5 sm:flex">
             {relatedUiNames.map((name) => (
               <span key={name} className="rounded-full px-2 py-0.5 text-xs text-muted ring-1 ring-line">
                 {name}

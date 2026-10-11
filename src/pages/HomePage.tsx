@@ -50,7 +50,6 @@ export function HomePage() {
   const featuredUI = uiItems.filter((item) => item.featured).slice(0, 4);
   const featuredUX = uxPatterns.filter((pattern) => pattern.featured).slice(0, 3);
   const featuredServices = services.slice(0, 4);
-  const featuredComparisons = deviceComparisons.slice(0, 3);
   const featuredVersus = versusTopics.slice(0, 3);
   const todayItem = pickTodayItem();
   const stickerItems = stickers
@@ -98,8 +97,8 @@ export function HomePage() {
             to="/versus"
             className="glass group inline-flex items-center gap-2 rounded-full py-1 pl-1 pr-3 text-xs font-medium text-muted shadow-card transition-colors hover:text-ink"
           >
-            <span className="rounded-full bg-accent px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-accent-ink">
-              New
+            <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-bold text-accent-ink">
+              새로운
             </span>
             헷갈리는 UI {versusTopics.length}가지, 비교표로 구분하기
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
@@ -142,12 +141,17 @@ export function HomePage() {
           <ul className="mx-auto mt-4 flex max-w-xl flex-wrap justify-center gap-1.5 lg:mx-0 lg:justify-start">
             {suggestedTerms.map((term) => (
               <li key={term}>
-                <Link to={`/search?q=${encodeURIComponent(term)}`} className="pill min-h-8 px-3 text-xs">
+                <Link to={`/search?q=${encodeURIComponent(term)}`} className="pill min-h-10 px-3 text-xs">
                   {term}
                 </Link>
               </li>
             ))}
           </ul>
+          {/* 처음 온 사람을 위한 한 줄 안내: UI와 UX의 차이 */}
+          <p className="mx-auto mt-4 max-w-xl text-sm text-muted lg:mx-0">
+            <strong className="font-semibold text-ink">UI</strong>는 버튼·창처럼 화면에 보이는 것,{' '}
+            <strong className="font-semibold text-ink">UX</strong>는 검색·저장처럼 사용하는 흐름이에요.
+          </p>
         </div>
 
         {/* 장식용 스티커 무대: 실제 항목 도식이 둥둥 떠 있습니다. */}
@@ -216,7 +220,7 @@ export function HomePage() {
           <BentoLink to="/ui" className="md:col-span-3 md:row-span-2">
             <div className="flex items-start justify-between">
               <div>
-                <p className="eyebrow">01 · UI Dictionary</p>
+                <p className="eyebrow">01 · 화면에 보이는 것</p>
                 <h3 className="mt-2 text-2xl font-bold tracking-tight">UI 요소 찾기</h3>
                 <p className="mt-1 text-sm text-muted">화면에서 본 이것의 이름이 궁금한가요?</p>
               </div>
@@ -240,7 +244,7 @@ export function HomePage() {
           <BentoLink to="/ux" className="md:col-span-3">
             <div className="flex items-start justify-between">
               <div>
-                <p className="eyebrow">02 · UX Patterns</p>
+                <p className="eyebrow">02 · 사용하는 흐름</p>
                 <h3 className="mt-2 text-2xl font-bold tracking-tight">UX 패턴 찾기</h3>
                 <p className="mt-1 text-sm text-muted">사용자가 목표를 이루는 흐름을 살펴보세요.</p>
               </div>
@@ -264,7 +268,7 @@ export function HomePage() {
           </BentoLink>
 
           <BentoLink to="/versus" className="md:col-span-2">
-            <p className="eyebrow">03 · Versus</p>
+            <p className="eyebrow">03 · 비교표</p>
             <h3 className="mt-2 text-xl font-bold tracking-tight">헷갈리는 UI 구분하기</h3>
             <p aria-hidden="true" className="mt-3 flex items-baseline gap-2 text-sm font-semibold">
               모달 <span className="font-serif text-3xl italic text-primary">vs</span> 바텀 시트
@@ -304,7 +308,7 @@ export function HomePage() {
           </BentoLink>
 
           <div className="flex flex-col justify-between rounded-[1.5rem] bg-[#0d0d12] p-6 text-white ring-1 ring-white/10 md:col-span-2">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] opacity-60">By the numbers</p>
+            <p className="text-xs font-semibold opacity-70">숫자로 보는 VibeDic</p>
             <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
               {[
                 ['UI', uiItems.length],
@@ -324,11 +328,53 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── 다시 온 사용자를 위한 최근·저장 항목(있을 때만) ──── */}
+      {recentEntries.length > 0 && (
+        <HomeSection eyebrow="최근" title="최근 본 항목" moreTo="/saved" moreLabel="저장함 가기">
+          <ul className="flex flex-wrap gap-2">
+            {recentEntries.map(({ ref, item }) => (
+              <li key={`${ref.type}-${ref.id}`}>
+                <Link to={ref.type === 'ui' ? `/ui/${item!.slug}` : `/ux/${item!.slug}`} className="pill text-ink">
+                  <span className="font-mono text-[11px] text-muted">{ref.type === 'ui' ? 'UI' : 'UX'}</span>
+                  {item!.koreanName}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </HomeSection>
+      )}
+
+      {savedEntries.length > 0 && (
+        <HomeSection eyebrow="저장" title="저장한 항목" moreTo="/saved" moreLabel="저장함 전체 보기">
+          <ul className="flex flex-wrap gap-2">
+            {savedEntries.map(({ ref, item }) => (
+              <li key={`${ref.type}-${ref.id}`}>
+                <Link to={ref.type === 'ui' ? `/ui/${item!.slug}` : `/ux/${item!.slug}`} className="pill pill-active">
+                  <span className="font-mono text-[11px] opacity-70">{ref.type === 'ui' ? 'UI' : 'UX'}</span>
+                  {item!.koreanName}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </HomeSection>
+      )}
+
+      {/* ── 사용 흐름: 겹쳐 쌓이는 카드 ─────────────────────── */}
+      <section aria-labelledby="how-heading">
+        <div data-reveal="blur" className="mb-8 max-w-2xl">
+          <p className="eyebrow">사용 방법</p>
+          <h2 id="how-heading" className="mt-1.5 text-3xl font-extrabold tracking-[-0.035em] sm:text-5xl">
+            찾고, 이해하고, <span className="text-gradient">가져가세요</span>
+          </h2>
+        </div>
+        <StackingSteps />
+      </section>
+
       {/* ── 스크롤 텍스트 리빌 ─────────────────────────────── */}
       <ScrollStatement />
 
       {/* ── 분류 ─────────────────────────────────────────────── */}
-      <HomeSection index="04" eyebrow="Categories" title="분류로 찾아보기" moreTo="/ui" moreLabel="UI 요소 전체 보기">
+      <HomeSection index="04" eyebrow="분류" title="분류로 찾아보기" moreTo="/ui" moreLabel="UI 요소 전체 보기">
         <ul data-reveal-stagger className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
           {uiCategories.map((category, categoryIndex) => {
             const { Icon, tone } = uiCategoryVisuals[category.id];
@@ -347,7 +393,7 @@ export function HomePage() {
                   </span>
                   <span>
                     <span className="block text-sm font-bold">{category.easyName}</span>
-                    <span className="mt-0.5 block font-mono text-[11px] text-muted">{count} items</span>
+                    <span className="mt-0.5 block text-xs text-muted">{count}개 항목</span>
                   </span>
                 </Link>
               </li>
@@ -356,7 +402,7 @@ export function HomePage() {
         </ul>
       </HomeSection>
 
-      <HomeSection index="05" eyebrow="Popular UI" title="자주 찾는 UI" moreTo="/ui" moreLabel="UI 요소 전체 보기">
+      <HomeSection index="05" eyebrow="인기 UI" title="자주 찾는 UI" moreTo="/ui" moreLabel="UI 요소 전체 보기">
         <div data-reveal-stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {featuredUI.map((item) => (
             <UIItemCard key={item.id} item={item} />
@@ -364,21 +410,10 @@ export function HomePage() {
         </div>
       </HomeSection>
 
-      {/* ── 사용 흐름: 겹쳐 쌓이는 카드 ─────────────────────── */}
-      <section aria-labelledby="how-heading">
-        <div data-reveal="blur" className="mb-8 max-w-2xl">
-          <p className="eyebrow">How it works</p>
-          <h2 id="how-heading" className="mt-1.5 text-3xl font-extrabold tracking-[-0.035em] sm:text-5xl">
-            찾고, 이해하고, <span className="text-gradient">가져가세요</span>
-          </h2>
-        </div>
-        <StackingSteps />
-      </section>
-
       {/* ── UX 분류: 세로 스크롤이 가로로 흐르는 고정 구간 ────── */}
       <UXJourneyRail />
 
-      <HomeSection index="06" eyebrow="Popular UX" title="자주 찾는 UX" moreTo="/ux" moreLabel="UX 패턴 전체 보기">
+      <HomeSection index="06" eyebrow="인기 UX" title="자주 찾는 UX" moreTo="/ux" moreLabel="UX 패턴 전체 보기">
         <div data-reveal-stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featuredUX.map((pattern) => (
             <UXPatternCard key={pattern.id} pattern={pattern} />
@@ -386,7 +421,7 @@ export function HomePage() {
         </div>
       </HomeSection>
 
-      <HomeSection index="07" eyebrow="Versus" title="이거랑 저거, 뭐가 달라요?" moreTo="/versus" moreLabel="구분하기 전체 보기">
+      <HomeSection index="07" eyebrow="구분하기" title="이거랑 저거, 뭐가 달라요?" moreTo="/versus" moreLabel="구분하기 전체 보기">
         <ul data-reveal-stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featuredVersus.map((topic) => (
             <li key={topic.id}>
@@ -407,7 +442,7 @@ export function HomePage() {
         </ul>
       </HomeSection>
 
-      <HomeSection index="08" eyebrow="Services" title="유명 서비스로 살펴보기" moreTo="/services" moreLabel="서비스 전체 보기">
+      <HomeSection index="08" eyebrow="서비스 사례" title="유명 서비스로 살펴보기" moreTo="/services" moreLabel="서비스 전체 보기">
         <div data-reveal-stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {featuredServices.map((service) => (
             <ServiceCard key={service.id} service={service} />
@@ -415,23 +450,6 @@ export function HomePage() {
         </div>
       </HomeSection>
 
-      <HomeSection index="09" eyebrow="Devices" title="PC·태블릿·모바일 비교 사례" moreTo="/compare" moreLabel="비교 전체 보기">
-        <div data-reveal-stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredComparisons.map((comparison) => (
-            <Link
-              key={comparison.id}
-              to={`/compare#${comparison.slug}`}
-              className="spotlight group rounded-[1.25rem] border border-line bg-surface p-6 transition-all hover:-translate-y-1 hover:shadow-raised"
-            >
-              <h3 className="flex items-center justify-between gap-2 text-base font-bold tracking-tight">
-                {comparison.title}
-                <ArrowUpRight className="h-4 w-4 shrink-0 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" aria-hidden="true" />
-              </h3>
-              <p className="mt-1.5 line-clamp-2 text-sm text-muted">{comparison.summary}</p>
-            </Link>
-          ))}
-        </div>
-      </HomeSection>
 
       {/* ── 가이드 배너: 잉크색으로 뒤집은 면 ───────────────── */}
       <section
@@ -443,7 +461,7 @@ export function HomePage() {
         <div aria-hidden="true" className="absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-[#ff5fae]/25 blur-3xl" />
         <div className="relative flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] opacity-60">Prompt Guide</p>
+            <p className="text-xs font-semibold opacity-70">프롬프트 가이드</p>
             <h2 id="guide-cta-heading" className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.03em] sm:text-4xl">
               AI가 한 번에 알아듣는 프롬프트,
               <br />
@@ -463,35 +481,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {recentEntries.length > 0 && (
-        <HomeSection eyebrow="Recent" title="최근 본 항목" moreTo="/saved" moreLabel="저장함 가기">
-          <ul className="flex flex-wrap gap-2">
-            {recentEntries.map(({ ref, item }) => (
-              <li key={`${ref.type}-${ref.id}`}>
-                <Link to={ref.type === 'ui' ? `/ui/${item!.slug}` : `/ux/${item!.slug}`} className="pill text-ink">
-                  <span className="font-mono text-[10px] text-muted">{ref.type === 'ui' ? 'UI' : 'UX'}</span>
-                  {item!.koreanName}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </HomeSection>
-      )}
-
-      {savedEntries.length > 0 && (
-        <HomeSection eyebrow="Saved" title="저장한 항목" moreTo="/saved" moreLabel="저장함 전체 보기">
-          <ul className="flex flex-wrap gap-2">
-            {savedEntries.map(({ ref, item }) => (
-              <li key={`${ref.type}-${ref.id}`}>
-                <Link to={ref.type === 'ui' ? `/ui/${item!.slug}` : `/ux/${item!.slug}`} className="pill pill-active">
-                  <span className="font-mono text-[10px] opacity-70">{ref.type === 'ui' ? 'UI' : 'UX'}</span>
-                  {item!.koreanName}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </HomeSection>
-      )}
     </div>
   );
 }

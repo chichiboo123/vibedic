@@ -33,10 +33,10 @@ const statement: { text: string; accent?: boolean }[] = [
 export function ScrollStatement() {
   const ref = useElementProgress<HTMLElement>('pinned');
   return (
-    <section ref={ref} aria-label="VibeDic이 하는 일" className="relative h-[170vh]">
+    <section ref={ref} aria-label="VibeDic이 하는 일" className="relative h-[130vh]">
       <div className="sticky top-0 flex h-screen items-center">
         <div>
-          <p className="eyebrow">Why VibeDic</p>
+          <p className="eyebrow">왜 이름이 중요할까요?</p>
           <p
             className="scroll-words mt-5 max-w-5xl text-[2rem] font-extrabold leading-[1.2] tracking-[-0.035em] sm:text-5xl lg:text-6xl"
             style={{ '--n': statement.length } as CSSProperties}
@@ -260,13 +260,13 @@ export function UXJourneyRail() {
       <div className={pinned ? 'sticky top-0 flex h-screen flex-col justify-center overflow-hidden' : ''}>
         <div className="mb-6 flex items-end justify-between gap-4 border-b border-line pb-4">
           <div>
-            <p className="eyebrow">UX Journeys</p>
+            <p className="eyebrow">UX 분류</p>
             <h2 id="journey-heading" className="mt-1.5 text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">
               사용자는 무엇을 하고 싶을까요?
             </h2>
           </div>
-          <p className="hidden font-mono text-xs text-muted sm:block">
-            {pinned ? 'scroll →' : 'swipe →'}
+          <p className="hidden text-xs text-muted sm:block">
+            {pinned ? '아래로 내리면 옆으로 흘러가요 →' : '옆으로 넘겨 보세요 →'}
           </p>
         </div>
         {/* 고정 구간에서는 양 끝을 흐리게 처리해 카드가 화면 밖에서 흘러 들어오는 느낌을 줍니다. */}
@@ -290,8 +290,8 @@ export function UXJourneyRail() {
                   <span className="font-mono text-xs text-muted">0{index + 1}</span>
                 </span>
                 <span className="mt-6 text-xl font-bold leading-snug tracking-tight">{category.easyName}</span>
-                <span className="mt-1 font-mono text-[11px] text-muted">
-                  {category.name} · {patterns.length} patterns
+                <span className="mt-1 text-xs text-muted">
+                  {category.name} · 패턴 {patterns.length}개
                 </span>
                 <span className="mt-4 flex flex-wrap gap-1.5">
                   {patterns.slice(0, 4).map((pattern) => (

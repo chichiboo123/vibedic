@@ -332,9 +332,9 @@ body::after {
   .pill-active {
     @apply border-ink bg-ink font-semibold text-background hover:border-ink hover:text-background;
   }
-  /* 모노 폰트의 작은 머리말 */
+  /* 섹션 위의 작은 머리말. 한글이 많아 고정폭 대문자 대신 읽기 쉬운 본문 글꼴을 씁니다. */
   .eyebrow {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted;
+    @apply text-xs font-semibold tracking-wide text-muted;
   }
   /* 사전 페이지 공통 카드 */
   .surface-card {

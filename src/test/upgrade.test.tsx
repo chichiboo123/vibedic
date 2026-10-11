@@ -275,3 +275,40 @@ describe('움직임·스크롤 분류', () => {
     expect(within(related).getByRole('link', { name: /겹쳐 쌓이는 카드/ })).toHaveAttribute('href', '/ui/stacking-cards');
   });
 });
+
+describe('쉬운 사용 개선', () => {
+  it('상세 제목 옆 "프롬프트 바로 복사"는 저장된 조건까지 반영해 복사한다', async () => {
+    const user = userEvent.setup();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    window.localStorage.setItem('vibedic:prompt-options', JSON.stringify({ stack: 'react', addons: ['a11y'] }));
+
+    renderApp('/ui/modal');
+    await user.click(screen.getByRole('button', { name: '프롬프트 바로 복사' }));
+    const copied = writeText.mock.calls[0][0] as string;
+    expect(copied).toContain('모달');
+    expect(copied).toContain('React 함수 컴포넌트와 Tailwind CSS');
+    expect(copied).toContain('키보드만으로 조작');
+  });
+
+  it('상세 페이지는 데모 다음에 "언제 사용하나요?"가 나온다', () => {
+    renderApp('/ui/modal');
+    const titles = screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent ?? '');
+    const demo = titles.findIndex((title) => title.includes('직접 살펴보기'));
+    expect(titles[demo + 1]).toContain('언제 사용하나요?');
+  });
+
+  it('모바일 메뉴에 메뉴마다 한 줄 설명이 보이고 링크 이름은 짧게 유지된다', async () => {
+    const user = userEvent.setup();
+    renderApp('/');
+    await user.click(screen.getByRole('button', { name: '메뉴 열기' }));
+    const dialog = await screen.findByRole('dialog', { name: '모바일 메뉴' });
+    const uiLink = within(dialog).getByRole('link', { name: 'UI 요소' });
+    expect(uiLink).toHaveTextContent('화면에 보이는 것의 이름');
+  });
+
+  it('홈 첫 화면에 UI와 UX의 차이를 한 줄로 알려준다', () => {
+    renderApp('/');
+    expect(screen.getByText(/는 검색·저장처럼 사용하는 흐름이에요/)).toBeInTheDocument();
+  });
+});

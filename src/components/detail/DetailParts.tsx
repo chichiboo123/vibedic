@@ -95,7 +95,7 @@ export function DetailJumpBar({ entries }: { entries: TocEntry[] }) {
       <ul className="flex gap-2">
         {entries.map((entry) => (
           <li key={entry.id} className="shrink-0">
-            <button type="button" onClick={() => scrollToSection(entry.id)} className="pill min-h-9 text-xs">
+            <button type="button" onClick={() => scrollToSection(entry.id)} className="pill min-h-10 text-xs">
               {entry.title}
             </button>
           </li>
@@ -140,9 +140,9 @@ export function PrevNextNav({ prev, next, label }: { prev: Neighbor; next: Neigh
         >
           <ArrowLeft className="h-4 w-4 shrink-0 text-muted transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />
           <span className="min-w-0">
-            <span className="eyebrow block">Prev</span>
+            <span className="eyebrow block">이전</span>
             <span className="mt-1 block truncate text-lg font-bold tracking-tight">{prev.title}</span>
-            <span className="block truncate font-mono text-[11px] text-muted">{prev.subtitle}</span>
+            <span className="block truncate font-mono text-xs text-muted">{prev.subtitle}</span>
           </span>
         </Link>
       ) : (
@@ -154,9 +154,9 @@ export function PrevNextNav({ prev, next, label }: { prev: Neighbor; next: Neigh
           className="group spotlight flex items-center justify-end gap-3 rounded-[1.25rem] border border-line bg-surface p-5 text-right transition-all hover:-translate-y-0.5 hover:shadow-raised"
         >
           <span className="min-w-0">
-            <span className="eyebrow block">Next</span>
+            <span className="eyebrow block">다음</span>
             <span className="mt-1 block truncate text-lg font-bold tracking-tight">{next.title}</span>
-            <span className="block truncate font-mono text-[11px] text-muted">{next.subtitle}</span>
+            <span className="block truncate font-mono text-xs text-muted">{next.subtitle}</span>
           </span>
           <ArrowRight className="h-4 w-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
         </Link>

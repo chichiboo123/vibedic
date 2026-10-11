@@ -191,7 +191,6 @@ export function InteractiveDemo({ item }: { item: UIItem }) {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
         </span>
-        <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink">Live demo</span>
         <Hand className="h-3.5 w-3.5" aria-hidden="true" />
         {Demo ? '데모 영역 · 직접 조작해 보세요' : '데모 영역 · 실제 예시로 살펴보세요'}
       </p>

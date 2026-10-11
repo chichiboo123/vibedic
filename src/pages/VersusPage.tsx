@@ -21,7 +21,7 @@ export function VersusPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Versus"
+        eyebrow="비교표"
         Icon={Scale}
         title="헷갈리는 UI 구분하기"
         description={`이름도 모양도 비슷한 UI, 같은 기준으로 나란히 놓고 비교해 보세요. ${versusTopics.length}가지 주제가 있어요.`}
@@ -31,7 +31,7 @@ export function VersusPage() {
         <ul className="flex gap-2 sm:flex-wrap">
           {versusTopics.map((topic) => (
             <li key={topic.id} className="shrink-0">
-              <a href={`#/versus#${topic.slug}`} className="pill min-h-9 text-xs">
+              <a href={`#/versus#${topic.slug}`} className="pill min-h-10 text-xs">
                 {topic.title}
               </a>
             </li>

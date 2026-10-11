@@ -9,7 +9,7 @@ export function ServicesPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Services"
+        eyebrow="사례로 배우기"
         Icon={Building2}
         title="유명 서비스"
         description={`자주 쓰는 서비스에서 UI와 UX가 어떻게 쓰이는지 살펴보세요. 총 ${services.length}개 서비스가 있어요.`}

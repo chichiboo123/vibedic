@@ -51,10 +51,10 @@ export function UXListPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="UX Dictionary"
+        eyebrow="UX 사전"
         Icon={Route}
         title="UX 패턴"
-        description={`사용자가 하고 싶은 일에서 시작해 보세요. 총 ${uxPatterns.length}개 패턴이 있어요.`}
+        description={`검색하기·저장하기처럼 사용자가 무언가를 해내는 흐름을 찾는 곳이에요. 아래에서 “하고 싶은 일”을 골라 시작해 보세요. 총 ${uxPatterns.length}개 패턴이 있어요.`}
       />
 
       <div className="relative mt-6 sm:max-w-xs">

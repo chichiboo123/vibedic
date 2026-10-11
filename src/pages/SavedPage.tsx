@@ -51,7 +51,7 @@ export function SavedPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Saved"
+        eyebrow="내 보관함"
         Icon={Bookmark}
         title="저장함"
         description={<span role="status">UI {savedUI.length}개, UX {savedUX.length}개를 저장했어요.</span>}

@@ -34,7 +34,7 @@ export function ServiceCard({ service }: { service: Service }) {
           />
         </h3>
         <p className="mt-1 line-clamp-2 text-sm text-muted">{service.summary}</p>
-        <p className="mt-3 font-mono text-[11px] text-muted">
+        <p className="mt-3 font-mono text-xs text-muted">
           UI {service.relatedUiIds.length} · UX {service.relatedUxIds.length}
         </p>
       </div>

@@ -101,7 +101,7 @@ export function SearchPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <PageHeader
-        eyebrow="Search"
+        eyebrow="한 번에 찾기"
         title="통합 검색"
         description={
           <>
@@ -228,7 +228,7 @@ export function SearchPage() {
 
           {allResults.length > 0 && (
             <div role="group" aria-label="결과 유형 필터" className="scrollbar-none -mx-4 mt-3 flex gap-2 overflow-x-auto px-4">
-              <button type="button" aria-pressed={activeType === null} onClick={() => setType(null)} className="pill min-h-9 shrink-0 text-xs">
+              <button type="button" aria-pressed={activeType === null} onClick={() => setType(null)} className="pill min-h-10 shrink-0 text-xs">
                 전체 {allResults.length}
               </button>
               {typeOrder
@@ -239,7 +239,7 @@ export function SearchPage() {
                     type="button"
                     aria-pressed={activeType === type}
                     onClick={() => setType(activeType === type ? null : type)}
-                    className="pill min-h-9 shrink-0 text-xs"
+                    className="pill min-h-10 shrink-0 text-xs"
                   >
                     {searchTypeLabels[type]} {groupCounts[type]}
                   </button>

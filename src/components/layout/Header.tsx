@@ -9,12 +9,13 @@ import { QuickSearch } from './QuickSearch';
 import { Logo } from './Logo';
 import { useScrollDirection } from '../../hooks/useScrollEffects';
 
+// desc는 처음 온 사람도 어디로 가야 할지 알 수 있게 붙이는 한 줄 설명입니다.
 const menuItems = [
-  { to: '/ui', label: 'UI 요소' },
-  { to: '/ux', label: 'UX 패턴' },
-  { to: '/versus', label: '헷갈리는 UI' },
-  { to: '/compare', label: '기기별 비교' },
-  { to: '/services', label: '유명 서비스' },
+  { to: '/ui', label: 'UI 요소', desc: '버튼·창·메뉴처럼 화면에 보이는 것의 이름' },
+  { to: '/ux', label: 'UX 패턴', desc: '검색·저장처럼 사용자가 무언가를 하는 흐름' },
+  { to: '/versus', label: '헷갈리는 UI', desc: '비슷한 요소의 차이를 비교표로' },
+  { to: '/compare', label: '기기별 비교', desc: 'PC·태블릿·모바일에서 달라지는 점' },
+  { to: '/services', label: '유명 서비스', desc: '유명 서비스에서 실제로 쓰는 모습' },
 ];
 
 // 입력 중인 칸에서 / 를 눌렀을 때까지 빠른 검색을 가로채지 않도록 확인합니다.
@@ -105,7 +106,7 @@ export function Header() {
           <ul className="flex items-center gap-0.5 rounded-full bg-background/70 p-1 ring-1 ring-line/70">
             {menuItems.map((item) => (
               <li key={item.to}>
-                <NavLink to={item.to} className={navLinkClass}>
+                <NavLink to={item.to} title={item.desc} className={navLinkClass}>
                   {item.label}
                 </NavLink>
               </li>

@@ -4,7 +4,7 @@ import { HelpCircle, X } from 'lucide-react';
 import { Logo } from './Logo';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 
-type MenuItem = { to: string; label: string };
+type MenuItem = { to: string; label: string; desc?: string };
 
 const secondaryItems: MenuItem[] = [
   { to: '/guide', label: '프롬프트 가이드' },
@@ -67,7 +67,13 @@ export function NavigationDrawer({ open, onClose, menuItems, onOpenGuide }: Navi
                     }`
                   }
                 >
-                  {item.label}
+                  <span className="block">{item.label}</span>
+                  {/* 화면용 한 줄 설명. 링크 이름은 짧게 유지하려고 보조기기에서는 숨깁니다. */}
+                  {item.desc && (
+                    <span aria-hidden="true" className="block text-xs font-normal leading-5 text-muted">
+                      {item.desc}
+                    </span>
+                  )}
                 </NavLink>
               </li>
             ))}

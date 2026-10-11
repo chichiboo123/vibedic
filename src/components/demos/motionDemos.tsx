@@ -60,7 +60,7 @@ function OptionButtons<T extends string>({
           type="button"
           aria-pressed={value === option.value}
           onClick={() => onChange(option.value)}
-          className="pill min-h-9 px-3 text-xs"
+          className="pill min-h-10 px-3 text-xs"
         >
           {option.label}
         </button>
